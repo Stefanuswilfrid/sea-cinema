@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Input from "./Input";
+import useLoginModal from "../../hooks/useLoginModal";
 
 export interface IUser {
   name: string;
@@ -15,6 +16,8 @@ export interface IUser {
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -38,6 +41,7 @@ const RegisterModal = () => {
       .then(() => {
         toast.success('Registered!');
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch((error) => {
         toast.error(error.response.data.error);

@@ -11,13 +11,19 @@ import useRegisterModal from "../../hooks/useRegisterModal";
 import useLoginModal from "../../hooks/useLoginModal";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+// import { authOptions } from "@/pages/api/auth/[...nextauth]";
+// import { getServerSession } from "next-auth";
 
 
 // interface UserMenuProps {
 //   currentUser?: SafeUser | null
 // }
 
-const UserMenu = () => {
+// export async function getSession() {
+//   return await getServerSession(authOptions)
+// }
+
+const UserMenu =  () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const router = useRouter();
@@ -29,7 +35,7 @@ const UserMenu = () => {
   }, []);
 
   const { data: session, status } = useSession();
-  console.log("se", session?.user);
+  console.log("se", session);
   console.log("st", status);
 
   return (

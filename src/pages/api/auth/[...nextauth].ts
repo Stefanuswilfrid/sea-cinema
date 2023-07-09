@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt"
-import NextAuth, { AuthOptions } from "next-auth"
+import NextAuth, { AuthOptions, DefaultSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 import prisma from "../../../libs/prismadb"
+import { UserData } from "@/pages/balance"
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -42,6 +43,46 @@ export const authOptions: AuthOptions = {
       }
     })
   ],
+  callbacks: {
+    jwt: async ({ token, trigger, session, user }) => {
+      const tokenUser = token.user as UserData;
+      if (trigger === "update" && session?.user?.balance) {
+        const currentBalance = tokenUser.balance + session.user.balance;
+        await prisma.user.update({
+          where: {
+            username: tokenUser.username ,
+          },
+          data: {
+            balance: currentBalance,
+          },
+        });
+
+        if (token.user) {
+          token.user = {
+            ...tokenUser,
+            balance: currentBalance,
+          };
+        }
+
+        return token;
+      } else {
+        user && (token.user = user);
+
+        if (user) {
+          token.user = {
+            ...user,
+            hashedPassword: undefined,
+          };
+        }
+
+        return token;
+      }
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user as DefaultSession["user"];
+      return session;
+    },
+  },
   pages: {
     signIn: '/',
   },

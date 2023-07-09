@@ -7,7 +7,7 @@ import LoginModal from "@/components/Modal/LoginModal";
 import ToasterProvider from "@/components/ToasterProvider";
 import { SessionProvider } from "next-auth/react";
 
-export default  function App({ Component, pageProps }: AppProps) {
+export default  function App({ Component, pageProps: {session,...pageProps} }: AppProps) {
   return (
     <>
     <SessionProvider>

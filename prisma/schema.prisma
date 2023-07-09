@@ -12,5 +12,6 @@ model User {
     username       String? @unique
     name           String?
     age            Int?
+    balance        Int?
     hashedPassword String?
 }

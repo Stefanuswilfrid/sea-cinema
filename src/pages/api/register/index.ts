@@ -9,7 +9,6 @@ import { NextApiResponse } from "next";
 export default async function POST(
   request: Request, response: NextApiResponse
 ) {
-  console.log("s",request.body)
   const body = await request.body;
   const { 
     username,
@@ -34,6 +33,7 @@ export default async function POST(
         name,
         age: ageInt,
         hashedPassword,
+        balance:0,
       }
     });
 
@@ -41,7 +41,4 @@ export default async function POST(
    }
 
    return response.status(400).json({error:"username already exists ! "})
-
-   
-
 }
