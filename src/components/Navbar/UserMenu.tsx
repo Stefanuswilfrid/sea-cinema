@@ -11,17 +11,7 @@ import useRegisterModal from "../../hooks/useRegisterModal";
 import useLoginModal from "../../hooks/useLoginModal";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-// import { authOptions } from "@/pages/api/auth/[...nextauth]";
-// import { getServerSession } from "next-auth";
 
-
-// interface UserMenuProps {
-//   currentUser?: SafeUser | null
-// }
-
-// export async function getSession() {
-//   return await getServerSession(authOptions)
-// }
 
 const UserMenu =  () => {
   const registerModal = useRegisterModal();
@@ -100,12 +90,12 @@ const UserMenu =  () => {
               <>
                 <MenuItem
                   label="My Balance"
-                  onClick={() => router.push("/balance")}
+                  onClick={() => {router.push("/balance"),setIsOpen(false)}}
                 />
                 
                 <MenuItem
                   label="Transactions history"
-                  onClick={() => router.push("/history")}
+                  onClick={() => {router.push("/history"),setIsOpen(false)}}
                 />
                
                 <MenuItem label="Log out" onClick={() => signOut()} />

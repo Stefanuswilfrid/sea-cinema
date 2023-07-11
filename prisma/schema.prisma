@@ -21,6 +21,7 @@ model Movie {
     id    String    @id @default(auto()) @map("_id") @db.ObjectId
     title String    @unique
     seats Boolean[]
+    price Int?
 
     transactions Transaction[]
 }

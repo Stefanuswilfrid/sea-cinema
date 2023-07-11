@@ -1,10 +1,15 @@
 import Container from '@/components/Container'
+import SEO from '@/components/SEO'
 import React from 'react'
 
 
 export default function index() {
   return (
     <main>
+      <SEO
+        title="User Transaction History | SEA Cinema"
+        desc="User Transaction History page."
+      />
         <Container>
             <h1 className='mt-12 text-3xl font-extrabold '>Transactions History</h1>
             <div className="grid grid-cols-4 grid-flow-col gap-4 mt-12">

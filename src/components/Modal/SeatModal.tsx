@@ -6,19 +6,30 @@ import { useMemo, useState } from "react";
 
 import useSeatModal from "../../hooks/useSeatModal";
 import Modal from "./Modal";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { CartContext } from "@/libs/context";
+
+interface IMovie{
+  title: string;
+  seats: Array<Boolean>;
+  price: number;
+}
 
 const SeatModal = ({ movieName }: { movieName: string }) => {
+  const { cartItems, addToCart } = useContext(CartContext);
+
   const seatModal = useSeatModal();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [seatArray, setSeatArray] = useState<Array<boolean>>([]);
+  const [movies,setMovies] = useState<IMovie>();
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchSeatsByMovieName();
+    // fetchSeatsByMovieName();
+    fetchMovieByName();
   }, []);
 
 
@@ -37,36 +48,25 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    Router.pu
-    // if (step !== STEPS.PRICE) {
-    //   return onNext();
-    // }
+  const onSubmit = () => {
+    if(selectedSeats.length > 0) {
+      if (movies){
+        const { title, price } = movies;
+        addToCart({name: title, price,quantity: selectedSeats.length})
+        router.push("/payment")
+        seatModal.onClose()
+      }
+    }
+    
 
-    // setIsLoading(true);
-
-    // axios.post('/api/listings', data)
-    // .then(() => {
-    //   toast.success('Listing created!');
-    //   router.refresh();
-    //   reset();
-    //   setStep(STEPS.CATEGORY)
-    //   rentModal.onClose();
-    // })
-    // .catch(() => {
-    //   toast.error('Something went wrong.');
-    // })
-    // .finally(() => {
-    //   setIsLoading(false);
-    // })
   }
 
-  const fetchSeatsByMovieName = async () => {
+  const fetchMovieByName = async () => {
     try {
-      const response = await fetch(`/api/movie/seats?movieName=${movieName}`);
+      const response = await fetch(`/api/movie?movieName=${movieName}`);
       if (response.ok) {
-        const seats = await response.json();
-        setSeatArray(seats);
+        const moviesJSON = await response.json();
+        setMovies(moviesJSON);
       } else {
         console.log(`Failed to fetch seats for movie "${movieName}".`);
       }
@@ -76,14 +76,32 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
   };
 
   let bodyContent = (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <div className="text-center">
         <div className="text-2xl font-bold">Select your seat position</div>
-        <div className="font-light text-neutral-500 mt-2">🟢 🔴 ⚪ Screen</div>
+        <div className="font-light text-neutral-500 mt-2 flex justify-between w-5/6 mx-auto ">
+          <div className="flex justify-between">
+            <div className="rounded-md w-[1.6rem] h-[1.6rem] bg-green-600" ></div>
+            <span className="ml-2">Selected</span>
+          </div>
+
+          <div className="flex">
+            <div className="rounded-md w-[1.6rem] h-[1.6rem] bg-red-600" ></div>
+            <span className="ml-2" >Unavailable</span>
+          </div>
+
+          <div className="flex">
+            <div className="rounded-md w-[1.6rem] h-[1.6rem] bg-gray-300" ></div>
+            <span className="ml-2" >Available</span>
+          </div>
+
+        </div>
       </div>
-      <div className="d-flec items-center text-center justify-center">
+      <div className=" items-center text-center justify-center">
+        <h2 className="flex text-center mx-auto w-fit font-black mb-3 text-base 
+        tracking-widest text-gray-500">SCREEN</h2>
         <div className="grid grid-cols-8 gap-6 mx-auto w-fit">
-          {seatArray.map((seatValue, index) => (
+          {movies?.seats.map((seatValue, index) => (
             <div
               key={index}
               className={`w-[1.6rem] h-[1.6rem] rounded-md cursor-pointer ${
@@ -101,8 +119,8 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
         </div>
         <button
           className="bg-gradient-to-r from-indigo-500 to-indigo-700 hover:bg-gradient-to-r hover:from-indigo-700 
-        hover:to-indigo-800 text-white font-bold py-2 px-4 rounded mt-8"
-        onClick={()=>{router.push("/payment")}}
+        hover:to-indigo-800 text-white font-bold py-2 px-4 rounded mt-8 w-5/6"
+        onClick={onSubmit}
         >
           Next
         </button>
