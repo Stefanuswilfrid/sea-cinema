@@ -2,12 +2,13 @@ import Container from "@/components/Container";
 import React from "react";
 import { useSession, getSession } from "next-auth/react";
 import { motion, useAnimation } from "framer-motion";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
+import Link from 'next/link';
 
 import { useRouter } from "next/router";
 import { useState } from "react";
+import AuthCheck from "@/components/AuthCheck";
+import SEO from "@/components/SEO";
 
 export type UserData = {
   id: string;
@@ -17,7 +18,21 @@ export type UserData = {
   balance: number;
 };
 
+
 export default function Balance() {
+  return (
+    <>
+    <AuthCheck>
+      <BalancePage/>
+    </AuthCheck>
+    </>
+
+  )
+  
+  
+}
+
+function BalancePage(){
   const [isHasChoosen, setHasChoosen] = useState<Boolean>(false);
   const [isTopUp, setIsTopUp] = useState<Boolean>(false);
   const [selectedAmount, setSelectedAmount] = useState<number>(0);
@@ -71,6 +86,11 @@ export default function Balance() {
 
   return (
     <Container>
+      <SEO
+        title="User Balance | SEA Cinema"
+        desc="User Balance Page, to withdraw and top up."
+      />
+      {currentUser ?
       <div className="h-screen text-center flex mt-16 flex-col items-center">
         <h1 className="text-2xl font-bold ">Available Balance</h1>
         <h1 className="text-5xl font-bold mt-8">
@@ -121,9 +141,12 @@ export default function Balance() {
               />
           )
         ) : null}
-      </div>
+      </div>:<div className="h-screen text-center place-items-center items-center flex justify-center"> 
+      <Link href="/">You must be signed in</Link></div>
+}
     </Container>
   );
+  
 }
 
 interface ChooseDepositProps {

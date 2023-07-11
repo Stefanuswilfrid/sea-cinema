@@ -1,9 +1,7 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+
 
 import prisma from "../../../libs/prismadb";
-import { FieldValue } from "react-hook-form";
-import { IUser } from "@/components/Modal/RegisterModal";
+
 import { NextApiResponse } from "next";
 import { UserData } from "@/pages/balance";
 

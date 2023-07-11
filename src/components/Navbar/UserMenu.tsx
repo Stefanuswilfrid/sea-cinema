@@ -35,8 +35,8 @@ const UserMenu =  () => {
   }, []);
 
   const { data: session, status } = useSession();
-  console.log("se", session);
-  console.log("st", status);
+  // console.log("se", session);
+  // console.log("st", status);
 
   return (
     <div className="relative">

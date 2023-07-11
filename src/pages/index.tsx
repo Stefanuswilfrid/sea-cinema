@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Container from '../components/Container'
 import ListingCard from '../components/ListingCard/ListingCard'
+import SEO from '@/components/SEO';
 
 export interface ListingCardProps {
   listing: Listing;
@@ -37,6 +38,11 @@ export async function getServerSideProps() {
 const Home: React.FC<HomeProps> = ({ listings }) => {
   return (
     <main>
+      <SEO
+        title="SEA Cinema | Movie ticket booking app"
+        desc="SEA Cinema is a rising star in the movie theater industry known for
+        its affordable ticket prices and wide range of movie genres."
+      />
       <Container>
         <h1  className='mt-12 text-3xl font-extrabold '>Currently Playing Movies</h1>
 
