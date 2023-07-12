@@ -9,6 +9,7 @@ import ToasterProvider from "@/components/ToasterProvider";
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/router";
 import { CartProvider } from "@/libs/context";
+import ModalProvider from "@/components/ModalProvider";
 
 export default  function App({ Component, pageProps: {session,...pageProps} }: AppProps) {
   const router = useRouter();
@@ -18,9 +19,7 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
     <CartProvider>
     <SessionProvider>
       <ToasterProvider />
-      <SeatModal movieName={movieName as string}/>
-      <LoginModal />
-      <RegisterModal />
+      <ModalProvider/>      
       <Navbar /> 
       <Component {...pageProps} />
       <Footer />

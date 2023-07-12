@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { CartContext } from "@/libs/context";
+import { toast } from "react-hot-toast";
 
 interface IMovie{
   title: string;
@@ -29,6 +30,19 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
 
   useEffect(() => {
     // fetchSeatsByMovieName();
+    const fetchMovieByName = async () => {
+      try {
+        const response = await fetch(`/api/movie?movieName=${movieName}`);
+        if (response.ok) {
+          const moviesJSON = await response.json();
+          setMovies(moviesJSON);
+        } else {
+          console.log(`Failed to fetch seats for movie "${movieName}".`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchMovieByName();
   }, []);
 
@@ -55,31 +69,23 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
         addToCart({name: title, price,quantity: selectedSeats.length})
         router.push("/payment")
         seatModal.onClose()
+        toast.success("Ticket added to cart!")
       }
+    }
+    else {
+      return 
     }
     
 
   }
 
-  const fetchMovieByName = async () => {
-    try {
-      const response = await fetch(`/api/movie?movieName=${movieName}`);
-      if (response.ok) {
-        const moviesJSON = await response.json();
-        setMovies(moviesJSON);
-      } else {
-        console.log(`Failed to fetch seats for movie "${movieName}".`);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   let bodyContent = (
     <div className="flex flex-col gap-6">
       <div className="text-center">
         <div className="text-2xl font-bold">Select your seat position</div>
-        <div className="font-light text-neutral-500 mt-2 flex justify-between w-5/6 mx-auto ">
+        <div className="font-light text-neutral-500 mt-4 md:mt-2 flex justify-between w-6/6 md:w-5/6 mx-auto ">
           <div className="flex justify-between">
             <div className="rounded-md w-[1.6rem] h-[1.6rem] bg-green-600" ></div>
             <span className="ml-2">Selected</span>
@@ -101,7 +107,7 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
         <h2 className="flex text-center mx-auto w-fit font-black mb-3 text-base 
         tracking-widest text-gray-500">SCREEN</h2>
         <div className="grid grid-cols-8 gap-6 mx-auto w-fit">
-          {movies?.seats.map((seatValue, index) => (
+          {movies && movies.seats.map((seatValue, index) => (
             <div
               key={index}
               className={`w-[1.6rem] h-[1.6rem] rounded-md cursor-pointer ${
@@ -114,7 +120,9 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
                   : "bg-gray-300" // Available seat
               }`}
               onClick={() => handleSeatClick(index)}
-            ></div>
+            >
+
+            </div>
           ))}
         </div>
         <button

@@ -88,7 +88,7 @@ export default function index({ listing }: MovieDetailsProps) {
         <div className="">
           <Image className="rounded-3xl m-auto md:m-0" src={listing.poster_url} width={350} height={200} alt="" />
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 text-center md:text-left mt-12 md:mt-0">
           <h1 className="text-xl font-light text-indigo-500 tracking-[0.3em]">
             
             {Math.ceil((new Date().getTime() - new Date(listing.release_date).getTime())/(1000 * 60 * 60 * 24)) > 120 ? "": "New Movie"}
