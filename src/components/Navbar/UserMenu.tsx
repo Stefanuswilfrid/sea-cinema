@@ -75,7 +75,8 @@ const UserMenu =  () => {
             absolute 
             rounded-xl 
             shadow-md
-            w-[10vw]
+            w-[40vw]
+            md:w-[10vw]
             bg-white 
             overflow-hidden 
             right-0 
@@ -102,10 +103,10 @@ const UserMenu =  () => {
             ) : (
               <>
                 <hr />
-                <MenuItem label="Login" onClick={loginModal.onOpen} />
+                <MenuItem label="Login" onClick={()=>{loginModal.onOpen();setIsOpen(false);}} />
                 <MenuItem
                   label="Register"
-                  onClick={registerModal.onOpen}
+                  onClick={()=>{registerModal.onOpen();setIsOpen(false);}}
                 />{" "}
               </>
             )}

@@ -109,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({
           `}>
             <div className="
               translate
-              h-full
+              
               lg:h-auto
               md:h-auto
               border-0 
@@ -153,7 +153,7 @@ const Modal: React.FC<ModalProps> = ({
                 </div>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">
+              <div className="relative p-6 ">
                 {body}
               </div>
               {/*footer*/}
