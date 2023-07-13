@@ -19,7 +19,6 @@ export default async function POST(request: Request, response: NextApiResponse) 
       });
 
       if (movie) {
-        console.log("tm",cartItem.seatNumber)
 
         const updatedSeats = movie.seats?.map((seatValue: boolean, index: number) => {
           if (cartItem.seatNumber && cartItem.seatNumber.includes(index)) {
@@ -36,7 +35,6 @@ export default async function POST(request: Request, response: NextApiResponse) 
           },
         });
 
-        console.log(updatedSeats)
 
         const transaction = await prisma.transaction.create({
           data: {

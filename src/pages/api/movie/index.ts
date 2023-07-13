@@ -14,7 +14,6 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
       return response.status(200).json(movie);
     } else {
       // Movie not found
-      console.log(`Movie with title "${movieName}" not found.`);
       return response.status(404).json({ error: "Movie not found" });
     }
   } catch (err) {

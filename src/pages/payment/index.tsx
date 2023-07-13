@@ -24,14 +24,12 @@ function PaymentPage(){
   const router = useRouter();
 
   const { cartItems, addToCart,totalPrice,resetCart } = useContext(CartContext);
-  console.log("ci",cartItems)
   const currentUsername = session?.user as UserData;
-  console.log(currentUsername)
 
   const handlePayment = async() => {
     if(currentUsername.balance>=totalPrice){
       try{
-        await axios.post('http://localhost:3000/api/transaction/create', {username: currentUsername.username,cartItems,totalPrice})
+        await axios.post('/api/transaction/create', {username: currentUsername.username,cartItems,totalPrice})
         .then( async () => {
           await update({
             user: {

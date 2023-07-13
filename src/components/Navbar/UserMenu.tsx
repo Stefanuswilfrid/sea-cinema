@@ -25,8 +25,7 @@ const UserMenu =  () => {
   }, []);
 
   const { data: session, status } = useSession();
-  // console.log("se", session);
-  // console.log("st", status);
+  
 
   return (
     <div className="relative">
@@ -98,7 +97,7 @@ const UserMenu =  () => {
                   onClick={() => {router.push("/history"),setIsOpen(false)}}
                 />
                
-                <MenuItem label="Log out" onClick={() => signOut()} />
+                <MenuItem label="Log out" onClick={() => {router.push("/"); signOut(); }} />
               </>
             ) : (
               <>

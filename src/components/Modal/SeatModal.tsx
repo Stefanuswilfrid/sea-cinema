@@ -35,14 +35,11 @@ const SeatModal = () => {
     const fetchMovieByName = async () => {
       try {
         const response = await fetch(`/api/movie?movieName=${movieName}`);
-        console.log("?")
 
         if (response.ok) {
           const moviesJSON = await response.json();
           setMovies(moviesJSON);
-          console.log("setted")
         } else {
-          console.log(`Failed to fetch seats for movie "${movieName}".`);
         }
       } catch (error) {
         console.error(error);
@@ -57,14 +54,11 @@ const SeatModal = () => {
     const fetchMovieByName = async () => {
       try {
         const response = await fetch(`/api/movie?movieName=${movieName}`);
-        console.log("?")
 
         if (response.ok) {
           const moviesJSON = await response.json();
           setMovies(moviesJSON);
-          console.log("setted")
         } else {
-          console.log(`Failed to fetch seats for movie "${movieName}".`);
         }
       } catch (error) {
         console.error(error);

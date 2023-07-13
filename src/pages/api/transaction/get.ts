@@ -19,8 +19,7 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
       updatedAt: transaction.updatedAt,
       quantity: transaction.quantity,
     }));
-
-    console.log(transactionsWithMovieName)
+    
 
     return response.status(200).json(transactionsWithMovieName);
   } catch (error) {

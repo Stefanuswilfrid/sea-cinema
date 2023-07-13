@@ -3,28 +3,40 @@ import SEO from "@/components/SEO";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 interface Transaction {
   id: string;
-  movieName:string;
+  movieName: string;
   createdAt: string;
   totalCost: number;
   quantity: number;
+  seats: any;
 }
-
 
 export default function index() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const { data, status, update } = useSession();
 
-
   const deleteTransaction = async (transactionId: String) => {
     try {
-      await axios.delete(`/api/transaction/delete`,{ data: { transactionId } });
-      
+      const response = await axios.get(`/api/transaction/${transactionId}`);
+      if (response.status === 200) {
+        const data = response.data ;
+        await update({
+          user: {
+            balance: data.transaction.totalCost,
+          },
+        });
+        // Handle the data
+        await axios.delete(`/api/transaction/delete`,{ data: { transactionId } });
+        toast.success("Transaction Cancelled Successfully")
+
+      } else {
+        console.log("Failed to fetch transaction");
+      }
 
       window.location.reload();
-      // Perform any additional actions after successful deletion
     } catch (error) {
       console.error(error);
       // Handle error case
@@ -37,7 +49,7 @@ export default function index() {
         const response = await fetch("/api/transaction/get");
         if (response.ok) {
           const transactionsData = await response.json();
-          setTransactions(transactionsData);
+          setTransactions(transactionsData as Transaction[]);
         } else {
           console.log("Failed to fetch transactions.");
         }
@@ -82,22 +94,31 @@ export default function index() {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
-                  {transaction.quantity} X    {transaction.movieName}
+                    {transaction.quantity} X {transaction.movieName} Movie
+                    Ticket | Seat{" "}
+                    {transaction.seats.map((seat: number, index: number) => (
+                      <span key={seat}>
+                        {seat}{" "}
+                        {index < transaction.seats.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
                   </th>
                   <td className="px-6 py-4">
-                    {new Date(transaction.createdAt).toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })}
-                   {"   "}AEST
+                    {new Date(transaction.createdAt).toLocaleString("en-AU", {
+                      timeZone: "Australia/Sydney",
+                    })}
+                    {"   "}AEST
                   </td>
                   <td className="px-6 py-4">$ {transaction.totalCost} AUD</td>
                   <td className="px-6 py-4">
                     <button
                       className="font-medium text-blue-600 hover:underline"
-                      onClick={()=>{deleteTransaction(transaction.id)}}
-
+                      onClick={() => {
+                        deleteTransaction(transaction.id);
+                      }}
                     >
                       Cancel Transaction
                     </button>
-                    
                   </td>
                 </tr>
               ))}
