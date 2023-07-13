@@ -59,8 +59,8 @@ const Home: React.FC<HomeProps> = ({ listings }) => {
           "
         >
           
-          {listings.map((listing) => (
-            <ListingCard key={listing.id} id={listing.id} description={listing.description} title={listing.title} url={listing.poster_url} price={listing.ticket_price} />
+          {listings.map((listing,id) => (
+            <ListingCard key={id} id={listing.id} description={listing.description} title={listing.title} url={listing.poster_url} price={listing.ticket_price} />
           ))}
           
 

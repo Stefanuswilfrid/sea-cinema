@@ -5,6 +5,10 @@ import { CartContext } from "@/libs/context";
 import { useContext } from "react";
 import { useSession } from "next-auth/react";
 import AuthCheck from "@/components/AuthCheck";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
+import { UserData } from "../balance";
 
 function Payment() {
   return (
@@ -16,13 +20,50 @@ function Payment() {
 }
 
 function PaymentPage(){
-  const { data: session, status } = useSession();
+  const { data: session, status , update} = useSession();
+  const router = useRouter();
 
-  const { cartItems, addToCart,totalPrice } = useContext(CartContext);
+  const { cartItems, addToCart,totalPrice,resetCart } = useContext(CartContext);
   console.log("ci",cartItems)
+  const currentUsername = session?.user as UserData;
+  console.log(currentUsername)
 
   const handlePayment = async() => {
+    if(currentUsername.balance>=totalPrice){
+      try{
+        await axios.post('http://localhost:3000/api/transaction/create', {username: currentUsername.username,cartItems,totalPrice})
+        .then( async () => {
+          await update({
+            user: {
+              balance: -totalPrice,
+            },
+          });
+          
+          toast.success('Payment Successful!');
+
+          resetCart()
+          
+          router.push("/")
+
+        })
+        .catch((error) => {
+          toast.error(error.response.data.error);
+        })
+        
+
+      } catch(err){
+
+      }
+    }
+    else {
+      toast.error("Balance insufficient, cancel this order or top up your balance first!");
+    }
     
+  }
+
+  const handleCancelOrder = () =>{
+    resetCart()
+    router.push("/")
   }
 
   return (
@@ -89,8 +130,21 @@ function PaymentPage(){
                 className="mt-4 inline-flex w-full items-center justify-center 
             rounded bg-violet-500 py-2.5 px-4 text-base font-semibold tracking-wide text-white 
             outline-none ring-offset-2 transition hover:scale-110 duration-300 focus:ring-2 focus:ring-violet-500 sm:text-lg"
+              onClick={handlePayment}
+              
               >
                 Place Order
+              </button>
+
+              <button
+                type="submit"
+                className="mt-4 inline-flex w-full items-center justify-center 
+            rounded  py-2.5 px-4 text-base font-semibold tracking-wide text-violet-500 
+            outline-none ring-offset-2 transition hover:scale-110 duration-300 focus:ring-2 focus:ring-violet-500 sm:text-lg"
+              onClick={handleCancelOrder}
+              
+              >
+                Cancel Order
               </button>
             </div>
           </div>

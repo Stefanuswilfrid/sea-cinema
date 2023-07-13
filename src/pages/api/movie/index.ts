@@ -10,6 +10,7 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
     });
 
     if (movie) {
+      response.setHeader('Cache-Control', 'no-store, max-age=0');
       return response.status(200).json(movie);
     } else {
       // Movie not found

@@ -17,11 +17,12 @@ interface IMovie{
   price: number;
 }
 
-const SeatModal = ({ movieName }: { movieName: string }) => {
+const SeatModal = () => {
   const { cartItems, addToCart } = useContext(CartContext);
 
   const seatModal = useSeatModal();
   const router = useRouter();
+  const movieName = router.asPath.substring(1);
 
   const [isLoading, setIsLoading] = useState(false);
   const [seatArray, setSeatArray] = useState<Array<boolean>>([]);
@@ -29,13 +30,17 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
   useEffect(() => {
-    // fetchSeatsByMovieName();
+    // Reset selected seats when the modal is opened
+    setSelectedSeats([]);
     const fetchMovieByName = async () => {
       try {
         const response = await fetch(`/api/movie?movieName=${movieName}`);
+        console.log("?")
+
         if (response.ok) {
           const moviesJSON = await response.json();
           setMovies(moviesJSON);
+          console.log("setted")
         } else {
           console.log(`Failed to fetch seats for movie "${movieName}".`);
         }
@@ -44,7 +49,29 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
       }
     };
     fetchMovieByName();
-  }, []);
+    
+  }, [seatModal.isOpen]);
+
+  useEffect(() => {
+    // fetchSeatsByMovieName();
+    const fetchMovieByName = async () => {
+      try {
+        const response = await fetch(`/api/movie?movieName=${movieName}`);
+        console.log("?")
+
+        if (response.ok) {
+          const moviesJSON = await response.json();
+          setMovies(moviesJSON);
+          console.log("setted")
+        } else {
+          console.log(`Failed to fetch seats for movie "${movieName}".`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMovieByName();
+  }, [movieName]);
 
 
   const handleSeatClick = (index: number) => {
@@ -66,7 +93,8 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
     if(selectedSeats.length > 0) {
       if (movies){
         const { title, price } = movies;
-        addToCart({name: title, price,quantity: selectedSeats.length})
+        const seatNumbers = selectedSeats.map((seatNumber) => parseInt(seatNumber));
+        addToCart({ name: title, price, quantity: seatNumbers.length, seatNumber: seatNumbers });      
         router.push("/payment")
         seatModal.onClose()
         toast.success("Ticket added to cart!")
@@ -75,8 +103,6 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
     else {
       return 
     }
-    
-
   }
 
   
@@ -112,7 +138,7 @@ const SeatModal = ({ movieName }: { movieName: string }) => {
               key={index}
               className={`w-[1.6rem] h-[1.6rem] rounded-md cursor-pointer ${
                 seatValue
-                  ? "bg-green-600" // Occupied seat
+                  ? "bg-red-600" // Occupied seat
                   : selectedSeats.includes(index.toString())
                   ? "bg-green-600" // Selected seat
                   : selectedSeats.length === 6

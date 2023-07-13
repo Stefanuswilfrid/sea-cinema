@@ -1,27 +1,49 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../libs/prismadb";
-import { NextApiResponse } from "next";
+import { NextApiResponse,NextApiRequest } from "next";
+
 
 export default async function POST(request: Request, response: NextApiResponse) {
   const body = await request.body;
   const { cartItems, totalPrice, username } = body as any;
 
-  const existingUser = await prisma.user.findUnique({
+  const existingUser = await prisma.user.findFirst({
     where: { username },
   });
+
 
   if (existingUser) {
     const transactionPromises = cartItems.map(async (cartItem: any) => {
       const movie = await prisma.movie.findUnique({
-        where: { title: cartItem.movieName },
+        where: { title: cartItem.name },
       });
 
       if (movie) {
+        console.log("tm",cartItem.seatNumber)
+
+        const updatedSeats = movie.seats?.map((seatValue: boolean, index: number) => {
+          if (cartItem.seatNumber && cartItem.seatNumber.includes(index)) {
+            return true;
+          } else {
+            return seatValue;
+          }
+        });
+
+        await prisma.movie.update({
+          where: { id: movie.id },
+          data: {
+            seats: updatedSeats,
+          },
+        });
+
+        console.log(updatedSeats)
+
         const transaction = await prisma.transaction.create({
           data: {
             user: { connect: { id: existingUser.id } },
             movie: { connect: { id: movie.id } },
-            seats: cartItem.seats,
+            seats: cartItem.seatNumber.map((seat: string) => parseInt(seat)),
+            quantity: cartItem.quantity,
             totalCost: cartItem.price * cartItem.quantity,
           },
         });
@@ -38,11 +60,12 @@ export default async function POST(request: Request, response: NextApiResponse) 
 
       // Return success response or perform any other actions
       return response.status(200).json({ message: "Transactions created successfully", transactions });
-    } catch (error) {
+    } catch (error: any) {
       // Handle error if any of the movies are not found
-      return response.status(404).json({ error: "internal server error" });
+      return response.status(404).json({ error: error.message });
     }
   }
 
-  return response.status(400).json({ error: "Username already exists!" });
+  return response.status(400).json({ error: "User not found" });
 }
+
