@@ -53,7 +53,7 @@ const RegisterModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <div className="text-start">
+      <div className="text-center">
         <div className="text-2xl font-bold">Register</div>
         <div className="font-light text-neutral-500 mt-2">
           Create your account
