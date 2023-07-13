@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import AuthCheck from "@/components/AuthCheck";
 
 interface Transaction {
   id: string;
@@ -15,6 +16,17 @@ interface Transaction {
 }
 
 export default function index() {
+  return (
+    <>
+      <AuthCheck>
+        <HistoryPage/>
+      </AuthCheck>
+    </>
+  )
+  
+}
+
+function HistoryPage(){
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const { data, status, update } = useSession();
 
@@ -126,4 +138,5 @@ export default function index() {
       </Container>
     </main>
   );
+
 }
