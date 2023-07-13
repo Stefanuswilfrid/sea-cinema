@@ -6,11 +6,10 @@ import LoginModal from "./Modal/LoginModal";
 import RegisterModal from "./Modal/RegisterModal";
 
 const ModalProvider = () => {
-    const router = useRouter();
-    const movieName = router.asPath.substring(1);
+ 
     return (
         <>
-        <SeatModal movieName={movieName as string}/>
+        <SeatModal />
       <LoginModal />
       <RegisterModal />
       </>
