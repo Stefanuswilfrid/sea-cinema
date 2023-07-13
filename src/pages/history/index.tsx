@@ -33,7 +33,6 @@ export default function index() {
         toast.success("Transaction Cancelled Successfully")
 
       } else {
-        console.log("Failed to fetch transaction");
       }
 
       window.location.reload();
@@ -51,7 +50,6 @@ export default function index() {
           const transactionsData = await response.json();
           setTransactions(transactionsData as Transaction[]);
         } else {
-          console.log("Failed to fetch transactions.");
         }
       } catch (error) {
         console.error(error);

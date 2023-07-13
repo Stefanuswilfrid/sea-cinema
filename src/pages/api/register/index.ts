@@ -6,6 +6,14 @@ import { FieldValue } from "react-hook-form";
 import { IUser } from "@/components/Modal/RegisterModal";
 import { NextApiResponse } from "next";
 
+interface IUserBody {
+  name: string;
+  username: string;
+  age: string ;
+  password: string;
+
+}
+
 export default async function POST(
   request: Request, response: NextApiResponse
 ) {
@@ -15,7 +23,7 @@ export default async function POST(
     name,
     age,
     password,
-   } = body as unknown as IUser;
+   } = body as unknown as IUserBody;
 
    const hashedPassword = await bcrypt.hash(password, 12);
    const ageInt = parseInt(age);
