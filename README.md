@@ -40,5 +40,6 @@ Additionally, the app provides transaction history functionality, allowing users
 
 Overall, the app offers a convenient and secure movie browsing experience with ticket booking, user balance, and personalized features.
 
-![ezgif com-video-to-gif](https://github.com/Stefanuswilfrid/sea-cinema/assets/77448713/5959c44a-527e-4986-acb7-e0500b3418f7)
+![ezgif com-video-to-gif-2](https://github.com/Stefanuswilfrid/sea-cinema/assets/77448713/7e58a243-aa05-414c-ad74-29c763ce8592)
+
 
