@@ -10,6 +10,7 @@ import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/router";
 import { CartProvider } from "@/libs/context";
 import ModalProvider from "@/components/ModalProvider";
+import { Analytics } from "@vercel/analytics/react"
 
 export default  function App({ Component, pageProps: {session,...pageProps} }: AppProps) {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
     <>
     <CartProvider>
     <SessionProvider>
+      <Analytics/>
       <ToasterProvider />
       <ModalProvider/>      
       <Navbar /> 

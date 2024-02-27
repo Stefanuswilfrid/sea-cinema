@@ -20,6 +20,6 @@
 
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ListingCard"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ListingCard", "babel.config.js"],
   "exclude": ["node_modules"]
 }
