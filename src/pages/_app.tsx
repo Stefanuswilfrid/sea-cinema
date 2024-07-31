@@ -21,7 +21,6 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
     <SessionProvider>
       <Analytics/>
       <ToasterProvider />
-      <ModalProvider/>      
       <Navbar /> 
       <Component {...pageProps} />
       <Footer />

@@ -2,6 +2,9 @@ import Image from 'next/image'
 import Container from '../components/Container'
 import ListingCard from '../components/ListingCard/ListingCard'
 import SEO from '@/components/SEO';
+import useSWR from 'swr';
+import { fetcher } from '@/libs';
+import { LoadingPlaceholder } from '@/components/LoadingProvider';
 
 export interface ListingCardProps {
   listing: Listing;
@@ -21,21 +24,13 @@ export interface HomeProps {
   listings: Listing[];
 }
 
-export async function getServerSideProps() {
-  // Fetch your data from an API or any other source
-  const response = await fetch('https://seleksi-sea-2023.vercel.app/api/movies');
-  const data = await response.json();
+const Home = () => {
+  const { data: listings, error } = useSWR<any>('api/movie/', fetcher);
+  console.log("movies",listings)
 
-  return {
-    props: {
-      listings: data, // Pass the fetched data as props to the Home component
-    },
-  };
-}
+  if (error) return <div>Failed to load</div>;
+  if (!listings) return <LoadingPlaceholder/>;
 
-
-
-const Home: React.FC<HomeProps> = ({ listings }) => {
   return (
     <main>
       <SEO
@@ -59,8 +54,8 @@ const Home: React.FC<HomeProps> = ({ listings }) => {
           "
         >
           
-          {listings.map((listing,id) => (
-            <ListingCard key={id} id={listing.id} description={listing.description} title={listing.title} url={listing.poster_url} price={listing.ticket_price} />
+          {listings.map((listing : any,id : any) => (
+            <ListingCard key={id} id={listing.id} description={listing.description} title={listing.title} url={listing.poster_url} price={listing.price} />
           ))}
           
 

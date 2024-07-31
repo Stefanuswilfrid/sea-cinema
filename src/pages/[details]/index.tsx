@@ -15,47 +15,19 @@ import { useRouter } from "next/router";
 import SEO from "@/components/SEO";
 import useSeatModal from "../../hooks/useSeatModal";
 import useLoginModal from "../../hooks/useLoginModal";
+import useSWR from "swr";
+import { fetcher } from "@/libs";
 
 
 interface MovieDetailsProps {
   listing: Listing;
 }
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Fetch the list of items or IDs from your API
-  const response = await fetch(
-    "https://seleksi-sea-2023.vercel.app/api/movies"
-  );
-  const data = await response.json();
 
-  // Generate the paths based on the item IDs
-  const paths = data.map((item: Listing) => ({
-    params: { details: item.title },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const itemTitle = context.params?.details;
-
-  // Fetch the item data based on the ID
-  const response = await fetch(
-    `https://seleksi-sea-2023.vercel.app/api/movies/`
-  );
-  const datas: Listing[] = await response.json();
-  const movies = datas.filter((data) => data.title == itemTitle);
-
-  return {
-    props: {
-      listing: movies[0],
-    },
-  };
-};
 
 export default function index({ listing }: MovieDetailsProps) {
+    
+    const { data: listings, error } = useSWR<any>('api/movie/', fetcher);
+
   const { data, status, update } = useSession();
   const currentUser = data?.user as UserData;
   const loginModal = useLoginModal();

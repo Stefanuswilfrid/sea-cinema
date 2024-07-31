@@ -18,10 +18,14 @@ model User {
 }
 
 model Movie {
-    id    String    @id @default(auto()) @map("_id") @db.ObjectId
-    title String    @unique
-    seats Boolean[]
-    price Int?
+    id           String    @id @default(auto()) @map("_id") @db.ObjectId
+    title        String    @unique
+    description  String
+    release_date DateTime
+    poster_url   String
+    age_rating   Int
+    seats        Boolean[]
+    price        Int?
 
     transactions Transaction[]
 }
