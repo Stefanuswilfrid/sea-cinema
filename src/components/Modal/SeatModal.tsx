@@ -10,6 +10,8 @@ import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { CartContext } from "@/libs/context";
 import { toast } from "react-hot-toast";
+import useSWR from "swr";
+import { fetcher } from "@/libs";
 
 interface IMovie{
   title: string;
@@ -22,50 +24,25 @@ const SeatModal = () => {
 
   const seatModal = useSeatModal();
   const router = useRouter();
-  const movieName = router.asPath.substring(1);
+  const id = router.query.details as string;
 
   const [isLoading, setIsLoading] = useState(false);
   const [seatArray, setSeatArray] = useState<Array<boolean>>([]);
-  const [movies,setMovies] = useState<IMovie>();
+  // const [movies,setMovies] = useState<IMovie>();
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
+  const { data: movies, error } = useSWR<any>(`api/movie/${id}`, fetcher);
+
+  
 
   useEffect(() => {
     // Reset selected seats when the modal is opened
     setSelectedSeats([]);
-    const fetchMovieByName = async () => {
-      try {
-        const response = await fetch(`/api/movie?movieName=${movieName}`);
-
-        if (response.ok) {
-          const moviesJSON = await response.json();
-          setMovies(moviesJSON);
-        } else {
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchMovieByName();
+    
     
   }, [seatModal.isOpen]);
 
-  useEffect(() => {
-    // fetchSeatsByMovieName();
-    const fetchMovieByName = async () => {
-      try {
-        const response = await fetch(`/api/movie?movieName=${movieName}`);
 
-        if (response.ok) {
-          const moviesJSON = await response.json();
-          setMovies(moviesJSON);
-        } else {
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchMovieByName();
-  }, [movieName]);
 
 
   const handleSeatClick = (index: number) => {
@@ -84,7 +61,7 @@ const SeatModal = () => {
   };
 
   const onSubmit = () => {
-    if(selectedSeats.length > 0) {
+    if(selectedSeats.length > 0 && movies) {
       if (movies){
         const { title, price } = movies;
         const seatNumbers = selectedSeats.map((seatNumber) => parseInt(seatNumber));
@@ -127,7 +104,7 @@ const SeatModal = () => {
         <h2 className="flex text-center mx-auto w-fit font-black mb-3 text-base 
         tracking-widest text-gray-500">SCREEN</h2>
         <div className="grid grid-cols-8 gap-6 mx-auto w-fit">
-          {movies && movies.seats.map((seatValue, index) => (
+          {movies && movies.seats.map((seatValue : any, index : number) => (
             <div
               key={index}
               className={`w-[1.6rem] h-[1.6rem] rounded-md cursor-pointer ${

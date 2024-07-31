@@ -1,11 +1,6 @@
 import React from "react";
 import { Listing } from "..";
-import {
-  GetStaticProps,
-  GetStaticPaths,
-  GetServerSidePropsContext,
-  GetStaticPropsContext,
-} from "next";
+
 import Image from "next/image";
 import Container from "../../components/Container";
 import { useSession } from "next-auth/react";
@@ -24,15 +19,20 @@ interface MovieDetailsProps {
 }
 
 
-export default function index({ listing }: MovieDetailsProps) {
+export default function index() {
     
-    const { data: listings, error } = useSWR<any>('api/movie/', fetcher);
 
-  const { data, status, update } = useSession();
+  const { data } = useSession();
   const currentUser = data?.user as UserData;
   const loginModal = useLoginModal();
   const seatModal = useSeatModal();
   const router = useRouter();
+
+  const id = router.query.details as string;
+
+  const { data: listing, error } = useSWR<any>(`api/movie/${id}`, fetcher);
+
+  console.log("movid",id,listing)
 
   const handleBookTicket =  () =>{
       if(!currentUser){
@@ -49,6 +49,8 @@ export default function index({ listing }: MovieDetailsProps) {
         }
       }
   }
+
+  if(!listing) return <h1>loading...</h1>
 
   return (
     <Container>
@@ -69,7 +71,7 @@ export default function index({ listing }: MovieDetailsProps) {
           <h1 className="text-2xl font-normal opacity-50">{listing.description}</h1>
 
           <h1 className="text-lg  font-extrabold my-3 tracking-widest">
-            $ {listing.ticket_price}
+            $ {listing.price}
           </h1>
           <h1 className="text-base font-normal">
             Age Rating: {listing.age_rating}+
@@ -84,8 +86,7 @@ export default function index({ listing }: MovieDetailsProps) {
             </button>
           </div>
         </div>
-      </div>
-      
+      </div>      
     </Container>
   );
 }

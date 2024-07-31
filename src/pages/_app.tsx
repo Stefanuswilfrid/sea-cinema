@@ -20,6 +20,7 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
     <CartProvider>
     <SessionProvider>
       <Analytics/>
+      <ModalProvider/>
       <ToasterProvider />
       <Navbar /> 
       <Component {...pageProps} />
