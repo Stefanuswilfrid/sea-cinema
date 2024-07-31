@@ -1,4 +1,3 @@
-
 ## Cloning the repository
 
 ```shell
@@ -11,12 +10,19 @@ git clone <REPOSITORY_URL>
 npm i
 ```
 
-## Setup Local Environment 
-create .env file containing : 
+## Setup Local Environment
+
+create .env file containing :
 
 ```
 DATABASE_URL=<MONGODB URL>
 NEXTAUTH_SECRET=<>
+```
+
+seed the database :
+
+```
+npx prisma db seed
 ```
 
 ## Run the app
@@ -36,10 +42,8 @@ The app is a movie browsing platform that includes the following features:
 - **Registration**: Users can register an account to personalize their experience and access additional features.
 - **Login**: Registered users can log in to their accounts to access their profile and saved preferences.
 - **Logout**: Users can securely log out of their accounts to protect their privacy.
-Additionally, the app provides transaction history functionality, allowing users to view their past transactions and track their ticket bookings and balance usage.
+  Additionally, the app provides transaction history functionality, allowing users to view their past transactions and track their ticket bookings and balance usage.
 
 Overall, the app offers a convenient and secure movie browsing experience with ticket booking, user balance, and personalized features.
 
 ![ezgif com-video-to-gif-2](https://github.com/Stefanuswilfrid/sea-cinema/assets/77448713/7e58a243-aa05-414c-ad74-29c763ce8592)
-
-

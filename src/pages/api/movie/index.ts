@@ -484,9 +484,7 @@ const movieData =
 
 export default async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
-    console.log("bro")
     const movie = await prisma.movie.findMany();
-    console.log("api",movie)
 
     if (movie) {
       response.setHeader('Cache-Control', 'no-store, max-age=0');

@@ -32,7 +32,6 @@ export default function index() {
 
   const { data: listing, error } = useSWR<any>(`api/movie/${id}`, fetcher);
 
-  console.log("movid",id,listing)
 
   const handleBookTicket =  () =>{
       if(!currentUser){

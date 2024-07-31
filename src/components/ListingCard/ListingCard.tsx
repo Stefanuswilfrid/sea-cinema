@@ -21,7 +21,6 @@ export default function ListingCard({
 }: ListingCardProps) {
   const router = useRouter();
   const { ref, inView } = useInView();
-  console.log("LC",price)
 
   return (
     <motion.div

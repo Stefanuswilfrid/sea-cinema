@@ -551,7 +551,6 @@ const movieData = [
 
 async function main() {
   const movies = await prisma.movie.createMany({ data: movieData });
-  console.log("mov", movies);
 }
 main()
   .then(async () => {

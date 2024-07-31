@@ -22,7 +22,6 @@ export default async function handler(
   }
   const { movieId } = req.query;
 
-  console.log("ids", movieId);
   try {
     const movies = await getMovieById(movieId as string);
     res.status(200).json(movies);
