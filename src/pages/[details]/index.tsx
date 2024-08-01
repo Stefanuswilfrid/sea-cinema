@@ -25,7 +25,8 @@ export default function index() {
   const seatModal = useSeatModal();
   const router = useRouter();
 
-  const id = router.query.details as string;
+  const id = router.query.details! as string;
+  console.log("testttt",id)
 
   const { data: listing, error } = useSWR<any>(`api/movie/${id}`, fetcher);
 
@@ -41,10 +42,10 @@ export default function index() {
       }
     }
   };
+  if (error) return (<Container><h1 className="mt-12">An Error Occured </h1></Container>)
 
   return (
     <Container>
-      {error && <h1 className="mt-12">An Error Occured : {error}</h1>}
       {!listing && <h1 className="mt-12">Loading Movie Details ....</h1>}
       {listing && (
         <>
