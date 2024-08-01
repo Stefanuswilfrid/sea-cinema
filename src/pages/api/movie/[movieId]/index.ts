@@ -26,6 +26,7 @@ export default async function handler(
     const movies = await getMovieById(movieId as string);
     res.status(200).json(movies);
   } catch (error) {
-    res.status(500).json({ error });
+  
+    res.status(500).json( error );
   }
 }
