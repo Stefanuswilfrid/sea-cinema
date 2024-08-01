@@ -44,7 +44,7 @@ export default function index() {
 
   return (
     <Container>
-      {error && <h1 className="mt-12">An Error Occured</h1>}
+      {error && <h1 className="mt-12">An Error Occured : {error}</h1>}
       {!listing && <h1 className="mt-12">Loading Movie Details ....</h1>}
       {listing && (
         <>
