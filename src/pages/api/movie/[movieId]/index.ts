@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import prisma  from "@/libs/prismadb";
 
 type Data = {
   name: string;
 };
 
 async function getMovieById(id: string) {
-  return prisma?.movie.findUnique({
+  return prisma.movie.findUnique({
     where: {
       id,
     },
