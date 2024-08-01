@@ -76,7 +76,7 @@ const UserMenu =  () => {
             rounded-xl 
             shadow-md
             w-[40vw]
-            md:w-[10vw]
+            md:w-[13vw]
             bg-white 
             overflow-hidden 
             right-0 

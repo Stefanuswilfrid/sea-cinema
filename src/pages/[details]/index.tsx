@@ -63,16 +63,16 @@ export default function index() {
             animate={{ opacity: 1 }}
           >
             <div className="w-11/12 grid md:grid-cols-2  m-auto mt-12">
-              <div className="relative">
+              <div className="relative mx-auto">
                 <Image
-                  className="rounded-3xl m-auto md:m-0"
+                  className="rounded-3xl  md:m-0"
                   src={listing.poster_url}
                   width={350}
                   height={200}
                   alt=""
                 />
 
-                <div className="absolute w-[350px] h-[525px] rounded-3xl  m-auto grid place-content-center gap-5   top-0 opacity-0 bg-black/50 transition-all duration-300 hover:opacity-100">
+                <div className="absolute w-full sm:w-[350px] aspect-[350/525]  rounded-3xl   grid place-content-center gap-5   top-0 opacity-0 bg-black/50  transition-all duration-300 hover:opacity-100">
                   <AudioButton text={listing.title + " ...... " + listing.description}/>
                 </div>
                 
