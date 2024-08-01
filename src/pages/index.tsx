@@ -5,6 +5,7 @@ import SEO from '@/components/SEO';
 import useSWR from 'swr';
 import { fetcher } from '@/libs';
 import { LoadingPlaceholder } from '@/components/LoadingProvider';
+import { Pagination } from '@/components/Pagination';
 
 export interface ListingCardProps {
   listing: Listing;
@@ -59,8 +60,14 @@ const Home = () => {
           
 
         </div>
-        </Container>
+        {/* <div className="fixed w-full left-0 max-w-[1440px] mx-auto max-sm:border-t border-t-secondary/10 p-1 max-sm:bg-stone-100 bottom-0 md:right-4 md:px-4 flex justify-end mt-8 gap-1">
 
+          <Pagination
+            
+          />
+        </div> */}
+        </Container>
+        
     </main>
   )
 }

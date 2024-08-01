@@ -22,6 +22,7 @@
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "framer-motion": "^10.12.18",
+    "lucide-react": "^0.418.0",
     "next": "13.4.8",
     "next-auth": "^4.22.1",
     "postcss": "8.4.24",
