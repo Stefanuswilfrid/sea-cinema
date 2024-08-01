@@ -43,7 +43,7 @@ export default function ListingCard({
           <div className="p-8 space-y-2">
             <div className="flex items-center gap-4 text-white">
               <p>$ {price}</p>
-              <p>{description.substring(0,10)+ "..."}</p>
+              <p>{description.substring(0,15)+ "..."}</p>
             </div>
             <p className="font-semibold text-xl text-white">{title}</p>
           </div>

@@ -1,8 +1,10 @@
 import { loadingPlaceholder } from "@/libs";
+import Container from "./Container";
 
 export function LoadingPlaceholder({ amount = 6 }: { amount?: number }) {
   return (
-    <ul className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-full mx-auto">
+    <Container>
+    <ul className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-full mx-auto">
       {loadingPlaceholder(amount).map((index) => (
         
 
@@ -16,5 +18,6 @@ export function LoadingPlaceholder({ amount = 6 }: { amount?: number }) {
 
       ))}
     </ul>
+    </Container>
   );
 }
