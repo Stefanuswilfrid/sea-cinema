@@ -94,10 +94,16 @@ const UserMenu =  () => {
                 />
                 
                 <MenuItem
-                  label="Transactions history"
+                  label="Transactions "
                   onClick={() => {router.push("/history"),setIsOpen(false)}}
                 />
-               
+               <hr/>
+               <MenuItem
+                  label="Account"
+                  onClick={() => {router.push("/account"),setIsOpen(false)}}
+                  bold={false}
+                />
+               <hr/>
                 <MenuItem label="Log out" onClick={() => {router.push("/"); signOut(); }} />
               </>
             ) : (
