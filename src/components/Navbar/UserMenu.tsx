@@ -100,7 +100,7 @@ const UserMenu =  () => {
                <hr/>
                <MenuItem
                   label="Account"
-                  onClick={() => {router.push("/account"),setIsOpen(false)}}
+                  onClick={() => {router.push("/account-settings"),setIsOpen(false)}}
                   bold={false}
                 />
                <hr/>
