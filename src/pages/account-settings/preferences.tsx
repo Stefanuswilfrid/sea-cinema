@@ -41,7 +41,7 @@ export default function Preferences() {
               grid 
               grid-cols-1 
               md:grid-cols-7 
-              md:gap-10 
+              md:gap-12
               mt-6
             "
           >
@@ -92,7 +92,6 @@ export default function Preferences() {
             pb-6
           "
                 >
-                  {/* <div>Legal Name </div> */}
                   <div
                     className="text-left w-full md:hover:bg-hovered active:bg-hovered duration-200 flex items-center justify-between"
                   >

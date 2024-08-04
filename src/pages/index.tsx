@@ -6,6 +6,7 @@ import useSWR from 'swr';
 import { fetcher } from '@/libs';
 import { LoadingPlaceholder } from '@/components/LoadingProvider';
 import { Pagination } from '@/components/Pagination';
+import LastViewedMovie from '@/components/LastViewedMovie';
 
 export interface ListingCardProps {
   listing: Listing;
@@ -39,6 +40,8 @@ const Home = () => {
         its affordable ticket prices and wide range of movie genres."
       />
       <Container>
+        <LastViewedMovie/>
+        
         <h1  className='mt-12 text-3xl font-extrabold '>Currently Playing Movies</h1>
 
         <div 

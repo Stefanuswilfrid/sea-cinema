@@ -1,12 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300;1,400;1,600;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300;1,400;1,600;1,800&display=swap");
 
 @font-face {
-  font-family: 'Nunito';
-  src: 
-       url("../../public/fonts/Nunito-VariableFont_wght.ttf") format('woff');
+  font-family: "Nunito";
+  src: url("../../public/fonts/Nunito-VariableFont_wght.ttf") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -26,5 +25,26 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;  
+  font-family: "Nunito", sans-serif;
+}
+
+.indicator-blue {
+  animation-name: pulse-blue;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+}
+
+@keyframes pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(173, 216, 230, 0.5); /* light blue with 50% opacity */
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(173, 216, 230, 0); /* light blue with 0% opacity */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(173, 216, 230, 0); /* light blue with 0% opacity */
+  }
 }

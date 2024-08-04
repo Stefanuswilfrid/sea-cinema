@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Listing } from "..";
 
 import Image from "next/image";
@@ -14,6 +14,7 @@ import useSWR from "swr";
 import { fetcher } from "@/libs";
 import { motion } from "framer-motion";
 import { AudioButton } from "@/components/AudioButton";
+import { LAST_VIEWED_MOVIE_KEY } from "@/hooks/useLastViewedMovie";
 
 interface MovieDetailsProps {
   listing: Listing;
@@ -30,6 +31,21 @@ export default function index() {
 
   const { data: listing, error } = useSWR<any>(`api/movie/${id}`, fetcher);
 
+  useEffect(() =>{
+    const pathname = `/${id}`;
+
+    if (typeof window !== "undefined" && !pathname.includes("undefined")) {
+      localStorage.setItem(
+        LAST_VIEWED_MOVIE_KEY,
+        JSON.stringify({
+          movieName: listing?.title,
+          pathname,
+        })
+      );
+    }
+
+  },[router,id,listing])
+
   const handleBookTicket = () => {
     if (!currentUser) {
       loginModal.onOpen();
@@ -41,6 +57,7 @@ export default function index() {
       }
     }
   };
+
   if (error)
     return (
       <Container>
