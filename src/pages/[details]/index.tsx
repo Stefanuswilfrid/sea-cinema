@@ -13,7 +13,7 @@ import useLoginModal from "../../hooks/useLoginModal";
 import useSWR from "swr";
 import { fetcher } from "@/libs";
 import { motion } from "framer-motion";
-import { AudioButton } from "@/components/AudioButton";
+import { AudioButton } from "@/components/Button/AudioButton";
 import { LAST_VIEWED_MOVIE_KEY } from "@/hooks/useLastViewedMovie";
 
 interface MovieDetailsProps {

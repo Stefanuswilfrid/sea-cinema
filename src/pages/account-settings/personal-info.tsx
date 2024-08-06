@@ -1,6 +1,6 @@
 import Breadcrumb from "@/components/Breadcrumbs";
 import Container from "@/components/Container";
-import { BackRouteButton } from "@/components/RouteButton";
+import { BackRouteButton } from "@/components/Button/RouteButton";
 import React from "react";
 
 export default function PersonalInfo() {

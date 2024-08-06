@@ -57,9 +57,9 @@ export default function AccountSettings() {
       <Container>
         <div className="mx-6  sm:max-w-5xl sm:mx-auto">
           <AccountHeading
-            name={currentUser.name}
-            username={currentUser.username}
-            id={currentUser.id}
+            name={currentUser?.name}
+            username={currentUser?.username}
+            id={currentUser?.id}
           />
 
           <InfoCard />
@@ -89,7 +89,7 @@ export default function AccountSettings() {
                     icon={button.icon}
                     path={button.path}
                   />
-                  {(index + 1) % 2 === 0 && <hr />}
+                  {(index + 1) % 2 === 0 && <hr className="my-6 sm:hidden" />}
                 </motion.div>
               );
             })}

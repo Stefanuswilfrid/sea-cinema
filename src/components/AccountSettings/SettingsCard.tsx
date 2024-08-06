@@ -18,7 +18,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({ title, label, icon: IconCom
       <IconComponent className='h-[32px] w-[32px] sm:mb-4 mr-4'  />
       <div className='justify-between sm:justify-normal flex sm:flex-col w-full sm:w-fit'>
 
-      <h1 className='text-lg font-black'>{title}</h1>
+      <h1 className='text-lg font-thin sm:font-black'>{title}</h1>
       <p className='text-[#6A6A6A] font-thin text-sm leading-5 text-left hidden sm:block'>{label}</p>
            <ChevronRightIcon
       className=" h-5 w-5 shrink-0 flex-none text-secondary/50 sm:hidden"
