@@ -4,7 +4,6 @@ import { Listing } from "..";
 import Image from "next/image";
 import Container from "../../components/Container";
 import { useSession } from "next-auth/react";
-import { UserData } from "../balance";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import SEO from "@/components/SEO";
@@ -15,6 +14,7 @@ import { fetcher } from "@/libs";
 import { motion } from "framer-motion";
 import { AudioButton } from "@/components/Button/AudioButton";
 import { LAST_VIEWED_MOVIE_KEY } from "@/hooks/useLastViewedMovie";
+import { CurrentUser } from "@/types";
 
 interface MovieDetailsProps {
   listing: Listing;
@@ -22,7 +22,7 @@ interface MovieDetailsProps {
 
 export default function index() {
   const { data } = useSession();
-  const currentUser = data?.user as UserData;
+  const currentUser = data?.user as CurrentUser;
   const loginModal = useLoginModal();
   const seatModal = useSeatModal();
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function index() {
     if (!currentUser) {
       loginModal.onOpen();
     } else {
-      if (currentUser.age < listing.age_rating) {
+      if (!currentUser.age < listing.age_rating) {
         toast.error("Age is below the movie's age rating");
       } else {
         seatModal.onOpen();

@@ -4,6 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 
 import { useInView } from "react-intersection-observer";
 import HeartButton from "../Button/HeartButton";
+import { CurrentUser } from "@/types";
 
 interface ListingCardProps {
   id: Number;
@@ -11,6 +12,8 @@ interface ListingCardProps {
   url: string;
   price: number;
   description: string;
+  currentUser?: CurrentUser | null
+
 }
 
 export default function ListingCard({

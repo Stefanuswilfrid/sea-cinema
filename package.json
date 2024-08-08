@@ -24,6 +24,7 @@
     "bcrypt": "^5.1.0",
     "cloudinary": "^2.4.0",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "framer-motion": "^10.12.18",
     "lucide-react": "^0.418.0",
     "next": "13.4.8",

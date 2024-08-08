@@ -10,8 +10,8 @@ import React from "react";
 import AccountHeading from "@/components/AccountSettings/AccountHeading";
 import InfoCard from "@/components/AccountSettings/InfoCard";
 import { useSession } from "next-auth/react";
-import { UserData } from "../balance";
 import AuthCheck from "@/components/AuthCheck";
+import { CurrentUser } from "@/types";
 
 export default function AccountSettings() {
   const buttons: Array<{
@@ -48,7 +48,7 @@ export default function AccountSettings() {
     },
   ];
   const { data } = useSession();
-  const currentUser = data?.user as UserData;
+  const currentUser = data?.user as CurrentUser;
   console.log("curr", currentUser);
 
   return (
@@ -56,8 +56,8 @@ export default function AccountSettings() {
       <Container>
         <div className="mx-6  sm:max-w-5xl sm:mx-auto">
           <AccountHeading
-            name={currentUser?.name}
-            username={currentUser?.username}
+            name={currentUser?.name!}
+            username={currentUser?.username!}
             id={currentUser?.id}
           />
 

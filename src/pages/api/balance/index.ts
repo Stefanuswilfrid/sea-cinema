@@ -3,7 +3,6 @@
 import prisma from "../../../libs/prismadb";
 
 import { NextApiResponse } from "next";
-import { UserData } from "@/pages/balance";
 
 export default async function POST(
   request: Request,

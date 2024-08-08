@@ -6,11 +6,11 @@ import { toast } from "react-hot-toast";
 // import { SafeUser } from "@/app/types";
 
 import useLoginModal from "./useLoginModal";
-import { UserData } from "@/pages/balance";
+import { CurrentUser } from "@/types";
 
 interface IUseFavorite {
   listingId: string;
-  currentUser?: UserData | null
+  currentUser?: CurrentUser | null
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {

@@ -8,7 +8,7 @@ import AuthCheck from "@/components/AuthCheck";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { UserData } from "../balance";
+import { CurrentUser } from "@/types";
 
 function Payment() {
   return (
@@ -24,7 +24,7 @@ function PaymentPage(){
   const router = useRouter();
 
   const { cartItems, addToCart,totalPrice,resetCart } = useContext(CartContext);
-  const currentUsername = session?.user as UserData;
+  const currentUsername = session?.user as CurrentUser;
 
   const handlePayment = async() => {
     if(currentUsername.balance>=totalPrice){

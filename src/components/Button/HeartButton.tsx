@@ -3,13 +3,13 @@
 import { AiFillHeart, AiOutlineHeart , AiFillSave } from "react-icons/ai";
 import { Bookmark } from "lucide-react";
 
-import { UserData } from "@/pages/balance";
 import useFavorite from "@/hooks/useFavourite";
+import { CurrentUser } from "@/types";
 
 
 interface HeartButtonProps {
   listingId: string
-  currentUser?: UserData | null
+  currentUser?: CurrentUser | null
 }
 
 const HeartButton: React.FC<HeartButtonProps> = ({ 

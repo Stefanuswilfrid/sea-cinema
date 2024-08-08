@@ -9,14 +9,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import SEO from "@/components/SEO";
+import { CurrentUser } from "@/types";
 
-export type UserData = {
-  id: string;
-  username: string;
-  name: string;
-  age: number;
-  balance: number;
-};
+
 
 
 export default function Balance() {
@@ -44,7 +39,7 @@ function BalancePage(){
   const router = useRouter();
   const { data, status, update } = useSession();
 
-  const currentUser = data?.user as UserData;
+  const currentUser = data?.user as CurrentUser;
 
   const handleSubmitDeposit = async() => {
     if (selectedAmount == 0) {

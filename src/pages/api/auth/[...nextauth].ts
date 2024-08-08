@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 import prisma from "../../../libs/prismadb"
-import { UserData } from "@/pages/balance"
+import { CurrentUser } from "@/types"
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -45,12 +45,12 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     jwt: async ({ token, trigger, session, user }) => {
-      const tokenUser = token.user as UserData;
+      const tokenUser = token.user as CurrentUser;
       if (trigger === "update" && session?.user?.balance) {
         const currentBalance = tokenUser.balance + session.user.balance;
         await prisma.user.update({
           where: {
-            username: tokenUser.username ,
+            username: tokenUser?.username! ,
           },
           data: {
             balance: currentBalance,

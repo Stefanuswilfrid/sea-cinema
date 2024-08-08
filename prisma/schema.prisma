@@ -12,7 +12,7 @@ model User {
     username    String?  @unique
     name        String?
     age         Int?
-    balance     Int?
+    balance     Int
     favoriteIds String[] @db.ObjectId
 
     avatarUrl String?
