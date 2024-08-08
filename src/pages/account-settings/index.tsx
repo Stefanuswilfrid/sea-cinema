@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { IdCard, ToggleLeft } from "lucide-react";
 import { ShieldHalf } from "lucide-react";
 import { Banknote } from "lucide-react";
-import { File } from "lucide-react";
-import { SessionProvider } from "next-auth/react";
+
 
 import React from "react";
 import AccountHeading from "@/components/AccountSettings/AccountHeading";

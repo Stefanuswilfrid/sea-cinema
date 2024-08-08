@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
 
 import { useInView } from "react-intersection-observer";
+import HeartButton from "../Button/HeartButton";
 
 interface ListingCardProps {
   id: Number;
@@ -38,6 +39,16 @@ export default function ListingCard({
             height={750}
             className="object-cover w-full h-full group-hover:opacity-25"
           />
+          <div className="
+            absolute
+            top-5
+            right-4
+          ">
+            <HeartButton 
+              listingId={""} 
+              currentUser={null}
+            />
+          </div>
         </div>
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent">
           <div className="p-8 space-y-2">

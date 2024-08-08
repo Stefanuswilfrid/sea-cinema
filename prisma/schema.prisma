@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-    id        String  @id @default(auto()) @map("_id") @db.ObjectId
-    username  String? @unique
-    name      String?
-    age       Int?
-    balance   Int?
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    username    String?  @unique
+    name        String?
+    age         Int?
+    balance     Int?
+    favoriteIds String[] @db.ObjectId
+
     avatarUrl String?
 
     hashedPassword String?
