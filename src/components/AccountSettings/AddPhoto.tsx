@@ -4,8 +4,13 @@ import { apiClient } from '@/libs/utils/api-client'
 import React from 'react'
 import Avatar from '../Avatar'
 import { TabLoader } from '../Loader/TabLoader'
+import { useSession } from 'next-auth/react'
+import { CurrentUser } from '@/types'
 
 export default function AddPhoto({id}:{id:string}) {
+  const { data: session,update } = useSession();
+  const currentUser = session?.user as CurrentUser;
+  
   const { trigger, status } = useMutation<{
     file: File
   }>('/profile/change-avatar', async (url, args) => {
@@ -17,12 +22,22 @@ export default function AddPhoto({id}:{id:string}) {
       formData,
       userId: id,
     })
+    console.log("what",source)
 
-    const avatarUrl = source.replace('w_430', 'h_92,w_92')
-    console.log("url",url,avatarUrl)
+    
+    const avatarUrl = source
+    
+    
+    console.log("url",avatarUrl)
     const { data } = await apiClient.put(url, {
       avatarUrl,
     })
+
+    await update({
+      user:{
+        avatarUrl: avatarUrl,
+      }
+    });
 
     return data
   })
@@ -33,7 +48,7 @@ export default function AddPhoto({id}:{id:string}) {
     <div className='sticky top-11'>
             <div className="w-52 h-52 rounded-full border border-divider flex items-center justify-center relative overflow-hidden">
 
-      <Avatar src={null} height={208} width={208} isLoading={isLoading}/>
+      <Avatar src={currentUser?.avatarUrl} height={208} width={208} isLoading={isLoading}/>
       <div className="absolute scale-125">
           <TabLoader offset={-8} visible={isLoading} />
         </div>

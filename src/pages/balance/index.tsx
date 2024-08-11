@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import React from "react";
-import { useSession, getSession } from "next-auth/react";
-import { motion, useAnimation } from "framer-motion";
+import { useSession } from "next-auth/react";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import Link from 'next/link';
 

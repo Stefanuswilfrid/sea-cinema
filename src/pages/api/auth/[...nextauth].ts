@@ -1,33 +1,33 @@
-import bcrypt from "bcrypt"
-import NextAuth, { AuthOptions, DefaultSession } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import bcrypt from "bcrypt";
+import NextAuth, { AuthOptions, DefaultSession } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-import prisma from "../../../libs/prismadb"
-import { CurrentUser } from "@/types"
+import prisma from "../../../libs/prismadb";
+import { CurrentUser } from "@/types";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: "credentials",
       credentials: {
-        username: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' }
+        username: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
           where: {
-            username: credentials.username
-          }
+            username: credentials.username,
+          },
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -36,33 +36,40 @@ export const authOptions: AuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         return user;
-      }
-    })
+      },
+    }),
   ],
   callbacks: {
     jwt: async ({ token, trigger, session, user }) => {
       const tokenUser = token.user as CurrentUser;
-      if (trigger === "update" && session?.user?.balance) {
-        const currentBalance = tokenUser.balance + session.user.balance;
+      if (trigger === "update" && session?.user) {
+        const { avatarUrl, balance } = session.user;
+
+        const updateData: Partial<{ avatarUrl: string; balance: number }> = {};
+
+        if (avatarUrl) {
+          updateData.avatarUrl = avatarUrl;
+        }
+
+        if (balance !== undefined) {
+          updateData.balance = (tokenUser.balance || 0) + balance;
+        }
+
         await prisma.user.update({
           where: {
-            username: tokenUser?.username! ,
+            username: tokenUser.username!,
           },
-          data: {
-            balance: currentBalance,
-          },
+          data: updateData,
         });
 
-        if (token.user) {
-          token.user = {
-            ...tokenUser,
-            balance: currentBalance,
-          };
-        }
+        token.user = {
+          ...tokenUser,
+          ...updateData, 
+        };
 
         return token;
       } else {
@@ -84,13 +91,13 @@ export const authOptions: AuthOptions = {
     },
   },
   pages: {
-    signIn: '/',
+    signIn: "/",
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
+};
 
 export default NextAuth(authOptions);

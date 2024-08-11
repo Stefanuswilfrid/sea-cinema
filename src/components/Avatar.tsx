@@ -10,6 +10,7 @@ interface AvatarProps {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ src , height, width,isLoading}) => {
+  // console.log("url",src)
   if (isLoading) return null
 
   return ( 

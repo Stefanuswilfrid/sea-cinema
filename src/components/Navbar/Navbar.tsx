@@ -4,10 +4,14 @@ import Container from '../Container'
 import UserMenu from './UserMenu';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession } from "next-auth/react";
+import { CurrentUser } from '@/types';
 
 
 const Navbar =() => {
-  
+  const { data: session } = useSession();
+  const currentUser = session?.user as CurrentUser;
+
   
   return (
     <div className='w-full bg-white z-10 shadow-sm'>
@@ -25,7 +29,7 @@ const Navbar =() => {
                       />
                     </span>
                     </Link>
-                    <UserMenu />
+                    <UserMenu currentUser={currentUser} />
 
 
                 </div>
