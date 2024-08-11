@@ -29,7 +29,7 @@ export default function index() {
 
   const id = router.query.details! as string;
 
-  const { data: listing, error } = useSWR<any>(`api/movie/${id}`, fetcher);
+  const { data: listing, error } = useSWR<any>(`/movie/${id}`, fetcher);
 
   useEffect(() =>{
     const pathname = `/${id}`;

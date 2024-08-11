@@ -31,7 +31,7 @@ const SeatModal = () => {
   // const [movies,setMovies] = useState<IMovie>();
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
-  const { data: movies, error } = useSWR<any>(`api/movie/${id}`, fetcher);
+  const { data: movies, error } = useSWR<any>(`/movie/${id}`, fetcher);
 
   
 

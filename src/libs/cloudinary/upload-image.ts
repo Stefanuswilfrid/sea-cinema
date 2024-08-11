@@ -8,7 +8,7 @@ export const uploadImage = async ({
   onUploadProgress,
 }: UploadFileProps): Promise<MediaAttributes> => {
   const { timestamp, signature } = await axios
-    .get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cloudinary?user_id=${userId}`)
+    .get(`/api/cloudinary?user_id=${userId}`)
     .then((res) => res.data)
 
   const fd = new FormData()

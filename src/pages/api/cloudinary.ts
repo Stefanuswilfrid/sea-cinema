@@ -10,6 +10,7 @@ cl.config({
 })
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log("cloud")
   const timestamp = Math.round(new Date().getTime() / 1000)
   const signature = cl.utils.api_sign_request(
     {

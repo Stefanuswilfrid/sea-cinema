@@ -10,19 +10,24 @@ export type SWRPayload<T> = {
 
 const apiClient = axios.create({
   baseURL:
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api` ?? 'http://localhost:3000/api',
+    `${process.env.NEXT_PUBLIC_API_ROUTE}` ?? 'http://localhost:3000/api',
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: false,
 })
 
+console.log("api-client",`${process.env.NEXT_PUBLIC_BASE_URL}/api` )
+
 apiClient.interceptors.response.use(
   (config) => {
+    console.log("",config)
     return config
   },
   (error: AxiosError<UninterceptedApiError>) => {
     // parse error
+    // console.log("",config)
+
     if (error.response?.data.message) {
       return Promise.reject({
         ...error,

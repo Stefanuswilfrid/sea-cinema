@@ -27,7 +27,7 @@ export interface HomeProps {
 }
 
 const Home = () => {
-  const { data: listings, error } = useSWR<any>('api/movie/', fetcher);
+  const { data: listings, error } = useSWR<any>('/movie/', fetcher);
 
   if (error) return <div>Failed to load</div>;
   if (!listings) return <LoadingPlaceholder/>;

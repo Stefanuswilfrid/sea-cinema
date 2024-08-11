@@ -25,13 +25,13 @@ type HandlerType = {
 
 
 
-function isCurrentUser(user: any): user is CurrentUser {
-    return typeof user === 'object' &&
-      typeof user.id === 'string' &&
-      typeof user.username === 'string' &&
-      typeof user.image === 'string' &&
-      typeof user.name === 'string';
-  }
+// function isCurrentUser(user: any): user is CurrentUser {
+//     return typeof user === 'object' &&
+//       typeof user.id === 'string' &&
+//       typeof user.username === 'string' &&
+//       // typeof user.avatarUrl === 'string' &&
+//       typeof user.name === 'string';
+//   }
   
   export async function requestHandler(
     req: NextApiRequest,
@@ -64,13 +64,16 @@ function isCurrentUser(user: any): user is CurrentUser {
         id: '',
         username: '',
       }
+      console.log("receba",session?.user)
+      const sessionUser = session?.user as CurrentUser;
   
-      if (session?.user && isCurrentUser(session.user)) {
-        currentUser = {
-          avatarUrl: session.user.avatarUrl as string,
-          displayName: session.user.name as string,
-          id: session.user.id ?? '',
-          username: session.user.username ?? '',
+      if (session?.user ) {
+        console.log("neymar")
+        currentUser  = {
+          avatarUrl: sessionUser.avatarUrl as string,
+          displayName: sessionUser.displayName as string,
+          id: sessionUser.id  ?? '',
+          username: sessionUser.username ?? '',
         }
       }
   

@@ -99,6 +99,11 @@ const UserMenu =  () => {
                 />
                <hr/>
                <MenuItem
+                  label="Messages"
+                  onClick={() => {router.push("/messages"),setIsOpen(false)}}
+                  bold={false}
+                />
+               <MenuItem
                   label="Account"
                   onClick={() => {router.push("/account-settings"),setIsOpen(false)}}
                   bold={false}

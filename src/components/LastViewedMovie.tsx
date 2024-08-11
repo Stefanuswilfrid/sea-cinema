@@ -2,14 +2,19 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from "next/router";
 import { useLastViewedMovie, useLastViewedMovieActions } from '@/hooks/useLastViewedMovie';
-import { motion } from 'framer-motion';
+import {  motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 
 export default function LastViewedMovie() {
     const { handleValueMismatch, hydrateLastViewedMovie } = useLastViewedMovieActions();
     const router = useRouter();
     const isInteracted = React.useRef(false);
     const lastViewedMovie = useLastViewedMovie();
-    const isDetailPage = router.pathname.startsWith('/movie/'); // Adjust as needed
+
+    const isIndexPage = router.pathname == "/" // Adjust as needed
+    const { data: session } = useSession();
+    const currentUser = session?.user;
+
 
     React.useEffect(() => {
         if (typeof window !== "undefined") {
@@ -20,17 +25,27 @@ export default function LastViewedMovie() {
 
     React.useEffect(() => {
         if (isInteracted.current) toast.dismiss();
+        if (!isIndexPage) {
+            toast.dismiss();
+            return;
+        }
+        console.log("isIndex",isIndexPage)
         
         const timeout = setTimeout(() => {
-            if (lastViewedMovie && !isInteracted.current && !isDetailPage) {
+            if (lastViewedMovie && !isInteracted.current && isIndexPage && currentUser) {
                 isInteracted.current = true;
                 toast.custom(
                     (t) => (
+
                         <motion.div
-                            className="flex-grow antialiased"
-                            initial={{ opacity: 0, y: '0%' }}
-                            animate={{ opacity: 1, y: '50%' }}
-                            exit={{ opacity: 0, y: '0%' }}
+                            className=" antialiased w-fit"
+                            initial={{ opacity: 0}}
+                            animate={{ opacity: 1,  transition: {
+                                delay: 0,
+                              }, }}
+                            exit={{ opacity: 0,transition: {
+                                delay: 0.8,
+                              }}}
                             transition={{ type: 'tween', duration: 0.4 }}
                         >
                             <div className="border border-secondary/10 font-sans mx-auto min-w-[300px] select-none w-fit rounded-full bg-white whitespace-nowrap py-2 pl-6 pr-2 flex items-center gap-3">
@@ -60,8 +75,9 @@ export default function LastViewedMovie() {
 
         return () => {
             clearTimeout(timeout);
+            
         };
-    }, [lastViewedMovie, router, isDetailPage]);
+    }, [lastViewedMovie, router, isIndexPage]);
 
     return null;
 }
