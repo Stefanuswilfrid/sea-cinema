@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { AudioButton } from "@/components/Button/AudioButton";
 import { LAST_VIEWED_MOVIE_KEY } from "@/hooks/useLastViewedMovie";
 import { CurrentUser } from "@/types";
+import Button from "@/components/Button/Button";
 
 interface MovieDetailsProps {
   listing: Listing;
@@ -114,14 +115,19 @@ export default function index() {
                 </span>
                 </div>
 
-                <div>
-                  <button
+                <div className="mt-4">
+                  {/* <button
                     className="mt-4 mx-auto md:mx-0 flex items-center justify-center gap-2 w-1/2 py-3 font-medium rounded-md bg-indigo-600 active:bg-hovered duration-200 text-white"
 
                     onClick={handleBookTicket}
                   >
                     Book Tickets &#8594;
-                  </button>
+                  </button> */}
+                  <Button
+
+                    label={"Book Tickets &#8594;"}
+                    onClick={handleBookTicket}
+                  />
                 </div>
               </div>
             </div>

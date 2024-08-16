@@ -10,8 +10,7 @@ import { useState } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import SEO from "@/components/SEO";
 import { CurrentUser } from "@/types";
-
-
+import { useUser } from "@/hooks/useUser";
 
 
 export default function Balance() {
@@ -37,20 +36,26 @@ function BalancePage(){
 
 
   const router = useRouter();
-  const { data, status, update } = useSession();
+  // const { data, status, update } = useSession();
+  const { updateUser, user  } = useUser()
 
-  const currentUser = data?.user as CurrentUser;
+
+  const currentUser = user ;
 
   const handleSubmitDeposit = async() => {
     if (selectedAmount == 0) {
       setErrorDeposit(true);
     } else {
       setErrorDeposit(false);
-      await update({
-        user: {
-          balance: selectedAmount,
-        },
-      });
+      updateUser({ 
+        balance: selectedAmount
+
+      })
+      // await update({
+      //   user: {
+      //     balance: selectedAmount,
+      //   },
+      // });
       toast.success("Top Up Successfull!")
       setSelectedAmount(0);
       
@@ -66,11 +71,8 @@ function BalancePage(){
       return
     } else {
       setErrorDeposit(false);
-      await update({
-        user: {
-          balance: -withdrawAmount,
-        },
-      });
+      updateUser({balance: -withdrawAmount})
+      
       toast.success("Withdrawn Successfull!")
       setWithdrawAmount(0);
       

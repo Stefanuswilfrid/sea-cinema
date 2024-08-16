@@ -10,6 +10,13 @@
     "test": "jest --watchAll=false",
     "postinstall": "prisma generate"
   },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false,
+    "child_process": false
+
+  },
   "dependencies": {
     "@material-tailwind/react": "^2.0.4",
     "@next-auth/prisma-adapter": "^1.0.7",

@@ -22,6 +22,7 @@ export default function ListingCard({
   url,
   price,
   description,
+  currentUser
 }: ListingCardProps) {
   const router = useRouter();
   const { ref, inView } = useInView();
@@ -48,8 +49,8 @@ export default function ListingCard({
             right-4
           ">
             <HeartButton 
-              listingId={""} 
-              currentUser={null}
+              listingId={id.toString()} 
+              currentUser={currentUser}
             />
           </div>
         </div>

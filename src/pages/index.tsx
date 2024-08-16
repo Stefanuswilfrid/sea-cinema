@@ -7,6 +7,8 @@ import { fetcher } from '@/libs';
 import { LoadingPlaceholder } from '@/components/LoadingProvider';
 import { Pagination } from '@/components/Pagination';
 import LastViewedMovie from '@/components/LastViewedMovie';
+import { useUser } from '@/hooks/useUser';
+// import getCurrentUser from '@/actions/getCurrentUser';
 
 export interface ListingCardProps {
   listing: Listing;
@@ -26,8 +28,11 @@ export interface HomeProps {
   listings: Listing[];
 }
 
-const Home = () => {
+const Home =  () => {
   const { data: listings, error } = useSWR<any>('/movie/', fetcher);
+  // const currentUser = await getCurrentUser();
+  const { user : currentUser} = useUser()
+
 
   if (error) return <div>Failed to load</div>;
   if (!listings) return <LoadingPlaceholder/>;
@@ -58,7 +63,13 @@ const Home = () => {
         >
           
           {listings.map((listing : any,id : any) => (
-            <ListingCard key={id} id={listing.id} description={listing.description} title={listing.title} url={listing.poster_url} price={listing.price} />
+            <ListingCard key={id} id={listing.id} 
+            currentUser={currentUser}
+
+            description={listing.description} 
+            title={listing.title} 
+            url={listing.poster_url} 
+            price={listing.price} />
           ))}
           
 
