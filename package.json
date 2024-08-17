@@ -36,6 +36,7 @@
     "lucide-react": "^0.418.0",
     "next": "13.4.8",
     "next-auth": "^4.22.1",
+    "next-cloudinary": "^6.10.0",
     "postcss": "8.4.24",
     "posthog-js": "^1.154.2",
     "react": "18.2.0",

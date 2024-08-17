@@ -3,6 +3,8 @@ import { cn } from "@/utils/cn";
 import { User } from "@prisma/client";
 import { Search } from "lucide-react";
 import { useState } from "react";
+import ConversationBox from "./ConversationBox";
+import Avatar from "../Avatar";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
@@ -41,17 +43,58 @@ export default function  ConversationList({initialItems,users}: ConversationList
                 transition
               "
             >
-              {/* <MdOutlineGroupAdd size={20} /> */}
               <Search className="w-4 h-4"/>
             </div>
         </div>
-        {/* {items.map((item) => (
+        <div
+        className={cn(`
+          w-full 
+          relative 
+          flex 
+          items-center 
+          space-x-3 
+          p-3 
+          hover:bg-neutral-100
+          rounded-lg
+          transition
+          cursor-pointer
+          `,
+           'bg-white'
+        )}
+      >
+        <Avatar src={null}/>
+        {/* {data.isGroup ? (
+          <AvatarGroup users={data.users} />
+        ) : (
+          <Avatar user={otherUser} />
+        )} */}
+        <div className="min-w-0 flex-1">
+          <div className="focus:outline-none">
+            <span className="absolute inset-0" aria-hidden="true" />
+            <div className="flex justify-between items-center mb-1">
+              <p className="text-md font-medium text-gray-900">
+                name
+              </p>
+             
+            </div>
+            <p 
+              className={cn(`
+                truncate 
+                text-sm
+                `,
+              )}>
+s              </p>
+          </div>
+        </div>
+      </div>
+
+        {users.map((item) => (
             <ConversationBox
               key={item.id}
               data={item}
-              selected={conversationId === item.id}
+              // selected={conversationId === item.id}
             />
-          ))} */}
+          ))}
       </div>
     </aside>
   );

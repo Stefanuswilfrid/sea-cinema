@@ -5,6 +5,7 @@ import getUsers from "@/actions/getUsers"
 import Avatar from "@/components/Avatar"
 import ConversationList from "@/components/Conversation/ConversationList"
 import EmptyConversation from "@/components/Conversation/EmptyConversation"
+import UserList from "@/components/Conversation/UserList";
 import useConversation from "@/hooks/useConversation"
 import { useDelayedSWR } from "@/hooks/useDelayedSWR"
 import { useUser } from "@/hooks/useUser";
@@ -21,23 +22,17 @@ import toast from "react-hot-toast";
 import useSWR from "swr"
 
 export default  function MessageHome() {
-  // const conversations = await getConversations();
 
-  const { user : currentUser} = useUser()
-
-  const { data : users, error } = useSWR(`/users?username=${currentUser?.username}`, fetcher);
-  // const { data : users, error } = useSWR(`/users?username=${currentUser?.username}`, fetcher);
-
-  console.log("users,",users)
 
   const { isOpen } = useConversation();
 
   return (
     <>
-    <ConversationList users={users} initialItems={[]}/>
+           <UserList/>
+
     <div className={cn(
       'lg:pl-80 h-full lg:block', 
-      isOpen ? 'block' : 'hidden'
+      'block' 
     )}>
       <EmptyConversation />
     </div>

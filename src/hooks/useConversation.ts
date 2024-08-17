@@ -1,23 +1,25 @@
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 const useConversation = () => {
-  const params = useParams();
+  const router = useRouter();
 
-  const conversationId = useMemo(() => {
-    if (!params?.conversationId) {
+    const id = router.query.messageId! as string;
+
+  const messageId = useMemo(() => {
+    if (!id) {
       return '';
     }
 
-    return params.conversationId as string;
-  }, [params?.conversationId]);
+    return id as string;
+  }, [id]);
 
-  const isOpen = useMemo(() => !!conversationId, [conversationId]);
+  const isOpen = useMemo(() => !!messageId, [messageId]);
 
   return useMemo(() => ({
     isOpen,
-    conversationId
-  }), [isOpen, conversationId]);
+    messageId
+  }), [isOpen, messageId]);
 };
 
 export default useConversation;

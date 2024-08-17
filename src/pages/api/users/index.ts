@@ -8,18 +8,8 @@ export default async function handler(
     res: NextApiResponse
   ) {
 
-
-    // const currentUser = await getCurrentUser();
-    // console.log("uname",currentUser)
-
-    // // const { isAuthenticated,user : currentUser } = useUser()
-    // if(isAuthenticated===false){
-    //   return []
-    // } 
-
     try {
       const { username } = req.query; // Example parameter
-      console.log("params",username)
       const users = await prisma.user.findMany({
         orderBy: {
           name: 'desc'
@@ -30,7 +20,6 @@ export default async function handler(
           }
         }
       });
-      console.log("db",users)
   
       res.status(200).json(users);
     } catch (error: any) {
