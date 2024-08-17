@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Conversation, Message, User } from "@prisma/client";
 export type CurrentUser = Omit<User,"createdAt"> & {
     // id: string;
     // username: string;
@@ -8,3 +8,13 @@ export type CurrentUser = Omit<User,"createdAt"> & {
     // favoriteIds: string[];
     createdAt : string;
 };
+
+export type FullMessageType = Message & {
+    sender: User, 
+    seen: User[]
+  };
+  
+  export type FullConversationType = Conversation & { 
+    users: User[]; 
+    messages: FullMessageType[]
+  };
