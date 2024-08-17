@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import MessageForm from "@/components/Conversation/MessageForm";
+// import MessageForm from "@/components/Conversation/MessageForm";
 import UserList from "@/components/Conversation/UserList";
 import { fetcher } from "@/libs";
 import { useRouter } from "next/router";
@@ -23,7 +23,7 @@ export default function MessageID() {
         <div className=" w-full flex flex-col">
           {/* <MessageHeader conversation={conversation} /> */}
 
-          <MessageForm />
+          {/* <MessageForm /> */}
         </div>
       </div>
       </div>
