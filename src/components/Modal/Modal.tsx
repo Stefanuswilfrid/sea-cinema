@@ -137,6 +137,7 @@ const Modal: React.FC<ModalProps> = ({
                 "
               >
                 <button
+                title="btn"
                   className="
                     p-1
                     border-0 
