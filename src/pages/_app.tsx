@@ -56,9 +56,13 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
       <Analytics/>
       <ModalProvider/>
       <ToasterProvider />
+      <div className="h-screen flex flex-col justify-between">
       <Navbar /> 
-      <Component {...pageProps} />
+<div className="h-full">
+      <Component {...pageProps}  />
+      </div>
       <Footer />
+      </div>
       {/* </PostHogProvider> */}
       </SessionProvider>
       </CartProvider>

@@ -16,7 +16,6 @@ const UserList = () => {
     fetcher
   );
 console.log("u",users)
-  // const { data : users, error } = useSWR(`/users?username=${currentUser?.username}`, fetcher)
 
   if (error) return <div>Error loading users.</div>;
   if (!users) return <div>Loading...</div>;
@@ -24,7 +23,6 @@ console.log("u",users)
   return (
     <aside
       className="
-        fixed 
         inset-y-0 
         pb-20
         lg:pb-0

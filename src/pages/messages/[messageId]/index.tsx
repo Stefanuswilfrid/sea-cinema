@@ -1,32 +1,32 @@
-import MessageForm from '@/components/Conversation/MessageForm';
-import UserList from '@/components/Conversation/UserList'
-import { fetcher } from '@/libs';
-import { useRouter } from 'next/router';
-import React from 'react'
-import useSWR from 'swr';
-
+import Container from "@/components/Container";
+import MessageForm from "@/components/Conversation/MessageForm";
+import UserList from "@/components/Conversation/UserList";
+import { fetcher } from "@/libs";
+import { useRouter } from "next/router";
+import React from "react";
+import useSWR from "swr";
 
 export default function MessageID() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const id = router.query.messageId! as string;
+  const id = router.query.messageId! as string;
 
-    const { data: conversation, error } = useSWR(
-        `/conversation/${id}`,
-        fetcher
-      );
-    console.log("p",conversation)
-    
+  const { data: conversation, error } = useSWR(`/conversation/${id}`, fetcher);
+  console.log("p", conversation);
+
   return (
-    <div>
-        <UserList/>
-        {/* <UserList/> */}
-        <div className="lg:pl-80 h-full">
-        <div className="h-full flex flex-col">
-        <MessageForm />
+    // <Container>
+    <div className="flex max-w-[1320px] ml-auto   px-0  h-full">
+      <UserList />
+      {/* <UserList/> */}
+      <div className=" h-full w-full">
+        <div className=" w-full flex flex-col">
+          {/* <MessageHeader conversation={conversation} /> */}
 
-</div>
-</div>
-    </div>
-  )
+          <MessageForm />
+        </div>
+      </div>
+      </div>
+    // </Container>
+  );
 }
