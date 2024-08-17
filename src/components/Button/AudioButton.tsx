@@ -12,15 +12,9 @@ export function AudioButton({
   size?: "small" | "normal" | "large";
 }) {
     const memoizedContent = useMemo(() => [text], [text]);
-    // const [memoizedContent, setMemoizedContent] = useState<any>(["broooo","dude","bro"]);
 
     const { play, playbackState, pause } = useSpeech(memoizedContent);
     const audioPlaying = playbackState === "playing";
-
-    function test(){
-        console.log("testttt");
-        alert("oi")
-    }
 
 
   return (

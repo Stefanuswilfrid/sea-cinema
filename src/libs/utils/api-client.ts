@@ -25,8 +25,6 @@ apiClient.interceptors.response.use(
     return config
   },
   (error: AxiosError<UninterceptedApiError>) => {
-    // parse error
-    // console.log("",config)
 
     if (error.response?.data.message) {
       return Promise.reject({

@@ -17,18 +17,14 @@ export default function AddPhoto({id}:{id:string}) {
     const formData = new FormData()
     formData.append('file', args.file)
     formData.append('type', 'image')
-    console.log("aduh ",id)
     const { source } = await uploadImage({
       formData,
       userId: id,
     })
-    console.log("what",source)
-
     
     const avatarUrl = source
     
     
-    console.log("url",avatarUrl)
     const { data } = await apiClient.put(url, {
       avatarUrl,
     })

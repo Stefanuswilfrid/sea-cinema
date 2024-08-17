@@ -8,7 +8,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("idk")
   await requestHandler(req, res, {
     allowedRoles: {
       PUT: ['USER'],
@@ -16,9 +15,7 @@ export default async function handler(
 
     PUT: async (currentUser) => {
       const { avatarUrl } = req.body
-      console.log("eu",currentUser)
       const username = currentUser.username
-      console.log("BRUH",username)
 
       const user = await prisma.user.update({
         where: {

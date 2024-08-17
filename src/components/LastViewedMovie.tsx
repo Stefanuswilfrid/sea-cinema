@@ -29,7 +29,6 @@ export default function LastViewedMovie() {
             toast.dismiss();
             return;
         }
-        console.log("isIndex",isIndexPage)
         
         const timeout = setTimeout(() => {
             if (lastViewedMovie && !isInteracted.current && isIndexPage && currentUser) {
