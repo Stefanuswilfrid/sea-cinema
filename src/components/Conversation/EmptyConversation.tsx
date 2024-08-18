@@ -11,7 +11,6 @@ const EmptyConversation = () => {
           flex 
           justify-center 
           items-center 
-          bg-gray-100
         "
       >
         <div className="text-center items-center flex flex-col">

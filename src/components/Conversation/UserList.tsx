@@ -4,6 +4,7 @@ import { useUser } from "@/hooks/useUser";
 import useSWR from "swr";
 import { fetcher } from "@/libs";
 import useConversation from "@/hooks/useConversation";
+import clsx from "clsx";
 
 const UserList = () => {
   const { messageId, isOpen } = useConversation();
@@ -22,7 +23,7 @@ console.log("u",users)
 
   return (
     <aside
-      className="
+      className={clsx(`
         inset-y-0 
         pb-20
         lg:pb-0
@@ -31,9 +32,9 @@ console.log("u",users)
         lg:block
         overflow-y-auto 
         border-r 
-        border-gray-200
-        block w-full left-0
-      "
+        border-gray-200 
+      `, isOpen ? 'hidden' : 'block w-full left-0')}
+
     >
       <div className="px-5">
         <div className="flex-col">

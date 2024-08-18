@@ -6,6 +6,9 @@ import { User } from "@prisma/client";
 import Avatar from "../Avatar";
 import { cn } from "@/utils/cn";
 import useConversation from "@/hooks/useConversation";
+import LoadingModal from "../Modal/LoadingModal";
+import { useMutation } from "@/hooks/useMutation";
+import { apiClient } from "@/libs/utils/api-client";
 
 interface UserBoxProps {
   data: User;
@@ -18,18 +21,26 @@ const UserBox: React.FC<UserBoxProps> = ({ data, selected }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  const { trigger, status, data: responseData, error, isMutating, reset } = useMutation(
+    '/api/conversations',
+    async (url, payload) => apiClient.post(url, payload)
+  );
+
   const handleClick = useCallback(() => {
     setIsLoading(true);
 
-    router.push(`/messages/${data.id}`);
-    setIsLoading(false);
+    trigger({ userId: data.id })
+    .then((data) => {
+      router.push(`/conversations/${data.data.id}`);
+    })
+    .finally(() => setIsLoading(false));
   }, [data, router]);
 
   return (
     <>
-      {/* {isLoading && (
+      {isLoading && (
         <LoadingModal />
-      )} */}
+      )}
       <div
         onClick={handleClick}
         className={cn(

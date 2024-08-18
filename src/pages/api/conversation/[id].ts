@@ -7,12 +7,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log("nyampe")
     const { id } = req.query; // Example parameter
     await requestHandler(req, res, {
-        allowedRoles: {
-            GET: ['USER',"PUBLIC"],
-          },
+      allowedRoles: {
+        GET: ["USER", "PUBLIC"],
+      },
       GET: async (session) => {
         const conversation = await prisma.conversation.findUnique({
           where: {
@@ -22,7 +21,7 @@ export default async function handler(
             users: true,
           },
         });
-        console.log("conv",conversation)
+        console.log("conv", conversation);
 
         res.status(200).json(conversation);
       },
