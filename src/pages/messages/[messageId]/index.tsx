@@ -23,7 +23,7 @@ export default function MessageID() {
   console.log("p", conversation);
   
 
-  if (!conversation) {
+  if (!conversation || !messages) {
     return (
       <div className="lg:pl-80 h-full">
         <div className="h-full flex flex-col">
