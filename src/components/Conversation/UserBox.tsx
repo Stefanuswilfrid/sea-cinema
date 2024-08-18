@@ -13,28 +13,43 @@ import { apiClient } from "@/libs/utils/api-client";
 interface UserBoxProps {
   data: User;
   selected: boolean;
+  currentUserId: string; // Add currentUserId to props
 }
 
-const UserBox: React.FC<UserBoxProps> = ({ data, selected }) => {
+const UserBox: React.FC<UserBoxProps> = ({ data, selected, currentUserId }) => {
   const { messageId, isOpen } = useConversation();
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { trigger, status, data: responseData, error, isMutating, reset } = useMutation(
-    '/api/conversations',
-    async (url, payload) => apiClient.post(url, payload)
-  );
+  // const { trigger, status, data: responseData, error, isMutating, reset } = useMutation(
+  //   '/conversation/',
+  //   async (url, payload) => apiClient.post(url, payload)
+  // );
+
+  // const { trigger, isMutating } = useMutation<any, { data: any }>("/auth/edit/email");
+
+  // const { trigger, status } = useMutation('/conversation/', async (url) => {
+  //   const  data  = await apiClient.post(url)
+  //   return data
+  // })
+
+  const { trigger, status } = useMutation('/conversation/', async (url, payload) => {
+    console.log("payload", payload); 
+    return await apiClient.post(url, payload);
+  });
+
+  
 
   const handleClick = useCallback(() => {
     setIsLoading(true);
 
-    trigger({ userId: data.id })
-    .then((data) => {
-      router.push(`/conversations/${data.data.id}`);
-    })
-    .finally(() => setIsLoading(false));
-  }, [data, router]);
+    // Trigger the mutation with both currentUserId and data.id
+    trigger({ userId: data.id  })
+      .then((response) => {
+        router.push(`/messages/${response.data.id}`);
+      })
+      .finally(() => setIsLoading(false));
+  }, [data, router, currentUserId, trigger]);
 
   return (
     <>

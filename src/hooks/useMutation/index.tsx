@@ -12,6 +12,7 @@ export function useMutation<T>(
     url,
     payload
   ) => {
+    console.log("payload",payload)
     return await apiClient.post(url, payload)
   },
   options?: {
@@ -36,6 +37,8 @@ export function useMutation<T>(
           mutatedBy: options?.mutatedBy,
         })
 
+        console.log('url',url)
+
         const response = await mutatorFn(url, data.arg)
         swrObserver.setMutationState(key, {
           state: 'success',
@@ -43,6 +46,7 @@ export function useMutation<T>(
         })
         return response
       } catch (error) {
+        console.log("wt",error)
         swrObserver.setMutationState(key, {
           state: 'error',
           mutatedBy: options?.mutatedBy,

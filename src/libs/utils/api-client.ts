@@ -17,11 +17,9 @@ const apiClient = axios.create({
   withCredentials: false,
 })
 
-console.log("api-client",`${process.env.NEXT_PUBLIC_BASE_URL}/api` )
 
 apiClient.interceptors.response.use(
   (config) => {
-    console.log("",config)
     return config
   },
   (error: AxiosError<UninterceptedApiError>) => {

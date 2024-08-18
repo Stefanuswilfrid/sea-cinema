@@ -8,7 +8,6 @@ import clsx from "clsx";
 
 const UserList = () => {
   const { messageId, isOpen } = useConversation();
-  console.log("apamesageid",messageId)
 
   const { user: currentUser } = useUser();
 
@@ -51,7 +50,7 @@ console.log("u",users)
         </div>
         {
           users.map((user: any) => (
-            <UserBox key={user.id} data={user} selected={messageId===user.id} />
+            <UserBox key={user.id} data={user} selected={messageId===user.id} currentUserId={currentUser.id} />
           ))
         }
       </div>

@@ -64,11 +64,10 @@ type HandlerType = {
         id: '',
         username: '',
       }
-      console.log("receba",session?.user)
+      // console.log("receba",session?.user)
       const sessionUser = session?.user as CurrentUser;
   
       if (session?.user ) {
-        console.log("neymar")
         currentUser  = {
           avatarUrl: sessionUser.avatarUrl as string,
           displayName: sessionUser.displayName as string,

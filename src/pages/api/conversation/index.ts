@@ -1,16 +1,87 @@
 import { requestHandler } from "@/libs/utils/request-handler";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../libs/prismadb";
+import { pusherServer } from "@/libs/pusher";
 
-export async function handler(req: Request, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     await requestHandler(req, res, {
       allowedRoles: {
-        GET: ["USER", "PUBLIC"],
+        POST: ["USER", "PUBLIC"],
       },
       POST: async (session) => {
-        const body = await req.json();
-        const { userId, isGroup, members, name ,id } = body;
+        console.log("sess", session);
+        console.log("whathappen",req.body);
+        const { userId } = req.body;
+
+        const currentUserId = session.id;
+        console.log("ids",currentUserId,userId)
+
+        if (!session.id || !session.username) {
+          return res.status(400).json({ message: "Unauthorize" });
+        }
+
+        const existingConversations = await prisma.conversation.findMany({
+          where: {
+            OR: [
+              {
+                userIds: {
+                  equals: [currentUserId, userId],
+                },
+              },
+              {
+                userIds: {
+                  equals: [userId, currentUserId],
+                },
+              },
+            ],
+          },
+        });
+
+        console.log("excov",existingConversations)
+        const singleConversation = existingConversations[0];
+        if (singleConversation) {
+          return res.status(200).json(singleConversation);
+        }
+        console.log("reach?",userId)
+
+        const newConversation = await prisma.conversation.create({
+          data: {
+            users: {
+              connect: [
+                {
+                  id: currentUserId,
+                },
+                {
+                  id: userId,
+                },
+              ],
+            },
+          },
+          include: {
+            users: true,
+          },
+        });
+
+        // Update all connections with new conversation
+        newConversation.users.map((user) => {
+          if (user.username) {
+            pusherServer.trigger(
+              user.username,
+              "conversation:new",
+              newConversation
+            );
+          }
+        });
+
+        return res.status(200).json({ newConversation: null });
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log("error", error);
+    return res.status(500).json(error);
+  }
 }
