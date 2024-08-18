@@ -132,18 +132,7 @@ const movieData = [
 
     price: 10, // Placeholder
   },
-  {
-    title: "Deadpool 2",
-    description:
-      "Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/original/to0spRl1CMDvCztpKkrqQwK3R4M.jpg",
-    age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
-    price: 10, // Placeholder
-  },
   {
     title: "Beverly Hills Cop: Axel F",
     description:
@@ -191,53 +180,7 @@ const movieData = [
 
     price: 10, // Placeholder
   },
-  {
-    title: "The Last Horizon",
-    description:
-      "In a dystopian future where Earth's environment is collapsing, a team of scientists ventures into a perilous wasteland to find a rumored safe zone. Along the way, they uncover dark secrets that could change the fate of humanity.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/original/6gakVJ2UCRXZBrIq5ZLe6W0umQc.jpg",
-    age_rating: 7.5, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
-
-    price: 10, // Placeholder
-  },
-  {
-    title: "Echoes of the Past",
-    description:
-      "A detective haunted by his own dark past is called to investigate a series of mysterious disappearances in a small town. As he delves deeper, he realizes the cases are connected to his own buried secrets.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/w500/original/5H55w3kNGUtQvZfb6rZyAfaKmga.jpg",
-    age_rating: 7.9, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
-    price: null, // Placeholder; adjust based on available data
-  },
-  {
-    title: "Galactic Odyssey",
-    description:
-      "A space explorer teams up with an alien diplomat to stop a galactic war. Their journey takes them across various planets, encountering strange civilizations and facing perilous challenges.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/original/2pD0ZLZ5l4z0e4XbIj2CEcwnNjH.jpg",
-    age_rating: 8.3, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
-
-    price: 10, // Placeholder
-  },
-  {
-    title: "The Secret Chamber",
-    description:
-      "An archaeologist discovers a hidden chamber in an ancient ruin. As she unravels its mysteries, she awakens a dormant curse that threatens to unleash ancient evils upon the modern world.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/original/kjHk0f8pl7HQnR9jT7hlzMNk5Ak.jpg",
-    age_rating: 6.7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
-
-    price: 10, // Placeholder
-  },
+  
   {
     title: "Handling the Undead",
     description:
@@ -536,17 +479,7 @@ const movieData = [
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
   },
-  {
-    title: "Alienoid",
-    description:
-      "Gurus in the late Goryeo dynasty try to obtain a fabled, holy sword, and humans in 2022 hunt down an alien prisoner that is locked in a human's body. The lives of these people become tangled as they find out about their shared destiny.",
-    release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/w500/x9vVxOvHRgTA1gkH8dESRlKqrp0.jpg",
-    age_rating: 17, // Approximate average rating
-    price: 11,
-    seats: Array.from({length: 64}, (_) => false),
-  },
+
 ];
 
 async function main() {

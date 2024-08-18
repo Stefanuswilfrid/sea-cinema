@@ -13,7 +13,7 @@ import useSWR from "swr";
 export default function MessageID() {
   const router = useRouter();
 
-  const id = router.query.messageId! as string;
+  const id = router.query.messageId as string | undefined;
 
   const { data: conversation, error } = useSWR(`/conversation/${id}`, fetcher);
   console.log("tff",id)

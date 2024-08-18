@@ -8,6 +8,7 @@ import { LoadingPlaceholder } from '@/components/LoadingProvider';
 import { Pagination } from '@/components/Pagination';
 import LastViewedMovie from '@/components/LastViewedMovie';
 import { useUser } from '@/hooks/useUser';
+import LoadingModal from '@/components/Modal/LoadingModal';
 // import getCurrentUser from '@/actions/getCurrentUser';
 
 export interface ListingCardProps {
@@ -35,7 +36,7 @@ const Home =  () => {
 
 
   if (error) return <div>Failed to load</div>;
-  if (!listings) return <LoadingPlaceholder/>;
+  if (!listings) return <LoadingModal/>;
 
   return (
     <main>
