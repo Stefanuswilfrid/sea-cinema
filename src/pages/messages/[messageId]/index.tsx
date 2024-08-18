@@ -1,5 +1,6 @@
 import Container from "@/components/Container";
 import EmptyConversation from "@/components/Conversation/EmptyConversation";
+import MessageBody from "@/components/Conversation/MessageBody";
 import MessageForm from "@/components/Conversation/MessageForm";
 import MessageHeader from "@/components/Conversation/MessageHeader";
 // import MessageForm from "@/components/Conversation/MessageForm";
@@ -15,6 +16,7 @@ export default function MessageID() {
   const id = router.query.messageId! as string;
 
   const { data: conversation, error } = useSWR(`/conversation/${id}`, fetcher);
+  console.log("tff",id)
   const { data: messages } = useSWR(`/messages?messageId=${id}`, fetcher);
   console.log("msg",messages)
 
@@ -34,10 +36,10 @@ export default function MessageID() {
   return (
     <div className="flex max-w-[1280px] mx-auto   px-0  h-full">
       <UserList />
-      <div className=" h-full w-full">
+      <div className=" h-full w-full flex">
         <div className=" w-full flex flex-col">
           <MessageHeader conversation={conversation} />
-
+          <MessageBody initialMessages={messages} />
           <MessageForm />
         </div>
       </div>

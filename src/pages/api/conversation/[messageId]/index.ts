@@ -1,13 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../libs/prismadb";
+import prisma from "../../../../libs/prismadb";
 import { requestHandler } from "@/libs/utils/request-handler";
+
+interface IParams {
+    Id?: string;
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const { id } = req.query; // Example parameter
+    
+    const { messageId } = req.query; // Example parameter
     await requestHandler(req, res, {
       allowedRoles: {
         GET: ["USER", "PUBLIC"],
@@ -15,13 +20,12 @@ export default async function handler(
       GET: async (session) => {
         const conversation = await prisma.conversation.findUnique({
           where: {
-            id: id?.toString(),
+            id: messageId?.toString(),
           },
           include: {
             users: true,
           },
         });
-        console.log("conv", conversation);
 
         res.status(200).json(conversation);
       },

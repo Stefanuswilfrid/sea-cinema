@@ -1,14 +1,15 @@
 'use client';
 
-import useConversation from "@/hooks/useConversation";
-import { pusherClient } from "@/libs/pusher";
-import { FullMessageType } from "@/types";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { find } from "lodash";
+
+
 import MessageBox from "./MessageBox";
 
-
+import { find } from "lodash";
+import { FullMessageType } from "@/types";
+import useConversation from "@/hooks/useConversation";
+import { pusherClient } from "@/libs/pusher";
 
 interface BodyProps {
   initialMessages: FullMessageType[];
@@ -17,11 +18,16 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState(initialMessages);
+  console.log("body",initialMessages)
   
   const { messageId } = useConversation();
+  useEffect(()=>{
+    setMessages(initialMessages)
+
+  },[initialMessages])
 
   useEffect(() => {
-    axios.post(`/api/conversations/${messageId}/seen`);
+    axios.post(`/api/conversation/${messageId}/seen`);
   }, [messageId]);
 
   useEffect(() => {
@@ -32,7 +38,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
 
     //receieve new msg from user 
     const messageHandler = (message: FullMessageType) => {
-      axios.post(`/api/conversations/${messageId}/seen`);
+      axios.post(`/api/conversation/${messageId}/seen`);
 
       setMessages((current) => {
         //search any msg that has already has the same id of the new coming in

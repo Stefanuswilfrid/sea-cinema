@@ -15,10 +15,15 @@ const UserList = () => {
     `/users?username=${currentUser?.username}`,
     fetcher
   );
-console.log("u",users)
+
+  console.log("u",users)
 
   if (error) return <div>Error loading users.</div>;
   if (!users) return <div>Loading...</div>;
+
+  const isUserSelected = (user: any) => {
+    return user.conversationIds.includes(messageId);
+  };
 
   return (
     <aside
@@ -50,7 +55,7 @@ console.log("u",users)
         </div>
         {
           users.map((user: any) => (
-            <UserBox key={user.id} data={user} selected={messageId===user.id} currentUserId={currentUser.id} />
+            <UserBox key={user.id} data={user} selected={isUserSelected(user)} currentUserId={currentUser.id} />
           ))
         }
       </div>

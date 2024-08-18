@@ -38,6 +38,8 @@ const UserBox: React.FC<UserBoxProps> = ({ data, selected, currentUserId }) => {
     return await apiClient.post(url, payload);
   });
 
+  // const { data: messages } = useSWR(`/messages?messageId=${id}`, fetcher);
+  // console.log("msg",messages)
   
 
   const handleClick = useCallback(() => {

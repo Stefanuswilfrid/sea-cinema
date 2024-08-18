@@ -5,7 +5,9 @@ const nextConfig = {
     domains: [
       'images.unsplash.com', 
       'image.tmdb.org',
-      'res.cloudinary.com'
+      'res.cloudinary.com',
+      'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com'
      
     ]
   }

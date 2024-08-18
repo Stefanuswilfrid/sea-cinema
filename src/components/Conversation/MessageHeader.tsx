@@ -51,12 +51,12 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
     >
       <div className="flex gap-3 items-center">
         <Link
-          href="/conversations" 
+          href="/messages" 
           className="
             lg:hidden 
             block 
-            text-sky-500 
-            hover:text-sky-600 
+            text-indigo-500 
+            hover:text-indigo-600 
             transition 
             cursor-pointer
           "
