@@ -16,7 +16,6 @@ const UserList = () => {
     fetcher
   );
 
-  console.log("u",users)
 
   if (error) return <div>Error loading users.</div>;
   if (!users) return <div>Loading...</div>;

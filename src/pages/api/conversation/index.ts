@@ -13,12 +13,10 @@ export default async function handler(
         POST: ["USER", "PUBLIC"],
       },
       POST: async (session) => {
-        console.log("sess", session);
-        console.log("whathappen",req.body);
+
         const { userId } = req.body;
 
         const currentUserId = session.id;
-        console.log("ids",currentUserId,userId)
 
         if (!session.id || !session.username) {
           return res.status(400).json({ message: "Unauthorize" });
