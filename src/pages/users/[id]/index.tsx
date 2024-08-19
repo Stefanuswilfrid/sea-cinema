@@ -10,8 +10,7 @@ export default function EditProfile() {
 
 
   return (
-    <Container>
-      <div className='mt-8 mx-6 sm:max-w-5xl sm:mx-auto flex gap-20'>
+      <div className='w-full xl:px-20 md:px-10 sm:px-6 px-4 mt-8 mx-6 sm:max-w-5xl sm:mx-auto flex gap-20'>
         <div className='relative'>
 <AddPhoto id={currentUser?.id}/>
         </div>
@@ -23,6 +22,5 @@ export default function EditProfile() {
           <h1 className='h-96'>Hello</h1>
         </div>
       </div>
-    </Container>
   )
 }

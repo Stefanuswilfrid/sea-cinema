@@ -34,7 +34,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
     pusherClient.subscribe(messageId)
 
     //scroll to the latest msg
-    bottomRef?.current?.scrollIntoView();
+    // bottomRef?.current?.scrollIntoView();
 
     //receieve new msg from user 
     const messageHandler = (message: FullMessageType) => {
@@ -49,7 +49,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
         return [...current, message]
       });
       
-      bottomRef?.current?.scrollIntoView();
+      // bottomRef?.current?.scrollIntoView();
     };
 
     // update the seen

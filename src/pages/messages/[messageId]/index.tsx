@@ -43,6 +43,8 @@ export default function MessageID() {
   }
 
   return (
+    <div className="h-full mb-[-5rem]">
+
     <div className="flex max-w-[1280px] mx-auto   px-0  h-full">
       <UserList />
       <div className=" h-full w-full flex">
@@ -51,6 +53,7 @@ export default function MessageID() {
           <MessageBody initialMessages={messages} />
           <MessageForm />
         </div>
+      </div>
       </div>
       </div>
   );

@@ -54,7 +54,7 @@ export default function AccountSettings() {
   return (
     <AuthCheck>
       <Container>
-        <div className="mx-6  sm:max-w-5xl sm:mx-auto">
+        <div className="mx-6  sm:max-w-5xl sm:mx-auto mb-20">
           <AccountHeading
             name={currentUser?.name!}
             username={currentUser?.username!}

@@ -58,9 +58,7 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
       <ToasterProvider />
       <div className="h-screen flex flex-col justify-between">
       <Navbar /> 
-<div className="h-full">
       <Component {...pageProps}  />
-      </div>
       <Footer />
       </div>
       {/* </PostHogProvider> */}

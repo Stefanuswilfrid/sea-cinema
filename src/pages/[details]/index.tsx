@@ -85,6 +85,7 @@ export default function index() {
                 <Image
                   className="rounded-3xl  md:m-0"
                   src={listing.poster_url}
+                  // src={"/poster/bad_boys.jpg"}
                   width={350}
                   height={200}
                   alt=""

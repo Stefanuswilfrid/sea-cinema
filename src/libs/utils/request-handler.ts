@@ -15,6 +15,7 @@ export type CurrentUser = {
   username: string
   avatarUrl: string
   displayName: string
+  wishlistIds : string[]
 }
 
 type HandlerType = {
@@ -63,6 +64,7 @@ type HandlerType = {
         displayName: '',
         id: '',
         username: '',
+        wishlistIds: [],
       }
       // console.log("receba",session?.user)
       const sessionUser = session?.user as CurrentUser;
@@ -73,6 +75,8 @@ type HandlerType = {
           displayName: sessionUser.displayName as string,
           id: sessionUser.id  ?? '',
           username: sessionUser.username ?? '',
+          wishlistIds: sessionUser.wishlistIds ?? []
+          
         }
       }
   

@@ -12,12 +12,14 @@ export default function MessageHome() {
   const { isOpen } = useConversation();
 
   return (
+    <div className="h-full mb-[-5rem]">
     <div  className="flex max-w-[1280px] mx-auto   px-0  h-full">
       <UserList />
 
       <div className={cn("w-full h-full lg:block", isOpen ? 'block' : 'hidden')}>
         <EmptyConversation />
       </div>
+    </div>
     </div>
   );
 }

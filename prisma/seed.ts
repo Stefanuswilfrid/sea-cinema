@@ -8,7 +8,7 @@ const movieData = [
       "After their late former Captain is framed, Lowrey and Burnett try to clear his name, only to end up on the run themselves.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/nP6RliHjxsz4irTKsxe8FRhKZYl.jpg",
+      "/poster/bad_boys.jpg",
     age_rating: 18,
     price: 15,
     seats: Array.from({length: 64}, (_) => false),
@@ -19,7 +19,7 @@ const movieData = [
       "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+      "/poster/deadpool_wolverine.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -31,7 +31,7 @@ const movieData = [
       "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+      "/poster/inside_out.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
     price: 6, // Placeholder
@@ -42,7 +42,7 @@ const movieData = [
       "Gru and Lucy and their girls — Margo, Edith and Agnes — welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Meanwhile, Gru faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/wWba3TaojhK7NdycRhoQpsG0FaH.jpg",
+    "/poster/despicable_me_4.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -54,7 +54,7 @@ const movieData = [
       "Now fully revealed as the ultimate threat to existence, the Anti-Monitor wages an unrelenting attack on the surviving Earths that struggle for survival in a pocket universe. One by one, these worlds and all their inhabitants are vaporized! On the planets that remain, even time itself is shattered, and heroes from the past join the Justice League and their rag-tag allies against the epitome of evil. But as they make their last stand, will the sacrifice of the superheroes be enough to save us all?",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/a3q8NkM8uTh9E23VsbUOdDSbBeN.jpg",
+    "/poster/justice_league_crisis.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -66,7 +66,7 @@ const movieData = [
       "Garfield, the world-famous, Monday-hating, lasagna-loving indoor cat, is about to have a wild outdoor adventure! After an unexpected reunion with his long-lost father – scruffy street cat Vic – Garfield and his canine friend Odie are forced from their perfectly pampered life into joining Vic in a hilarious, high-stakes heist.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/p6AbOJvMQhBmffd0PIv0u8ghWeY.jpg",
+    "/poster/garfield.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -78,7 +78,7 @@ const movieData = [
       "The origin story of former Special Forces operative turned mercenary Wade Wilson, who, after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/3E53WEZJqP6aM84D8CckXx4pIHw.jpg",
+    "/poster/deadpool.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -89,8 +89,7 @@ const movieData = [
     description:
       "JJ, a veteran CIA agent, reunites with his protégé Sophie, in order to prevent a catastrophic nuclear plot targeting the Vatican.",
     release_date: new Date("2024-07-31"),
-    poster_url:
-      "https://image.tmdb.org/t/p/original/Bf3vCfM94bSJ1saZlyi0UW0e0U.jpg",
+    poster_url:"/poster/my_spy.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -102,7 +101,7 @@ const movieData = [
       "Several generations following Caesar's reign, apes – now the dominant species – live harmoniously while humans have been reduced to living in the shadows. As a new tyrannical ape leader builds his empire, one young ape undertakes a harrowing journey that will cause him to question all he's known about the past and to make choices that will define a future for apes and humans alike.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
+    "/poster/kingdom_apes.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -114,7 +113,7 @@ const movieData = [
       "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+    "/poster/furiosa.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -126,7 +125,7 @@ const movieData = [
       "After the Queen of Hearts incites a coup on Auradon, her rebellious daughter Red and Cinderella's perfectionist daughter Chloe join forces and travel back in time to try to undo the traumatic event that set Red's mother down her villainous path.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/8fYluTtB3b3HKO7KQa5tzrvGaps.jpg",
+    "/poster/descendants.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -139,7 +138,7 @@ const movieData = [
       "Forty years after his unforgettable first case in Beverly Hills, Detroit cop Axel Foley returns to do what he does best: solve crimes and cause chaos.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/zszRKfzjM5jltiq8rk6rasKVpUv.jpg",
+    "/poster/beverly_cop.jpg",
     age_rating: 17, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
     price: null, // Placeholder; adjust based on available data
@@ -150,7 +149,7 @@ const movieData = [
       "Kid is an anonymous young man who ekes out a meager living in an underground fight club where, night after night, wearing a gorilla mask, he is beaten bloody by more popular fighters for cash. After years of suppressed rage, Kid discovers a way to infiltrate the enclave of the city’s sinister elite. As his childhood trauma boils over, his mysteriously scarred hands unleash an explosive campaign of retribution to settle the score with the men who took everything from him.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/4lhR4L2vzzjl68P1zJyCH755Oz4.jpg",
+    "/poster/monkey_man.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -162,7 +161,7 @@ const movieData = [
       "A kidnapped Fred Savage is forced to endure Deadpool's PG-13 rendition of Deadpool 2 as a Princess Bride-esque story that's full of magic, wonder & zero F's.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/5Ka49BWWyKMXr93YMbH5wLN7aAM.jpg",
+    "/poster/once_deadpool.jpg",
     age_rating: 7.1, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -174,7 +173,7 @@ const movieData = [
       "Near a remote town, the repeated dumping of toxic waste causes an underground cave dweller to mutate into a hideous monster. A construction team that is digging a tunnel accidentally disturb the creature's habitat causing it to attack.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/lWVwWRLqpS1OaNg7KT0ZecSW0PK.jpg",
+    "/poster/underground_monster.jpg",
     age_rating: 3.7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -187,7 +186,7 @@ const movieData = [
       "On a hot summer day in Oslo, the dead mysteriously awaken, and three families are thrown into chaos when their deceased loved ones come back to them. Who are they, and what do they want?",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/6XlHOx0JQNgYjuJ4YQKbrt4Gd4d.jpg",
+    "/poster/handling_undead.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -199,7 +198,7 @@ const movieData = [
       "Munro, a soldier turned lay preacher, comes to New Zealand to minister to the first British colonists, but he is converted by the powerful chief Maianui to serve a different purpose.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg",
+    "/poster/convert.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -211,7 +210,7 @@ const movieData = [
       "Follow the story of how the Old West was won—and lost—through the blood, sweat and tears of many. Spanning 15 years before, during and following the Civil War from 1859 to 1874, embark on an emotional journey across a country at war with itself, experienced through the lens of families, friends and foes all attempting to discover what it truly means to be the United States of America.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/tMI9SGttUJP96GbIIJOAaaCMkFe.jpg",
+    "/poster/horizon.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -223,7 +222,7 @@ const movieData = [
       "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+    "/poster/logan.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -235,7 +234,7 @@ const movieData = [
       "A seemingly ordinary girl finds her way into the eponymous Academy to explore the world of fairy tales, imagination and creativity. With the help of a crazy, talented teacher, she develops her unique abilities and also stumbles upon a clue that will help her unravel the biggest secret of the family...",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/ymbECZscR8BTkdvXziSinMIckAz.jpg",
+    "/poster/kleks_academy.jpg",
     age_rating: 6, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -247,7 +246,7 @@ const movieData = [
       "Wandering her rambling old house in her boring new town, 11-year-old Coraline discovers a hidden door to a strangely idealized version of her life. In order to stay in the fantasy, she must make a frighteningly real sacrifice.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
+    "/poster/poster_2/coraline.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -259,7 +258,7 @@ const movieData = [
       "A star athlete reluctantly returns home to take over his father's duties as Ultraman, shielding Tokyo from giant monsters as he becomes a legendary hero.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/yy4PktMbJfMp4H8GFAssBxHt0tY.jpg",
+    "/poster/poster_2/ultraman.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -271,7 +270,7 @@ const movieData = [
       "Villainous Gru lives up to his reputation as a despicable, deplorable and downright unlikable guy when he hatches a plan to steal the moon from the sky. But he has a tough time staying on task after three orphans land in his care.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/9lOloREsAhBu0pEtU0BgeR1rHyo.jpg",
+    "/poster/poster_2/despicable.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -283,7 +282,7 @@ const movieData = [
       "A live broadcast of a late-night talk show in 1977 goes horribly wrong, unleashing evil into the nation's living rooms.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/jGY62i0D0zitaGz4Ema7vTEYIXw.jpg",
+    "/poster/poster_2/late_devil.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -295,7 +294,7 @@ const movieData = [
       "A young woman's marriage to a charming prince turns into a fierce fight for survival when she's offered up as a sacrifice to a fire-breathing dragon.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/AgHbB9DCE9aE57zkHjSmseszh6e.jpg",
+    "/poster/poster_2/damsel.jpg",
     age_rating: 7, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -307,7 +306,7 @@ const movieData = [
       "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+    "/poster/poster_2/oppenheimer.jpg",
     age_rating: 8, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -319,7 +318,7 @@ const movieData = [
       "Asha, a sharp-witted idealist, makes a wish so powerful that it is answered by a cosmic force – a little ball of boundless energy called Star. Together, Asha and Star confront a most formidable foe - the ruler of Rosas, King Magnifico - to save her community and prove that when the will of one courageous human connects with the magic of the stars, wondrous things can happen.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/original/vgJZSqKMXWDDx09iSIStGKfHMku.jpg",
+    "/poster/poster_2/wish.jpg",
     age_rating: 6, // Approximate average rating
     seats: Array.from({length: 64}, (_) => false),
 
@@ -331,7 +330,7 @@ const movieData = [
       "In postwar Japan, Godzilla brings new devastation to an already scorched landscape. With no military intervention or government help in sight, the survivors must join together in the face of despair and fight back against an unrelenting horror.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/hkxxMIGaiCTmrEArK7J56JTKUlB.jpg",
+    "/poster/poster_2/godzilla1.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -342,7 +341,7 @@ const movieData = [
       "Gone Ghosting is a popular ghost hunting team that earned millions from live broadcasts and selling merch. Lise, Catta, Sandro, and Polly join the group to live-stream a ghost hunt to prove that everything is real. They break into a place where legend says everyone has died and do the craziest broadcast ever live.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/kgtDMp1Qut4M92g2yTdX2YL9zh8.jpg",
+    "/poster/poster_2/canceled.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -353,7 +352,7 @@ const movieData = [
       "Characters from different backgrounds are thrown together when the plane they're travelling on crashes into the Pacific Ocean. A nightmare fight for survival ensues with the air supply running out and dangers creeping in from all sides.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/hu40Uxp9WtpL34jv3zyWLb5zEVY.jpg",
+    "/poster/poster_2/noway.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -364,7 +363,7 @@ const movieData = [
       "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+    "/poster/poster_2/jwick.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -375,7 +374,7 @@ const movieData = [
       "This is the extraordinary true story of Trudy Ederle, the first woman to successfully swim the English Channel. Through the steadfast support of her older sister and supportive trainers, she overcame adversity and the animosity of a patriarchal society to rise through the ranks of the Olympic swimming team and complete the 21-mile trek from France to England.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/bZlecCuBVvKuarNGvchBwaOsQ3c.jpg",
+    "/poster/poster_2/youngwoman.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -386,7 +385,7 @@ const movieData = [
       "In a city where fire, water, land and air residents live together, a fiery young woman and a go-with-the-flow guy will discover something elemental: how much they have in common.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg",
+    "/poster/poster_2/elementa;.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -397,7 +396,7 @@ const movieData = [
       "When a young American woman is sent to Rome to begin a life of service to the church, she encounters a darkness that causes her to question her own faith and uncovers a terrifying conspiracy that hopes to bring about the birth of evil incarnate.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/uGyiewQnDHPuiHN9V4k2t9QBPnh.jpg",
+    "/poster/poster_2/omen.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -408,7 +407,7 @@ const movieData = [
       "Over many missions and against impossible odds, Dom Toretto and his family have outsmarted, out-nerved and outdriven every foe in their path. Now, they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge, and who is determined to shatter this family and destroy everything—and everyone—that Dom loves, forever.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
+    "/poster/poster_2/fast.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -419,7 +418,7 @@ const movieData = [
       "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+    "/poster/poster_2/spiderman.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -430,7 +429,7 @@ const movieData = [
       "Detective Ma Seok-do changes his affiliation from the Geumcheon Police Station to the Metropolitan Investigation Team, in order to eradicate Japanese gangsters who enter Korea to commit heinous crimes.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/lW6IHrtaATxDKYVYoQGU5sh0OVm.jpg",
+    "/poster/poster_2/roundup.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -441,7 +440,7 @@ const movieData = [
       "Marcus and Mike are forced to confront new threats, career changes, and midlife crises as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
+    "/poster/poster_2/bad_boys_2.jpg",
     age_rating: 10,
     price: 31,
     seats: Array.from({length: 64}, (_) => false),
@@ -452,7 +451,7 @@ const movieData = [
       "While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+    "/poster/poster_2/super_mario.jpg",
     age_rating: 12,
     price: 21,
     seats: Array.from({length: 64}, (_) => false),
@@ -463,7 +462,7 @@ const movieData = [
       "Forced to confront revelations about her past, paramedic Cassandra Webb forges a relationship with three young women destined for powerful futures...if they can all survive a deadly present.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/rULWuutDcN5NvtiZi4FRPzRYWSh.jpg",
+    "/poster/poster_2/madame_web.jpg",
     age_rating: 8,
     price: 11,
     seats: Array.from({length: 64}, (_) => false),
@@ -474,7 +473,7 @@ const movieData = [
       "Willy Wonka – chock-full of ideas and determined to change the world one delectable bite at a time – is proof that the best things in life begin with a dream, and if you’re lucky enough to meet Willy Wonka, anything is possible.",
     release_date: new Date("2024-07-31"),
     poster_url:
-      "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+    "/poster/poster_2/wonka.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
     seats: Array.from({length: 64}, (_) => false),

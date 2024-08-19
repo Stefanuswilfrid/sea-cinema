@@ -16,7 +16,7 @@ model User {
   name        String?
   age         Int?
   balance     Int
-  favoriteIds String[] @db.ObjectId
+  wishlistIds String[] @db.ObjectId
 
   avatarUrl String?
 

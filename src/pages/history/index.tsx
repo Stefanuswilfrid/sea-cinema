@@ -72,7 +72,7 @@ function HistoryPage(){
   }, []);
 
   return (
-    <main>
+    <main className="h-screen">
       <SEO
         title="User Transaction History | SEA Cinema"
         desc="User Transaction History page."

@@ -5,7 +5,7 @@ import Container from "../Container";
 
 export default function Footer() {
   return (
-    <footer className="bg-white rounded-lg  border-t-[1px]  ">
+    <footer className="bg-white rounded-lg  border-t-[1px] mt-20  ">
       <Container>
 
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
