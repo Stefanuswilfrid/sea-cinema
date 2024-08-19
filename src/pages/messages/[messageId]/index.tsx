@@ -16,21 +16,20 @@ export default function MessageID() {
 
   const id = router.query.messageId as string | undefined;
   if (!id) {
-    return <LoadingModal/>;
+    return <LoadingModal />;
   }
 
-  const { data: conversation, error: conversationError } = useSWR(`/conversation/${id}`, fetcher);
-  console.log("tff",id)
-  const { data: messages, error: messagesError  } = useSWR(`/messages?messageId=${id}`, fetcher);
-  
+  const { data: conversation, error: conversationError } = useSWR(`/conversation/${id}`,fetcher);
+  const { data: messages, error: messagesError } = useSWR(`/messages?messageId=${id}`,fetcher);
+
   if (conversationError || messagesError) {
-    return <div>Error: {conversationError?.message || messagesError?.message}</div>;
+    return (
+      <div>Error: {conversationError?.message || messagesError?.message}</div>
+    );
   }
-  
-  console.log("msg",messages)
 
+  console.log("msg", messages);
   console.log("p", conversation);
-  
 
   if (!conversation || !messages) {
     return (
@@ -39,22 +38,25 @@ export default function MessageID() {
           <EmptyConversation />
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="h-full mb-[-5rem]">
+            {!conversation && <LoadingModal/>}
+            {!messages && <LoadingModal/>}
 
-    <div className="flex max-w-[1280px] mx-auto   px-0  h-full">
-      <UserList />
-      <div className=" h-full w-full flex">
-        <div className=" w-full flex flex-col">
-          <MessageHeader conversation={conversation} />
-          <MessageBody initialMessages={messages} />
-          <MessageForm />
+
+      <div className="flex max-w-[1280px] mx-auto   px-0  h-full">
+        <UserList />
+        <div className=" h-full w-full flex">
+          <div className=" w-full flex flex-col">
+            {conversation && <MessageHeader conversation={conversation} />}
+            {messages && <MessageBody initialMessages={messages} />}
+            <MessageForm />
+          </div>
         </div>
       </div>
-      </div>
-      </div>
+    </div>
   );
 }

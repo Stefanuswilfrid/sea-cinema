@@ -49,7 +49,6 @@ export default function AccountSettings() {
   ];
   const { data } = useSession();
   const currentUser = data?.user as CurrentUser;
-  console.log("curr", currentUser);
 
   return (
     <AuthCheck>
