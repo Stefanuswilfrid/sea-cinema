@@ -18,6 +18,8 @@ import PlusIcon from "@/components/Icons/PlusIcon";
 import MinusIcon from "@/components/Icons/MinusIcon";
 import CreditCardIcon from "@/components/Icons/CreditCardIcon";
 import useTopUpModal from "@/hooks/useTopUpModal";
+import TransactionList from "@/components/Transactions/TransactionList";
+import useWithdrawModal from "@/hooks/useWithdrawModal";
 
 export default function Balance() {
   return (
@@ -31,13 +33,11 @@ export default function Balance() {
   
   
 }
-interface Transaction {
+export interface Transaction {
   id: string;
-  movieName: string;
-  createdAt: string;
+  type: string; // This could be a specific union type like 'TOP_UP' | 'WITHDRAWAL' | 'MOVIE_TICKET_BOOKING' if known
   totalCost: number;
-  quantity: number;
-  seats: any;
+  createdAt: string; // Assuming ISO string, adjust as necessary
 }
 function BalancePage(){
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -113,6 +113,7 @@ function BalancePage(){
   }
 
   const topUpModal = useTopUpModal();
+  const withdrawModal = useWithdrawModal();
 
 
   return (
@@ -205,7 +206,7 @@ function BalancePage(){
                   <p className="text-sm">Withdraw</p>
                   <p className="text-2xl font-bold">Cash Out</p>
                 </div>
-                <button className="flex items-center bg-white border-2 border-primary  text-primary py-2 px-4 rounded-md">
+                <button onClick={()=>{withdrawModal.onOpen()}} className="flex items-center bg-white border-2 border-primary  text-primary py-2 px-4 rounded-md">
                   <MinusIcon className="w-5 h-5 mr-2" />
                   Withdraw
                 </button>
@@ -215,38 +216,8 @@ function BalancePage(){
 
           <div className="mt-8">
             <h2 className="text-2xl font-bold">Recent Transactions</h2>
-            {/* <h2>WIP</h2> */}
             <div className="mt-4 space-y-4">
-  {transactions.length !== 0 ? (
-    transactions.map((transaction) => (
-      <div key={transaction.id} className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
-            <ShoppingBagIcon className="w-6 h-6 text-muted-foreground" />
-          </div>
-          <div>
-            <p className="font-medium">Amazon Purchase</p>
-            <p className="text-sm text-muted-foreground">{transaction.createdAt} Aug 15, 2023</p>
-          </div>
-        </div>
-        <p className="text-red-500 font-medium"> -${transaction.totalCost} </p>
-      </div>
-    ))
-  ) : (
-    <div className="text-center p-4 mt-12">
-      <CreditCardIcon className="mx-auto h-12 w-12" />
-      <h3 className="mt-2 text-base font-semibold text-gray-900">No Transactions</h3>
-      <p className="mt-1 text-sm text-gray-500">You haven't made any transactions in the past.</p>
-      <div className="mt-6">
-        <button
-          type="button"
-          className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Explore Movies
-        </button>
-      </div>
-    </div>
-  )}
+              <TransactionList transactions={transactions}/>
 </div>
 
           </div>
@@ -263,88 +234,6 @@ function BalancePage(){
   
 }
 
-interface ChooseDepositProps {
-  selectedAmount: number | undefined;
-  handleAmountClick: (amount: number) => void;
-  handleSubmit: () => void;
-  errorDeposit: Boolean;
-}
-
-function ChooseDeposit({
-  selectedAmount,
-  handleAmountClick,
-  handleSubmit,
-  errorDeposit,
-}: ChooseDepositProps) {
-  return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ rotate: 360, scale: 1 }}
-      transition={{
-        type: "spring",
-        duration: 2,
-      }}
-      className="w-5/6 mt-12  transition ease-linear   "
-    >
-      <h1 className="text-center md:text-left font-black text-xl ">Choose Sum:</h1>
-      <div className="grid grid-cols-2  mt-6 gap-10">
-        <div
-          className={`cursor-pointer border text-xl hover:bg-violet-600 duration-300 hover:text-white ${
-            selectedAmount === 5
-              ? "bg-violet-600 text-white"
-              : "border-gray-300 text-black"
-          } font-bold rounded-md py-4`}
-          onClick={() => handleAmountClick(5)}
-        >
-          $5
-        </div>
-        <div
-          className={`cursor-pointer border text-xl hover:bg-violet-600 duration-300 hover:text-white ${
-            selectedAmount === 20
-              ? "bg-violet-600 text-white"
-              : "border-gray-300 text-black"
-          } font-bold rounded-md py-4`}
-          onClick={() => handleAmountClick(20)}
-        >
-          $20
-        </div>
-        <div
-          className={`cursor-pointer border text-xl hover:bg-violet-600 duration-300 hover:text-white ${
-            selectedAmount === 50
-              ? "bg-violet-600 text-white"
-              : "border-gray-300 text-black"
-          } font-bold rounded-md py-4`}
-          onClick={() => handleAmountClick(50)}
-        >
-          $50
-        </div>
-        <div
-          className={`
-          cursor-pointer border text-xl hover:bg-violet-500 duration-300 hover:text-white ${
-            selectedAmount === 100
-              ? "bg-violet-500 text-white"
-              : "border-gray-300 text-black"
-          } font-bold rounded-md py-4`}
-          onClick={() => handleAmountClick(100)}
-        >
-          $100
-        </div>
-      </div>
-      <button 
-              onClick={handleSubmit}
-
-      className="bg-violet-600 mt-6 mr-auto flex ml-auto md:ml-0 md:items-start p-3 
-      rounded-lg text-white font-bold hover:-translate-y-1 transition 
-      ease-in-out delay-150 duration-300 hover:scale-110">Confirm Top Up</button>
-
-      {errorDeposit && (
-        <p className="text-red-500 text-xs italic text-left mt-3">
-          Choose an amount
-        </p>
-      )}
-    </motion.div>
-  );
-}
 
 interface WithDrawProps {
   balance: number ;

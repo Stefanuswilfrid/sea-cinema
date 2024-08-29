@@ -5,12 +5,14 @@ import SeatModal from "./Modal/SeatModal";
 import LoginModal from "./Modal/LoginModal";
 import RegisterModal from "./Modal/RegisterModal";
 import TopUpModal from "./Modal/TopUpModal";
+import WithdrawModal from "./Modal/WithdrawModal";
 
 const ModalProvider = () => {
  
     return (
         <>
         <TopUpModal/>
+        <WithdrawModal/>
         <SeatModal />
       <LoginModal />
       <RegisterModal />

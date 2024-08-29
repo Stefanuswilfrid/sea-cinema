@@ -7,11 +7,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
+        console.log("topup")
         const { userId, totalCost } = req.body;
+        console.log("test",userId,totalCost)
 
-        if (!userId || typeof totalCost !== 'number') {
+
+        if (!userId || !totalCost) {
             return res.status(400).json({ message: 'Invalid input data' });
         }
+        console.log("as",userId,totalCost)
 
         const transaction = await prisma.transaction.create({
             data: {

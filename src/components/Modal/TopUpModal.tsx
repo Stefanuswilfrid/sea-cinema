@@ -39,9 +39,11 @@ export default function TopUpModal() {
       updateUser({
         balance: parseFloat(amount),
       });
-      trigger({})
-      setIsLoading(false);
+      trigger({userId: user.id,totalCost:parseFloat(amount)}).finally(()=> {
+        setIsLoading(false);
       topUpModal.onClose();
+      })
+      
     }
   };
   const bodyContent = (
