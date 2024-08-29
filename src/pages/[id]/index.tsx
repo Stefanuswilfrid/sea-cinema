@@ -16,6 +16,7 @@ import { AudioButton } from "@/components/Button/AudioButton";
 import { LAST_VIEWED_MOVIE_KEY } from "@/hooks/useLastViewedMovie";
 import { CurrentUser } from "@/types";
 import Button from "@/components/Button/Button";
+import LoadingModal from "@/components/Modal/LoadingModal";
 
 interface MovieDetailsProps {
   listing: Listing;
@@ -28,7 +29,7 @@ export default function index() {
   const seatModal = useSeatModal();
   const router = useRouter();
 
-  const id = router.query.details! as string;
+  const id = router.query.id! as string;
 
   const { data: listing, error } = useSWR<any>(`/movie/${id}`, fetcher);
 
@@ -68,12 +69,12 @@ export default function index() {
 
   return (
     <Container>
-      {!listing && <h1 className="mt-12">Loading Movie Details ....</h1>}
+      {!listing && <LoadingModal/>}
       {listing && (
         <>
           <SEO
-            title={`${listing.title.toUpperCase()} | SEA Cinema`}
-            desc={`${listing.title.toUpperCase()} details`}
+            title={`${listing.title} | SEA Cinema`}
+            desc={`${listing.title} details`}
           />
           <motion.div
             transition={{ type: "tween", duration: 0.5 }}
@@ -107,8 +108,8 @@ export default function index() {
                 </h1>
                 
                 <div className="flex md:flex-col mx-auto gap-3 md:mx-0">
-                <span className="inline-flex max-w-fit  md:mx-0 items-center rounded-md px-2 py-1 text-sm font-medium ring-1 ring-inset text-green-400 ring-green-500/20 bg-green-500/10">
-                  Ticket Price : $ {listing.price}
+                <span className="inline-flex max-w-fit  md:mx-0 items-center rounded-md px-2 py-1 text-base font-bold ring-1 ring-inset text-green-400 ring-green-500/20 bg-green-500/10">
+                  Ticket Price : AUD {listing.price} <span className="font-thin ml-2 text-sm"> / person </span>
                 </span>
 
                 <span className=" max-w-fit  md:mx-0 items-center rounded-md px-2 py-1 text-sm font-medium ring-1 ring-inset text-pink-400 ring-pink-500/20 bg-pink-500/10">
@@ -126,8 +127,11 @@ export default function index() {
                   </button> */}
                   <Button
 
-                    label={"Book Tickets &#8594;"}
-                    onClick={handleBookTicket}
+                    label={"Book Now"}
+                    onClick={
+                      ()=>{router.push(`/${id}/seat`)}
+                      // handleBookTicket
+                    }
                   />
                 </div>
               </div>

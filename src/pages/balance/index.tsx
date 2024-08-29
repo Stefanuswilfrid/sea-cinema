@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -17,6 +17,7 @@ import BriefcaseIcon from "@/components/Icons/BriefcaseIcon";
 import PlusIcon from "@/components/Icons/PlusIcon";
 import MinusIcon from "@/components/Icons/MinusIcon";
 import CreditCardIcon from "@/components/Icons/CreditCardIcon";
+import useTopUpModal from "@/hooks/useTopUpModal";
 
 export default function Balance() {
   return (
@@ -30,8 +31,17 @@ export default function Balance() {
   
   
 }
-
+interface Transaction {
+  id: string;
+  movieName: string;
+  createdAt: string;
+  totalCost: number;
+  quantity: number;
+  seats: any;
+}
 function BalancePage(){
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
   const [isHasChoosen, setHasChoosen] = useState<Boolean>(false);
   const [isTopUp, setIsTopUp] = useState<Boolean>(false);
   const [selectedAmount, setSelectedAmount] = useState<number>(0);
@@ -39,6 +49,22 @@ function BalancePage(){
   const [errorDeposit, setErrorDeposit] = useState<Boolean>(false);
   const [errorWithdraw, setErrorWithdraw] = useState<Boolean>(false);
 
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch("/api/transaction/get");
+        if (response.ok) {
+          const transactionsData = await response.json();
+          setTransactions(transactionsData as Transaction[]);
+        } else {
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
 
   const router = useRouter();
   // const { data, status, update } = useSession();
@@ -85,6 +111,9 @@ function BalancePage(){
 
 
   }
+
+  const topUpModal = useTopUpModal();
+
 
   return (
     <Container>
@@ -164,7 +193,7 @@ function BalancePage(){
                   <p className="text-sm">Top Up</p>
                   <p className="text-2xl font-bold">Add Funds</p>
                 </div>
-                <button className="flex items-center bg-black text-white py-2 px-4 rounded-md">
+                <button onClick={()=>{topUpModal.onOpen()}} className="flex items-center bg-black text-white py-2 px-4 rounded-md">
                   <PlusIcon className="w-5 h-5 mr-2" />
                   Top Up
                 </button>
@@ -183,46 +212,43 @@ function BalancePage(){
               </div>
             </div>
           </div>
+
           <div className="mt-8">
             <h2 className="text-2xl font-bold">Recent Transactions</h2>
+            {/* <h2>WIP</h2> */}
             <div className="mt-4 space-y-4">
-              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
-                    <ShoppingBagIcon className="w-6 h-6 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Amazon Purchase</p>
-                    <p className="text-sm text-muted-foreground">Aug 15, 2023</p>
-                  </div>
-                </div>
-                <p className="text-red-500 font-medium">-$54.99</p>
-              </div>
-              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
-                    <BriefcaseIcon className="w-6 h-6 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Salary Deposit</p>
-                    <p className="text-sm text-muted-foreground">Aug 1, 2023</p>
-                  </div>
-                </div>
-                <p className="text-green-500 font-medium">+$3,500.00</p>
-              </div>
-              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
-                    <MenuIcon className="w-6 h-6 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Restaurant Dinner</p>
-                    <p className="text-sm text-muted-foreground">Aug 10, 2023</p>
-                  </div>
-                </div>
-                <p className="text-red-500 font-medium">-$78.23</p>
-              </div>
-            </div>
+  {transactions.length !== 0 ? (
+    transactions.map((transaction) => (
+      <div key={transaction.id} className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
+            <ShoppingBagIcon className="w-6 h-6 text-muted-foreground" />
+          </div>
+          <div>
+            <p className="font-medium">Amazon Purchase</p>
+            <p className="text-sm text-muted-foreground">{transaction.createdAt} Aug 15, 2023</p>
+          </div>
+        </div>
+        <p className="text-red-500 font-medium"> -${transaction.totalCost} </p>
+      </div>
+    ))
+  ) : (
+    <div className="text-center p-4 mt-12">
+      <CreditCardIcon className="mx-auto h-12 w-12" />
+      <h3 className="mt-2 text-base font-semibold text-gray-900">No Transactions</h3>
+      <p className="mt-1 text-sm text-gray-500">You haven't made any transactions in the past.</p>
+      <div className="mt-6">
+        <button
+          type="button"
+          className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Explore Movies
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+
           </div>
         </div>
       </main>
