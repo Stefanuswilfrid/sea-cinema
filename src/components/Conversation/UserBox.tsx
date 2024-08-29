@@ -21,25 +21,10 @@ const UserBox: React.FC<UserBoxProps> = ({ data, selected, currentUserId }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  // const { trigger, status, data: responseData, error, isMutating, reset } = useMutation(
-  //   '/conversation/',
-  //   async (url, payload) => apiClient.post(url, payload)
-  // );
-
-  // const { trigger, isMutating } = useMutation<any, { data: any }>("/auth/edit/email");
-
-  // const { trigger, status } = useMutation('/conversation/', async (url) => {
-  //   const  data  = await apiClient.post(url)
-  //   return data
-  // })
-
   const { trigger, status } = useMutation('/conversation/', async (url, payload) => {
     console.log("payload", payload); 
     return await apiClient.post(url, payload);
   });
-
-  // const { data: messages } = useSWR(`/messages?messageId=${id}`, fetcher);
-  // console.log("msg",messages)
   
 
   const handleClick = useCallback(() => {

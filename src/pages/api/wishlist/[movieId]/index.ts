@@ -8,11 +8,12 @@ export default async function handler(
   ) {
     requestHandler(req,res,{
         allowedRoles:{
-            DELETE: ["USER"],
-            POST:["USER"]
+            DELETE: ["USER","PUBLIC"],
+            POST:["USER","PUBLIC"]
         },
         POST: async (session) => {
             const {movieId} = req.query;
+            console.log("test",movieId)
 
             if (!movieId || typeof movieId !== 'string'){
                 throw new Error("Invalid ID");
@@ -31,6 +32,7 @@ export default async function handler(
                     wishlistIds
                 }
               });
+              console.log("user",user)
             
               return res.status(200).json(user)  
         },

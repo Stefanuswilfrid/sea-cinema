@@ -9,6 +9,7 @@ import { Pagination } from '@/components/Pagination';
 import LastViewedMovie from '@/components/LastViewedMovie';
 import { useUser } from '@/hooks/useUser';
 import LoadingModal from '@/components/Modal/LoadingModal';
+// import { useOptimistic } from "react";
 // import getCurrentUser from '@/actions/getCurrentUser';
 
 export interface ListingCardProps {

@@ -17,6 +17,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const router = useRouter();
 
   const loginModal = useLoginModal();
+  console.log("cu",currentUser)
 
   const hasFavorited = useMemo(() => {
     const list = currentUser?.wishlistIds || [];
@@ -35,9 +36,11 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
       let request;
 
       if (hasFavorited) {
-        request = () => axios.delete(`/api/favorites/${listingId}`);
+        console.log("isfav")
+        request = () => axios.delete(`/api/wishlist/${listingId}`);
       } else {
-        request = () => axios.post(`/api/favorites/${listingId}`);
+        console.log("test")
+        request = () => axios.post(`/api/wishlist/${listingId}`);
       }
 
       await request();

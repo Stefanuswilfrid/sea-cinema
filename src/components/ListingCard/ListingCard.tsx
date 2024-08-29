@@ -56,11 +56,11 @@ export default function ListingCard({
         </div>
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent">
           <div className="p-8 space-y-2">
-            <div className="flex items-center gap-4 text-white">
+            <div className="flex items-center gap-4 text-white text-sm">
               <p>$ {price}</p>
-              <p>{description.substring(0,15)+ "..."}</p>
+              <p>{description.substring(0,20)+ "..."}</p>
             </div>
-            <p className="font-semibold text-xl text-white">{title}</p>
+            <p className="font-semibold text-lg text-white">{title}</p>
           </div>
         </div>
         <div className="absolute opacity-0 fd-sh group-hover:opacity-100">

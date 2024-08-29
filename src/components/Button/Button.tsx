@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from "@/utils/cn";
 import { IconType } from "react-icons";
 
 interface ButtonProps {
@@ -9,6 +10,7 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
+  className?: string; // Add className prop
 }
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -18,12 +20,13 @@ const Button: React.FC<ButtonProps> = ({
   outline,
   small,
   icon: Icon,
+  className, // Destructure className
 }) => {
   return ( 
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`
+      className={cn(`
         relative
         disabled:opacity-70
         disabled:cursor-not-allowed
@@ -38,7 +41,8 @@ const Button: React.FC<ButtonProps> = ({
         ${small ? 'py-1' : 'py-3'}
         ${small ? 'font-light' : 'font-semibold'}
         ${small ? 'border-[1px]' : 'border-2'}
-      `}
+       
+      `,className)}
     >
       {Icon && (
         <Icon

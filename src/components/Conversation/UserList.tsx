@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { fetcher } from "@/libs";
 import useConversation from "@/hooks/useConversation";
 import clsx from "clsx";
+import LoadingModal from "../Modal/LoadingModal";
 
 const UserList = () => {
   const { messageId, isOpen } = useConversation();
@@ -18,7 +19,7 @@ const UserList = () => {
 
 
   if (error) return <div>Error loading users.</div>;
-  if (!users) return <div>Loading...</div>;
+  if (!users) return <LoadingModal/>;
 
   const isUserSelected = (user: any) => {
     return user.conversationIds.includes(messageId);
