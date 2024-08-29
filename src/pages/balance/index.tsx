@@ -11,7 +11,12 @@ import AuthCheck from "@/components/AuthCheck";
 import SEO from "@/components/SEO";
 import { CurrentUser } from "@/types";
 import { useUser } from "@/hooks/useUser";
-
+import ShoppingBagIcon from "@/components/Icons/ShoppingBagIcon";
+import MenuIcon from "@/components/Icons/MenuIcon";
+import BriefcaseIcon from "@/components/Icons/BriefcaseIcon";
+import PlusIcon from "@/components/Icons/PlusIcon";
+import MinusIcon from "@/components/Icons/MinusIcon";
+import CreditCardIcon from "@/components/Icons/CreditCardIcon";
 
 export default function Balance() {
   return (
@@ -88,57 +93,143 @@ function BalancePage(){
         desc="User Balance Page, to withdraw and top up."
       />
       {currentUser ?
-      <div className="h-screen text-center flex mt-16 flex-col items-center">
-        <h1 className="text-2xl font-bold ">Available Balance</h1>
-        <h1 className="text-5xl font-bold mt-8">
-          <span className="font-semibold">$</span> {currentUser?.balance}{" "}
-          <span className="text-4xl text-gray-400">AUD</span>
-        </h1>
-        <div className="flex  mt-6 gap-8">
-          <button
-            onClick={() => {
-              setIsTopUp(false), setHasChoosen(true);
-            }}
-            className="btn bg-red-600 py-3 
-                px-5 rounded-lg k text-white font-bold
-                hover:scale-110 hover:-translate-y-1 transition 
-                ease-in-out delay-150 duration-300
+      // <div className="h-screen text-center flex mt-16 flex-col items-center">
+      //   <h1 className="text-2xl font-bold ">Available Balance</h1>
+      //   <h1 className="text-5xl font-bold mt-8">
+      //     <span className="font-semibold">$</span> {currentUser?.balance}{" "}
+      //     <span className="text-4xl text-gray-400">AUD</span>
+      //   </h1>
+      //   <div className="flex  mt-6 gap-8">
+      //     <button
+      //       onClick={() => {
+      //         setIsTopUp(false), setHasChoosen(true);
+      //       }}
+      //       className="btn bg-red-600 py-3 
+      //           px-5 rounded-lg k text-white font-bold
+      //           hover:scale-110 hover:-translate-y-1 transition 
+      //           ease-in-out delay-150 duration-300
                 
-                "
-          >
-            Withdraw
-          </button>
-          <button
-            onClick={() => {
-              setIsTopUp(true), setHasChoosen(true);
-            }}
-            className="btn bg-green-600 py-3 px-5 rounded-lg 
-            text-white font-bold hover:scale-110 hover:-translate-y-1 t
-            ransition ease-in-out delay-150 duration-300"
-          >
-            Top Up
-          </button>
-        </div>
+      //           "
+      //     >
+      //       Withdraw
+      //     </button>
+      //     <button
+      //       onClick={() => {
+      //         setIsTopUp(true), setHasChoosen(true);
+      //       }}
+      //       className="btn bg-green-600 py-3 px-5 rounded-lg 
+      //       text-white font-bold hover:scale-110 hover:-translate-y-1 t
+      //       ransition ease-in-out delay-150 duration-300"
+      //     >
+      //       Top Up
+      //     </button>
+      //   </div>
 
-        {isHasChoosen ? (
-          isTopUp ? (
-            <ChooseDeposit
-              selectedAmount={selectedAmount}
-              handleAmountClick={handleAmountClick}
-              handleSubmit={handleSubmitDeposit}
-              errorDeposit={errorDeposit}
-            />
-          ) : (
-            <WithDraw 
-              balance={currentUser?.balance} 
-              withdrawAmount={withdrawAmount} 
-              handleSubmit={handleWithdraw} 
-              errorWithdraw={errorWithdraw}
-              setWithDrawAmount={setWithdrawAmount}
-              />
-          )
-        ) : null}
-      </div>:<div className="h-screen text-center place-items-center items-center flex justify-center"> 
+      //   {isHasChoosen ? (
+      //     isTopUp ? (
+      //       <ChooseDeposit
+      //         selectedAmount={selectedAmount}
+      //         handleAmountClick={handleAmountClick}
+      //         handleSubmit={handleSubmitDeposit}
+      //         errorDeposit={errorDeposit}
+      //       />
+      //     ) : (
+      //       <WithDraw 
+      //         balance={currentUser?.balance} 
+      //         withdrawAmount={withdrawAmount} 
+      //         handleSubmit={handleWithdraw} 
+      //         errorWithdraw={errorWithdraw}
+      //         setWithDrawAmount={setWithdrawAmount}
+      //         />
+      //     )
+      //   ) : null}
+      // </div>
+      <div className="bg-background text-foreground min-h-screen flex flex-col mt-16">
+     
+      <main className="flex-1 py-8 px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-violet-500 text-primary-foreground p-8 rounded-2xl">
+            <div className="flex items-center justify-between text-white">
+              <div>
+                <p className="text-sm">Current Balance</p>
+                <p className="text-4xl font-bold">$5,234.56</p>
+              </div>
+              <CreditCardIcon className="w-12 h-12" />
+            </div>
+          </div>
+          <div className="mt-8 grid sm:grid-cols-2 gap-4">
+            <div className=" border text-card-foreground p-6 rounded-2xl">
+              <div className="flex flex-row items-center justify-between">
+                <div>
+                  <p className="text-sm">Top Up</p>
+                  <p className="text-2xl font-bold">Add Funds</p>
+                </div>
+                <button className="flex items-center bg-black text-white py-2 px-4 rounded-md">
+                  <PlusIcon className="w-5 h-5 mr-2" />
+                  Top Up
+                </button>
+              </div>
+            </div>
+            <div className="border text-card-foreground p-6 rounded-2xl">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm">Withdraw</p>
+                  <p className="text-2xl font-bold">Cash Out</p>
+                </div>
+                <button className="flex items-center bg-slate-200 text-black py-2 px-4 rounded-md">
+                  <MinusIcon className="w-5 h-5 mr-2" />
+                  Withdraw
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold">Recent Transactions</h2>
+            <div className="mt-4 space-y-4">
+              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
+                    <ShoppingBagIcon className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Amazon Purchase</p>
+                    <p className="text-sm text-muted-foreground">Aug 15, 2023</p>
+                  </div>
+                </div>
+                <p className="text-red-500 font-medium">-$54.99</p>
+              </div>
+              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
+                    <BriefcaseIcon className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Salary Deposit</p>
+                    <p className="text-sm text-muted-foreground">Aug 1, 2023</p>
+                  </div>
+                </div>
+                <p className="text-green-500 font-medium">+$3,500.00</p>
+              </div>
+              <div className="border text-card-foreground p-4 rounded-xl flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="bg-muted rounded-full w-10 h-10 flex items-center justify-center">
+                    <MenuIcon className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Restaurant Dinner</p>
+                    <p className="text-sm text-muted-foreground">Aug 10, 2023</p>
+                  </div>
+                </div>
+                <p className="text-red-500 font-medium">-$78.23</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+    </div>
+      
+      :<div className="h-screen text-center place-items-center items-center flex justify-center"> 
       <Link href="/">You must be signed in</Link></div>
 }
     </Container>
