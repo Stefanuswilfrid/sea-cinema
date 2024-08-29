@@ -181,7 +181,7 @@ function BalancePage(){
             <div className="flex items-center justify-between text-white">
               <div>
                 <p className="text-sm">Current Balance</p>
-                <p className="text-4xl font-bold">$5,234.56</p>
+                <p className="text-4xl font-bold">$ {user.balance}</p>
               </div>
               <CreditCardIcon className="w-12 h-12" />
             </div>

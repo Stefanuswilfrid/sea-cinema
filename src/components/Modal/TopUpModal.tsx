@@ -39,7 +39,7 @@ export default function TopUpModal() {
     }
     else {
       updateUser({ 
-        balance: amount
+        balance: parseFloat(amount)
       })
       setIsLoading(false)
       topUpModal.onClose();
