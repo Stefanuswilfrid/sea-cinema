@@ -60,20 +60,16 @@ export default function Component() {
               </div>
               
               <div className="flex">
-                <div className="w-10 mr-4">
+                <div className="w-10 mt-2 mr-4">
                   {ROWS.map(row => (
-                    <div key={row} className="h-20 flex items-center justify-center font-semibold text-xl text-gray-700">
+                    <div key={row} className="h-24 flex items-center justify-center font-semibold text-xl text-gray-700">
                       {row}
                     </div>
                   ))}
                 </div>
                 <div className="flex-grow">
                   <div className="flex justify-between mb-4">
-                    {/* {Array.from({ length: COLUMNS }, (_, index) => (
-                      <div key={index} className="w-20 text-center font-semibold text-xl text-gray-700">
-                        {index + 1}
-                      </div>
-                    ))} */}
+                    
                   </div>
                   {ROWS.map(row => (
                     <div key={row} className="flex justify-between mb-4">

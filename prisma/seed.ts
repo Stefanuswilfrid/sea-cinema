@@ -11,7 +11,6 @@ const movieData = [
       "/poster/bad_boys.jpg",
     age_rating: 18,
     price: 15,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Deadpool & Wolverine",
@@ -21,7 +20,6 @@ const movieData = [
     poster_url:
       "/poster/deadpool_wolverine.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 12, // Placeholder
   },
@@ -33,7 +31,6 @@ const movieData = [
     poster_url:
       "/poster/inside_out.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
     price: 6, // Placeholder
   },
   {
@@ -44,7 +41,6 @@ const movieData = [
     poster_url:
     "/poster/despicable_me_4.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -56,7 +52,6 @@ const movieData = [
     poster_url:
     "/poster/justice_league_crisis.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -68,7 +63,6 @@ const movieData = [
     poster_url:
     "/poster/garfield.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -80,7 +74,6 @@ const movieData = [
     poster_url:
     "/poster/deadpool.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -91,7 +84,6 @@ const movieData = [
     release_date: new Date("2024-07-31"),
     poster_url:"/poster/my_spy.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -103,7 +95,6 @@ const movieData = [
     poster_url:
     "/poster/kingdom_apes.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 6, // Placeholder
   },
@@ -115,7 +106,6 @@ const movieData = [
     poster_url:
     "/poster/furiosa.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 12, // Placeholder
   },
@@ -127,7 +117,6 @@ const movieData = [
     poster_url:
     "/poster/descendants.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -140,7 +129,6 @@ const movieData = [
     poster_url:
     "/poster/beverly_cop.jpg",
     age_rating: 17, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
     price: null, // Placeholder; adjust based on available data
   },
   {
@@ -151,7 +139,6 @@ const movieData = [
     poster_url:
     "/poster/monkey_man.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -163,7 +150,6 @@ const movieData = [
     poster_url:
     "/poster/once_deadpool.jpg",
     age_rating: 7.1, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -175,7 +161,6 @@ const movieData = [
     poster_url:
     "/poster/underground_monster.jpg",
     age_rating: 3.7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -188,7 +173,6 @@ const movieData = [
     poster_url:
     "/poster/handling_undead.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -200,7 +184,6 @@ const movieData = [
     poster_url:
     "/poster/convert.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -212,7 +195,6 @@ const movieData = [
     poster_url:
     "/poster/horizon.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -224,7 +206,6 @@ const movieData = [
     poster_url:
     "/poster/logan.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -236,7 +217,6 @@ const movieData = [
     poster_url:
     "/poster/kleks_academy.jpg",
     age_rating: 6, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -248,7 +228,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/coraline.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -260,7 +239,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/ultraman.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -272,7 +250,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/despicable.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -284,7 +261,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/late_devil.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -296,7 +272,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/damsel.jpg",
     age_rating: 7, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -308,7 +283,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/oppenheimer.jpg",
     age_rating: 8, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -320,7 +294,6 @@ const movieData = [
     poster_url:
     "/poster/poster_2/wish.jpg",
     age_rating: 6, // Approximate average rating
-    seats: Array.from({length: 64}, (_) => false),
 
     price: 10, // Placeholder
   },
@@ -333,7 +306,6 @@ const movieData = [
     "/poster/poster_2/godzilla1.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Canceled",
@@ -344,7 +316,6 @@ const movieData = [
     "/poster/poster_2/canceled.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "No Way Up",
@@ -355,7 +326,6 @@ const movieData = [
     "/poster/poster_2/noway.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "John Wick: Chapter 4",
@@ -366,7 +336,6 @@ const movieData = [
     "/poster/poster_2/jwick.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Young Woman and the Sea",
@@ -377,7 +346,6 @@ const movieData = [
     "/poster/poster_2/youngwoman.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Elemental",
@@ -388,7 +356,6 @@ const movieData = [
     "/poster/poster_2/elementa;.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "The First Omen",
@@ -399,7 +366,6 @@ const movieData = [
     "/poster/poster_2/omen.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Fast X",
@@ -410,7 +376,6 @@ const movieData = [
     "/poster/poster_2/fast.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Spider-Man: No Way Home",
@@ -421,7 +386,6 @@ const movieData = [
     "/poster/poster_2/spiderman.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "The Roundup: No Way Out",
@@ -432,7 +396,6 @@ const movieData = [
     "/poster/poster_2/roundup.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Bad Boys for Life",
@@ -443,7 +406,6 @@ const movieData = [
     "/poster/poster_2/bad_boys_2.jpg",
     age_rating: 10,
     price: 31,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "The Super Mario Bros. Movie",
@@ -454,7 +416,6 @@ const movieData = [
     "/poster/poster_2/super_mario.jpg",
     age_rating: 12,
     price: 21,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Madame Web",
@@ -465,7 +426,6 @@ const movieData = [
     "/poster/poster_2/madame_web.jpg",
     age_rating: 8,
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
   {
     title: "Wonka",
@@ -476,13 +436,29 @@ const movieData = [
     "/poster/poster_2/wonka.jpg",
     age_rating: 17, // Approximate average rating
     price: 11,
-    seats: Array.from({length: 64}, (_) => false),
   },
 
 ];
+async function createSeatsForMovie(movieId : string) {
+  const rows = ['A', 'B', 'C', 'D', 'E'];
+  const seatsPerRow = 5;
+
+  const seats = rows.flatMap(row =>
+    Array.from({ length: seatsPerRow }, (_, index) => ({
+      label: `${row}${index + 1}`,
+      occupied: false,
+      movieId: movieId
+    }))
+  );
+
+  await prisma.seat.createMany({ data: seats });
+}
 
 async function main() {
-  const movies = await prisma.movie.createMany({ data: movieData });
+  for (const movie of movieData) {
+    const createdMovie = await prisma.movie.create({ data: movie });
+    await createSeatsForMovie(createdMovie.id);
+  }
 }
 main()
   .then(async () => {

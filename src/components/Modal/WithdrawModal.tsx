@@ -7,14 +7,11 @@ import {
     SubmitHandler, 
     useForm
   } from "react-hook-form";
-import toast from 'react-hot-toast';
-import { useUser } from '@/hooks/useUser';
+import useWithdrawModal from '@/hooks/useWithdrawModal';
 
-export default function TopUpModal() {
+export default function WithdrawModal() {
     const [isLoading, setIsLoading] = useState(false);
-    const topUpModal = useTopUpModal();
-    const { updateUser, user  } = useUser()
-
+    const topUpModal = useWithdrawModal();
 
     const { 
         register, 
@@ -31,20 +28,6 @@ export default function TopUpModal() {
     const onSubmit: SubmitHandler<FieldValues> = 
   (data) => {
     setIsLoading(true);
-    const {amount } = data
-    if (amount<=0){
-      toast.error("Balance must be more than 0")
-      setIsLoading(false)
-      return
-    }
-    else {
-      updateUser({ 
-        balance: amount
-      })
-      setIsLoading(false)
-      topUpModal.onClose();
-
-    }
 
     
   }
@@ -54,7 +37,7 @@ export default function TopUpModal() {
             <div className='text-center' >
           
           <div className="font-light text-neutral-500 ">
-            Enter the amount you'd like to add to your balance. 
+            Enter the amount you'd like to withdraw from your balance. 
           </div>
         </div>
     
@@ -81,7 +64,7 @@ export default function TopUpModal() {
           hover:bg-gradient-to-r hover:from-indigo-700 
           hover:to-indigo-800 text-lg py-3 text-md font-semibold text-white"
           >
-            Top Up
+            Withdraw
           </button>
           
           

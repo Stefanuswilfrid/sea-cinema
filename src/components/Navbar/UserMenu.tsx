@@ -102,11 +102,11 @@ const UserMenu : React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => {router.push("/history"),setIsOpen(false)}}
                 />
                <hr/>
-               <MenuItem
+               {/* <MenuItem
                   label="Messages"
                   onClick={() => {router.push("/messages"),setIsOpen(false)}}
                   bold={false}
-                />
+                /> */}
                <MenuItem
                   label="Account"
                   onClick={() => {router.push("/account-settings"),setIsOpen(false)}}

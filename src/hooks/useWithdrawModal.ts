@@ -6,11 +6,11 @@ interface WithdrawStore {
   onClose: () => void;
 }
 
-const useWithdraw = create<WithdrawStore>((set) => ({
+const useWithdrawModal = create<WithdrawStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false })
 }));
 
 
-export default useWithdraw;
+export default useWithdrawModal;
