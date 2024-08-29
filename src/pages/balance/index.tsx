@@ -193,7 +193,7 @@ function BalancePage(){
                   <p className="text-sm">Top Up</p>
                   <p className="text-2xl font-bold">Add Funds</p>
                 </div>
-                <button onClick={()=>{topUpModal.onOpen()}} className="flex items-center bg-black text-white py-2 px-4 rounded-md">
+                <button onClick={()=>{topUpModal.onOpen()}} className="flex items-center bg-indigo-600 text-white py-2 px-4 rounded-md">
                   <PlusIcon className="w-5 h-5 mr-2" />
                   Top Up
                 </button>
@@ -205,7 +205,7 @@ function BalancePage(){
                   <p className="text-sm">Withdraw</p>
                   <p className="text-2xl font-bold">Cash Out</p>
                 </div>
-                <button className="flex items-center bg-slate-200 text-black py-2 px-4 rounded-md">
+                <button className="flex items-center bg-white border-2 border-primary  text-primary py-2 px-4 rounded-md">
                   <MinusIcon className="w-5 h-5 mr-2" />
                   Withdraw
                 </button>

@@ -72,20 +72,6 @@ model Transaction {
   updatedAt DateTime        @updatedAt
 }
 
-// model Transaction {
-//   id       String @id @default(auto()) @map("_id") @db.ObjectId
-//   user     User   @relation(fields: [userId], references: [id])
-//   userId   String @db.ObjectId
-//   movie    Movie  @relation(fields: [movieId], references: [id])
-//   movieId  String @db.ObjectId
-//   seats    Int[]
-//   quantity Int // Add the quantity field
-
-//   totalCost Float
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
-
 model Conversation {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt     DateTime @default(now())

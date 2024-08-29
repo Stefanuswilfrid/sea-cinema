@@ -30,7 +30,6 @@ const UserBox: React.FC<UserBoxProps> = ({ data, selected, currentUserId }) => {
   const handleClick = useCallback(() => {
     setIsLoading(true);
 
-    // Trigger the mutation with both currentUserId and data.id
     trigger({ userId: data.id  })
       .then((response) => {
         router.push(`/messages/${response.data.id}`);
