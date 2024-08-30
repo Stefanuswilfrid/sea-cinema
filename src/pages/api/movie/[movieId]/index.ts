@@ -10,6 +10,9 @@ async function getMovieById(id: string) {
     where: {
       id,
     },
+    include: {
+      seats: true,
+    },
   });
 }
 

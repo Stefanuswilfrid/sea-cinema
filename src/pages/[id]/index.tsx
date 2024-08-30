@@ -48,17 +48,17 @@ export default function index() {
 
   },[router,id,listing])
 
-  const handleBookTicket = () => {
-    if (!currentUser) {
-      loginModal.onOpen();
-    } else {
-      if (!currentUser.age < listing.age_rating) {
-        toast.error("Age is below the movie's age rating");
-      } else {
-        seatModal.onOpen();
-      }
-    }
-  };
+  // const handleBookTicket = () => {
+  //   if (!currentUser) {
+  //     loginModal.onOpen();
+  //   } else {
+  //     if (!currentUser.age < listing.age_rating) {
+  //       toast.error("Age is below the movie's age rating");
+  //     } else {
+  //       seatModal.onOpen();
+  //     }
+  //   }
+  // };
 
   if (error)
     return (

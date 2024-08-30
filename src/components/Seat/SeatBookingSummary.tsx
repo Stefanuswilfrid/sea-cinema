@@ -7,9 +7,10 @@ interface Seat {
 
 interface BookingSummaryProps {
   selectedSeats: Seat[];
+  price : number;
 }
 
-const SeatBookingSummary: React.FC<BookingSummaryProps> = ({ selectedSeats }) => (
+const SeatBookingSummary: React.FC<BookingSummaryProps> = ({ selectedSeats,price }) => (
   <div className="w-full lg:w-1/3 bg-white p-8 border-t lg:border-l lg:border-t-0 border-gray-200">
     <h2 className="text-2xl font-semibold mb-6 text-gray-800">Booking Summary</h2>
     
@@ -31,7 +32,7 @@ const SeatBookingSummary: React.FC<BookingSummaryProps> = ({ selectedSeats }) =>
     <div className="flex justify-between items-center mb-8">
       <span className="text-lg text-gray-600">Total</span>
       <span className="text-2xl font-bold text-primary">
-        AUD {(selectedSeats.length * 3500000).toLocaleString()}
+        AUD {(selectedSeats.length * price).toLocaleString()}
       </span>
     </div>
 

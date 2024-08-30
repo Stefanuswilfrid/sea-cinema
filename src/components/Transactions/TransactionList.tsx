@@ -4,6 +4,7 @@ import { ArrowBigUp, WalletIcon, CreditCard, ChevronDown } from 'lucide-react';
 import { Transaction } from '@/pages/balance';
 import { formatDate } from '@/libs/utils/time';
 import ShoppingBagIcon from '../Icons/ShoppingBagIcon';
+import { useRouter } from 'next/navigation';
 
 interface TransactionProps {
   transactions: Transaction[];
@@ -40,6 +41,8 @@ function getTransactionDetails(type: string): TransactionDetail {
 }
 
 const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
+  const router = useRouter();
+
   const [visibleTransactions, setVisibleTransactions] = useState(5);
 
   const loadMore = () => {
@@ -143,7 +146,9 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
           <h3 className="mt-2 text-lg font-semibold">No Transactions</h3>
           <p className="mt-1 text-sm text-muted-foreground">You haven't made any transactions in the past.</p>
           <div className="mt-6">
-          <button type="button" className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" > Explore Movies </button>
+          <button onClick={()=>{
+            router.push("/")
+          }} type="button" className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" > Explore Movies </button>
           </div>
         </motion.div>
       )}

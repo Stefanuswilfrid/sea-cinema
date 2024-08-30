@@ -20,9 +20,9 @@ const SeatSelectionComponent: React.FC<SeatSelectionProps> = ({ seats, handleSea
     </div>
     
     <div className="flex">
-      <div className="w-10  sm:mt-4 mr-4">
+      <div className="w-10  sm:mt-2 mr-4">
         {ROWS.map(row => (
-          <div key={row} className="h-[62px] sm:h-[90px] flex items-center justify-center font-semibold text-sm sm:text-xl text-gray-700">
+          <div key={row} className="h-[60px] sm:h-[88px] flex items-center justify-center font-semibold text-sm sm:text-xl text-gray-700">
             {row}
           </div>
         ))}
