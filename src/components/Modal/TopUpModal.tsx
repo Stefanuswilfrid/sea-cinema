@@ -29,18 +29,18 @@ export default function TopUpModal() {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const { amount } = data;
     if (amount <= 0) {
       toast.error("Balance must be more than 0");
-      setIsLoading(false);
+      // setIsLoading(false);
       return;
     } else {
       updateUser({
         balance: parseFloat(amount),
       });
       trigger({userId: user.id,totalCost:parseFloat(amount)}).finally(()=> {
-        setIsLoading(false);
+        // setIsLoading(false);
       topUpModal.onClose();
       })
       

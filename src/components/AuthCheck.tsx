@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { useSession } from "next-auth/react";
 import { ReactNode } from 'react';
+import LoadingModal from './Modal/LoadingModal';
 
 
 type AuthCheckProps = {
@@ -16,7 +17,7 @@ export default function AuthCheck({ children }: AuthCheckProps) {
 
     if (status === 'loading') {
         // Optional: Render a loading state while checking the session status
-        return <div>Loading...</div>;
+        return <LoadingModal/>;
       }
     
       if (!currentUser) {

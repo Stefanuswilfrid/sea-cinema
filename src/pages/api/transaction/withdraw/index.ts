@@ -7,16 +7,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        console.log("topup")
         const { userId, totalCost } = req.body;
-        console.log("test",userId,totalCost)
-
 
         if (!userId || !totalCost) {
             return res.status(400).json({ message: 'Invalid input data' });
         }
-        console.log("as",userId,totalCost)
 
+        // Fetch the user's current balance
+        const user = await prisma.user.findUnique({
+            where: { id: userId }
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Calculate the new balance after withdrawal
+        const newBalance = user.balance - totalCost;
+
+        if (newBalance < 0) {
+            return res.status(400).json({ message: 'Insufficient funds' });
+        }
+
+        // Update the user's balance
+        await prisma.user.update({
+            where: { id: userId },
+            data: { balance: newBalance }
+        });
+
+        // Create the withdrawal transaction
         const transaction = await prisma.transaction.create({
             data: {
                 userId: userId,
@@ -27,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // Return the created transaction
         res.status(201).json(transaction);
-    } catch (error : any) {
+    } catch (error: any) {
         console.error('Transaction creation failed:', error);
         res.status(500).json({ message: 'Failed to create transaction', error: error.message });
     }

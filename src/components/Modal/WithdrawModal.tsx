@@ -8,10 +8,16 @@ import {
     useForm
   } from "react-hook-form";
 import useWithdrawModal from '@/hooks/useWithdrawModal';
+import toast from 'react-hot-toast';
+import { useMutation } from '@/hooks/useMutation';
+import { apiClient } from '@/libs/utils/api-client';
+import { useUser } from '@/hooks/useUser';
 
 export default function WithdrawModal() {
     const [isLoading, setIsLoading] = useState(false);
     const topUpModal = useWithdrawModal();
+    const { updateUser, user } = useUser();
+
 
     const { 
         register, 
@@ -25,9 +31,29 @@ export default function WithdrawModal() {
         },
     });
 
+    const { trigger, status } = useMutation('/transaction/withdraw', async (url, payload) => {
+      console.log("payload", payload); 
+      return await apiClient.post(url, payload);
+    });
+
     const onSubmit: SubmitHandler<FieldValues> = 
   (data) => {
     setIsLoading(true);
+    const { amount } = data;
+    if (amount <= 0) {
+      toast.error("Balance must be more than 0");
+      setIsLoading(false);
+      return;
+    } else {
+      updateUser({
+        balance: -parseFloat(amount),
+      });
+      trigger({userId: user.id,totalCost:parseFloat(amount)}).finally(()=> {
+        setIsLoading(false);
+      topUpModal.onClose();
+      })
+      
+    }
 
     
   }
