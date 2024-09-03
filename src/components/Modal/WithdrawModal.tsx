@@ -14,7 +14,6 @@ import { apiClient } from '@/libs/utils/api-client';
 import { useUser } from '@/hooks/useUser';
 
 export default function WithdrawModal() {
-    const [isLoading, setIsLoading] = useState(false);
     const topUpModal = useWithdrawModal();
     const { updateUser, user } = useUser();
 
@@ -31,25 +30,22 @@ export default function WithdrawModal() {
         },
     });
 
-    const { trigger, status } = useMutation('/transaction/withdraw', async (url, payload) => {
+    const { trigger, isMutating } = useMutation('/transaction/withdraw', async (url, payload) => {
       console.log("payload", payload); 
       return await apiClient.post(url, payload);
     });
 
     const onSubmit: SubmitHandler<FieldValues> = 
   (data) => {
-    setIsLoading(true);
     const { amount } = data;
     if (amount <= 0) {
       toast.error("Balance must be more than 0");
-      setIsLoading(false);
       return;
     } else {
       updateUser({
         balance: -parseFloat(amount),
       });
       trigger({userId: user.id,totalCost:parseFloat(amount)}).finally(()=> {
-        setIsLoading(false);
       topUpModal.onClose();
       })
       
@@ -71,7 +67,7 @@ export default function WithdrawModal() {
             id="amount"
             label="Amount"
             type='number'
-            disabled={isLoading}
+            disabled={isMutating}
             register={register}  
             errors={errors}
             required
@@ -102,7 +98,7 @@ export default function WithdrawModal() {
 
   return (
 <Modal
-      disabled={isLoading}
+      disabled={isMutating}
       isOpen={topUpModal.isOpen}
       title="Top Up Balance"
       actionLabel="Continue"

@@ -118,19 +118,12 @@ export default function index() {
                 </div>
 
                 <div className="mt-4">
-                  {/* <button
-                    className="mt-4 mx-auto md:mx-0 flex items-center justify-center gap-2 w-1/2 py-3 font-medium rounded-md bg-indigo-600 active:bg-hovered duration-200 text-white"
-
-                    onClick={handleBookTicket}
-                  >
-                    Book Tickets &#8594;
-                  </button> */}
+                  
                   <Button
 
                     label={"Book Now"}
                     onClick={
                       ()=>{router.push(`/${id}/seat`)}
-                      // handleBookTicket
                     }
                   />
                 </div>

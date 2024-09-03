@@ -97,22 +97,22 @@ const UserMenu : React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => {router.push("/balance"),setIsOpen(false)}}
                 />
                 
-                {/* <MenuItem
-                  label="Transactions "
-                  onClick={() => {router.push("/history"),setIsOpen(false)}}
-                /> */}
-               {/* <hr/> */}
-               {/* <MenuItem
-                  label="Messages"
-                  onClick={() => {router.push("/messages"),setIsOpen(false)}}
+                <MenuItem
+                  label="My Bookings "
+                  onClick={() => {router.push("/payment"),setIsOpen(false)}}
+                />
+               <hr/>
+               <MenuItem
+                  label="Liked Movie"
+                  onClick={() => {router.push("/likes"),setIsOpen(false)}}
                   bold={false}
-                /> */}
+                />
                <MenuItem
                   label="Account"
                   onClick={() => {router.push("/account-settings"),setIsOpen(false)}}
                   bold={false}
                 />
-               {/* <hr/> */}
+               <hr/>
                 <MenuItem label="Log out" onClick={() => {router.push("/"); signOut(); }} />
               </>
             ) : (

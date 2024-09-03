@@ -9,7 +9,6 @@ import { useMutation } from "@/hooks/useMutation";
 import { apiClient } from "@/libs/utils/api-client";
 
 export default function TopUpModal() {
-  const [isLoading, setIsLoading] = useState(false);
   const topUpModal = useTopUpModal();
   const { updateUser, user } = useUser();
 
@@ -23,7 +22,7 @@ export default function TopUpModal() {
     },
   });
 
-  const { trigger, status } = useMutation('/transaction/topup', async (url, payload) => {
+  const { trigger, isMutating } = useMutation('/transaction/topup', async (url, payload) => {
     console.log("payload", payload); 
     return await apiClient.post(url, payload);
   });
@@ -58,7 +57,7 @@ export default function TopUpModal() {
         id="amount"
         label="Amount"
         type="number"
-        disabled={isLoading}
+        disabled={isMutating}
         register={register}
         errors={errors}
         required
@@ -83,7 +82,7 @@ export default function TopUpModal() {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={isMutating}
       isOpen={topUpModal.isOpen}
       title="Top Up Balance"
       actionLabel="Continue"

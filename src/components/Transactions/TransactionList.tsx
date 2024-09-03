@@ -7,7 +7,7 @@ import ShoppingBagIcon from '../Icons/ShoppingBagIcon';
 import { useRouter } from 'next/navigation';
 
 interface TransactionProps {
-  transactions: Transaction[];
+  transactions: Transaction[] | null;
 }
 
 interface TransactionDetail {
@@ -42,11 +42,10 @@ function getTransactionDetails(type: string): TransactionDetail {
 
 const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
   const router = useRouter();
-
   const [visibleTransactions, setVisibleTransactions] = useState(5);
 
   const loadMore = () => {
-    setVisibleTransactions(prevVisible => Math.min(prevVisible + 5, transactions.length));
+    setVisibleTransactions(prevVisible => Math.min(prevVisible + 5, transactions?.length || 0));
   };
 
   const containerVariants = {
@@ -83,6 +82,31 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
       }
     }
   };
+
+  if (transactions === null) {
+    return (
+      <motion.div
+        variants={emptyStateVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        className="text-center p-4 mt-12"
+      >
+        <CreditCard className="mx-auto h-12 w-12 text-muted-foreground" />
+        <h3 className="mt-2 text-lg font-semibold">Unable to load transactions</h3>
+        <p className="mt-1 text-sm text-muted-foreground">Please try again later.</p>
+        <div className="mt-6">
+          <button
+            onClick={() => router.push("/")}
+            type="button"
+            className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Explore Movies
+          </button>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -126,7 +150,6 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
             >
               <button
                 onClick={loadMore}
-                // variant="outline"
                 className="flex items-center gap-2"
               >
                 Load More <ChevronDown className="w-4 h-4" />
@@ -146,9 +169,13 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
           <h3 className="mt-2 text-lg font-semibold">No Transactions</h3>
           <p className="mt-1 text-sm text-muted-foreground">You haven't made any transactions in the past.</p>
           <div className="mt-6">
-          <button onClick={()=>{
-            router.push("/")
-          }} type="button" className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" > Explore Movies </button>
+            <button
+              onClick={() => router.push("/")}
+              type="button"
+              className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Explore Movies
+            </button>
           </div>
         </motion.div>
       )}

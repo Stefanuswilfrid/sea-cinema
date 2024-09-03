@@ -44,6 +44,15 @@ The app is a movie browsing platform that includes the following features:
 - **Logout**: Users can securely log out of their accounts to protect their privacy.
   Additionally, the app provides transaction history functionality, allowing users to view their past transactions and track their ticket bookings and balance usage.
 
-Overall, the app offers a convenient and secure movie browsing experience with ticket booking, user balance, and personalized features.
+## Tech 🛠
+
+- Next.js
+- Prisma
+- SWR
+- Zustand
+- Tailwind CSS
+- MongoDB
+- Cloudinary
+- Next Auth
 
 ![ezgif com-video-to-gif-2](https://github.com/Stefanuswilfrid/sea-cinema/assets/77448713/7e58a243-aa05-414c-ad74-29c763ce8592)
