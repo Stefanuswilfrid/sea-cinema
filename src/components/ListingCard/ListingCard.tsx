@@ -34,7 +34,7 @@ export default function ListingCard({
       animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="hover:scale-105 duration-700 cursor-pointer shadow-md rounded-xl overflow-hidden relative" onClick={()=>{router.push(`${id}`)}}>
+      <div className="hover:scale-105 duration-700 cursor-pointer shadow-md rounded-xl overflow-hidden relative" onClick={()=>{router.push(`/movie/${id}`)}}>
         <div className="aspect-[3/4] group-hover:opacity-25">
           <Image
             src={url}

@@ -47,6 +47,7 @@ The app is a movie browsing platform that includes the following features:
 ## Tech 🛠
 
 - Next.js
+- Typescript
 - Prisma
 - SWR
 - Zustand
