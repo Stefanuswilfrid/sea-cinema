@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { CurrentUser } from "@/types";
 import SEO from "@/components/SEO";
+import { AlarmClock, ArrowRight, Lightbulb } from "lucide-react";
+import { ChevronRight } from "react-feather";
 
 export default function EditProfile() {
   const { data } = useSession();
@@ -34,40 +36,58 @@ export default function EditProfile() {
         desc="SEA Cinema is a rising star in the movie theater industry known for
         its affordable ticket prices and wide range of movie genres."
       />
-      <div className="w-full xl:px-20 md:px-10 sm:px-6 px-4 mt-8 mx-6 sm:max-w-5xl sm:mx-auto flex gap-20">
+      <div className="w-full xl:px-20 md:px-10 sm:px-6 px-4 mt-12 mx-6 sm:max-w-5xl sm:mx-auto flex flex-col sm:flex-row gap-20">
         <div className="relative">
           <AddPhoto id={currentUser?.id} />
         </div>
-        <div className="md:ml-12 w-full">
+        <div className="md:ml-12 w-full mt-6">
           <div>
             <h1 className="text-[32px] font-black tracking-tight leading-9">
               Your Profile
             </h1>
+            <p className="text-gray-500 my-5">The information you share will be used across SEA Cinema users to get to know you.</p>
+            <div className="grid grid-cols-2 gap-8">
+              <button className="border-b-[1px] border-gray-300  hover:bg-gray-100 px-3 py-4 hover:rounded-lg duration-200">
+                <div className="flex items-start ">
+                  <AlarmClock/>
+                <span className="text-gray-500 ml-3">I spend too much time
+                </span>
+                  {/* <ChevronRight className="tex"/> */}
+                </div>
+              </button>
+              <button className="border-b-[1px] border-gray-300  hover:bg-gray-100 px-3 py-4 hover:rounded-lg duration-200">
+                <div className="flex items-start ">
+                  <Lightbulb/>
+                <span className="text-gray-500 ml-3">My Fun Fact
+                </span>
+                  {/* <ChevronRight className="tex"/> */}
+                </div>
+              </button>
+            </div>
           </div>
           <section>
             <h1
-              className="hpipapi atm_7l_1kw7nm4 atm_c8_1x4eueo atm_cs_1kw7nm4 atm_g3_1kw7nm4 atm_gi_idpfg4 atm_l8_idpfg4 atm_kd_idpfg4_pfnrn2 dir dir-ltr"
+              className="text-2xl mt-8 font-bold "
             >
-              <span className="h1f0bcpo atm_c8_11rlvjh atm_g3_1xap3gc atm_fr_1xai86l atm_7l_dezgoh atm_cs_19iasv6 dir dir-ltr">
                 About you
-              </span>
             </h1>
-            <div className="c1ppnxkx atm_h3_1ph3nq8 atm_c8_16fp2vl atm_g3_x9fz81 atm_fr_12ckmjc atm_9s_1txwivl atm_ar_1bp4okc atm_cx_8tjzot atm_j3_13slfx3__1v156lz dir dir-ltr">
-              <div className="_11oyobo">
-                <span className="_1e2prbn">test</span>
-              </div>
-              <button
-                type="button"
-                className="l1ovpqvx atm_1he2i46_1k8pnbi_10saat9 atm_yxpdqi_1pv6nv4_10saat9 atm_1a0hdzc_w1h1e8_10saat9 atm_2bu6ew_929bqk_10saat9 atm_12oyo1u_73u7pn_10saat9 atm_fiaz40_1etamxe_10saat9 b1uxatsa atm_c8_1kw7nm4 atm_bx_1kw7nm4 atm_cd_1kw7nm4 atm_ci_1kw7nm4 atm_g3_1kw7nm4 atm_9j_tlke0l_1nos8r_uv4tnr atm_7l_1kw7nm4_pfnrn2 atm_rd_8stvzk_pfnrn2 c1qih7tm atm_1s_glywfm atm_26_1j28jx2 atm_3f_idpfg4 atm_9j_tlke0l atm_gi_idpfg4 atm_l8_idpfg4 atm_vb_1wugsn5 atm_7l_jt7fhx atm_rd_8stvzk atm_5j_1896hn4 atm_cs_10d11i2 atm_r3_1kw7nm4 atm_mk_h2mmj6 atm_kd_glywfm atm_9j_13gfvf7_1o5j5ji atm_7l_jt7fhx_v5whe7 atm_rd_8stvzk_v5whe7 atm_7l_177r58q_1nos8r_uv4tnr atm_rd_8stvzk_1nos8r_uv4tnr atm_7l_9vytuy_4fughm_uv4tnr atm_rd_8stvzk_4fughm_uv4tnr atm_rd_8stvzk_xggcrc_uv4tnr atm_7l_1he744i_csw3t1 atm_rd_8stvzk_csw3t1 atm_3f_glywfm_jo46a5 atm_l8_idpfg4_jo46a5 atm_gi_idpfg4_jo46a5 atm_3f_glywfm_1icshfk atm_kd_glywfm_19774hq atm_7l_jt7fhx_1w3cfyq atm_rd_8stvzk_1w3cfyq atm_uc_aaiy6o_1w3cfyq atm_70_1p56tq7_1w3cfyq atm_uc_glywfm_1w3cfyq_1rrf6b5 atm_7l_jt7fhx_pfnrn2_1oszvuo atm_rd_8stvzk_pfnrn2_1oszvuo atm_uc_aaiy6o_pfnrn2_1oszvuo atm_70_1p56tq7_pfnrn2_1oszvuo atm_uc_glywfm_pfnrn2_1o31aam atm_7l_9vytuy_1o5j5ji atm_rd_8stvzk_1o5j5ji atm_rd_8stvzk_1mj13j2 dir dir-ltr"
-              >
-                Edit Intro
-              </button>
-            </div>
+            {currentUser?.bio ? <span>eu</span> :
+            <div className="my-6 px-4 py-5 border-dashed border-2 border-grey rounded-xl">
+              <p >
+              Write something fun.
+              </p>
+              <p className="mt-1 underline underline-offset-4 ">Add Intro</p>
+
+              </div>}
+              <hr/>
+              <h1
+              className="text-2xl mt-8 font-bold "
+            >
+                What you're into
+            </h1>
+            
           </section>
-          {/* <h1 className="h-96">Hello</h1> */}
-          <h1 className="h-96">Hello</h1>
-          <h1 className="h-96">Hello</h1>
-          <h1 className="h-96">Hello</h1>
+      
           <h1 className="h-96 last-h1">Hello</h1>
           <div
             className={`bg-white border-t-2 w-full px-10 py-4 ${
@@ -83,7 +103,7 @@ export default function EditProfile() {
         </div>
       </div>
       <div
-        className={`transition-all duration-300 transform bg-white border-t-2 w-full px-10 py-4 ${
+        className={`transition-all duration-100 transform bg-white border-t-2 w-full px-10 py-4 ${
           isFixed ? "opacity-100 fixed bottom-0" : " opacity-0 "
         }`}
       >

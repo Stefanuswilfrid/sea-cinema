@@ -15,6 +15,7 @@ model User {
   username    String?  @unique
   name        String?
   age         Int?
+  bio         String?
   balance     Int
   wishlistIds String[] @db.ObjectId
 

@@ -103,13 +103,13 @@ const UserMenu : React.FC<UserMenuProps> = ({ currentUser }) => {
                 />
                <hr/>
                <MenuItem
-                  label="Liked Movie"
-                  onClick={() => {router.push("/likes"),setIsOpen(false)}}
+                  label="Watchlists"
+                  onClick={() => {router.push("/watchlist"),setIsOpen(false)}}
                   bold={false}
                 />
                <MenuItem
                   label="Account"
-                  onClick={() => {router.push("/account-settings"),setIsOpen(false)}}
+                  onClick={() => {router.push(`/users/${currentUser?.id}`),setIsOpen(false)}}
                   bold={false}
                 />
                <hr/>
