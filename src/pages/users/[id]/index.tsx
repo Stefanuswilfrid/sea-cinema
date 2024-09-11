@@ -3,10 +3,31 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { CurrentUser } from "@/types";
 import SEO from "@/components/SEO";
-import { AlarmClock, ArrowRight, Lightbulb } from "lucide-react";
+import { AlarmClock, ArrowRight, Lightbulb, PlusIcon } from "lucide-react";
 import { ChevronRight } from "react-feather";
+import { button } from "@material-tailwind/react";
+
+const interests = [
+  { icon: '🍝', label: 'Food' },
+  { icon: '🏞️', label: 'Outdoors' },
+  { icon: '🎵', label: 'Live music' },
+  { icon: '🛍️', label: 'Shopping' },
+  { icon: '📚', label: 'Reading' },
+  { icon: '📷', label: 'Photography' },
+  { icon: '🐾', label: 'Animals' },
+  { icon: '🏟️', label: 'Live sports' },
+  { icon: '🏛️', label: 'Museums' },
+  { icon: '🎬', label: 'Movies' },
+  { icon: '🍷', label: 'Wine' },
+  { icon: '🍳', label: 'Cooking' },
+  { icon: '🏛️', label: 'Architecture' },
+  { icon: '🌍', label: 'History' },
+  { icon: '🏄', label: 'Water sports' },
+  { icon: '🎭', label: 'Theatre' },
+]
 
 export default function EditProfile() {
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([])
   const { data } = useSession();
   const currentUser = data?.user as CurrentUser;
   const [isFixed, setIsFixed] = useState(true);
@@ -41,33 +62,10 @@ export default function EditProfile() {
           <AddPhoto id={currentUser?.id} />
         </div>
         <div className="md:ml-12 w-full mt-6">
-          <div>
-            <h1 className="text-[32px] font-black tracking-tight leading-9">
-              Your Profile
-            </h1>
-            <p className="text-gray-500 my-5">The information you share will be used across SEA Cinema users to get to know you.</p>
-            <div className="grid grid-cols-2 gap-8">
-              <button className="border-b-[1px] border-gray-300  hover:bg-gray-100 px-3 py-4 hover:rounded-lg duration-200">
-                <div className="flex items-start ">
-                  <AlarmClock/>
-                <span className="text-gray-500 ml-3">I spend too much time
-                </span>
-                  {/* <ChevronRight className="tex"/> */}
-                </div>
-              </button>
-              <button className="border-b-[1px] border-gray-300  hover:bg-gray-100 px-3 py-4 hover:rounded-lg duration-200">
-                <div className="flex items-start ">
-                  <Lightbulb/>
-                <span className="text-gray-500 ml-3">My Fun Fact
-                </span>
-                  {/* <ChevronRight className="tex"/> */}
-                </div>
-              </button>
-            </div>
-          </div>
+
           <section>
             <h1
-              className="text-2xl mt-8 font-bold "
+              className="text-2xl  font-bold "
             >
                 About you
             </h1>
@@ -80,17 +78,44 @@ export default function EditProfile() {
 
               </div>}
               <hr/>
-              <h1
-              className="text-2xl mt-8 font-bold "
-            >
-                What you're into
-            </h1>
+              <h2 className="text-2xl font-bold mb-4 mt-12 ">What you're into</h2>
+      <p className="text-gray-600 mb-4">
+        Find common ground with other users by adding interests to your profile.
+      </p>
+
+      <div className="space-y-2">
+      <div className="flex space-x-4  ">
+        {[1, 2, 3].map((_, index) => (
+          <button
+            key={index}
+            className="w-24 h-12 mb-8 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center"
+          >
+            <PlusIcon className="h-6 w-6 text-gray-400" />
+            <span className="sr-only">Add interest</span>
+          </button>
+        ))}
+      </div>
+      <button  className="p-0 mb-8  h-auto font-semibold text-gray-900 underline">
+        Add interests
+      </button>
+    </div>
+
+      {/* <div className="flex flex-wrap gap-2 mb-4">
+        {selectedInterests.map(interest => (
+          // <Button key={interest} variant="secondary" className="rounded-full">
+          //   {interest}
+          // </Button>
+          <button>
+            {interest}
+          </button>
+        ))}
+      </div> */}
             
           </section>
       
-          <h1 className="h-96 last-h1">Hello</h1>
+          {/* <h1 className="h-96 last-h1">Hello</h1> */}
           <div
-            className={`bg-white border-t-2 w-full px-10 py-4 ${
+            className={`bg-white border-t-2 w-full px-10 py-4 mt-8 ${
               isFixed ? "" : "relative"
             }`}
           >
@@ -102,17 +127,7 @@ export default function EditProfile() {
           </div>
         </div>
       </div>
-      <div
-        className={`transition-all duration-100 transform bg-white border-t-2 w-full px-10 py-4 ${
-          isFixed ? "opacity-100 fixed bottom-0" : " opacity-0 "
-        }`}
-      >
-        <div className="max-w-6xl text-right m-auto">
-          <button className="px-6 py-3 bg-black text-white rounded-lg">
-            Done
-          </button>
-        </div>
-      </div>
+      
     </>
   );
 }

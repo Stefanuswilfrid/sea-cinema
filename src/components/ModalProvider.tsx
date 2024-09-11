@@ -6,6 +6,7 @@ import LoginModal from "./Modal/LoginModal";
 import RegisterModal from "./Modal/RegisterModal";
 import TopUpModal from "./Modal/TopUpModal";
 import WithdrawModal from "./Modal/WithdrawModal";
+import CreateWatchlistModal from "./Modal/CreateWatchlistModal";
 
 const ModalProvider = () => {
  
@@ -16,6 +17,7 @@ const ModalProvider = () => {
         <SeatModal />
       <LoginModal />
       <RegisterModal />
+      {/* <CreateWatchlistModal/> */}
       </>
     )
 }

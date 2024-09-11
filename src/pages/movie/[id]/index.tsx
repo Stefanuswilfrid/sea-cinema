@@ -120,7 +120,7 @@ export default function index() {
 
                     label={"Book Now"}
                     onClick={
-                      ()=>{router.push(`/${id}/seat`)}
+                      ()=>{router.push(`/movie/${id}/seat`)}
                     }
                   />
                 </div>

@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 
 import useLoginModal from "./useLoginModal";
 import { CurrentUser } from "@/types";
+import useWatchlistModal from "./useWatchlistModal";
 
 interface IUseFavorite {
   listingId: string;
@@ -17,6 +18,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const router = useRouter();
 
   const loginModal = useLoginModal();
+  const watchlistModal = useWatchlistModal();
   console.log("cu",currentUser)
 
   const hasFavorited = useMemo(() => {
@@ -31,24 +33,25 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     if (!currentUser) {
       return loginModal.onOpen();
     }
+    watchlistModal.onOpen();
 
-    try {
-      let request;
+    // try {
+    //   let request;
 
-      if (hasFavorited) {
-        console.log("isfav")
-        request = () => axios.delete(`/api/wishlist/${listingId}`);
-      } else {
-        console.log("test")
-        request = () => axios.post(`/api/wishlist/${listingId}`);
-      }
+    //   if (hasFavorited) {
+    //     console.log("isfav")
+    //     request = () => axios.delete(`/api/wishlist/${listingId}`);
+    //   } else {
+    //     console.log("test")
+    //     request = () => axios.post(`/api/wishlist/${listingId}`);
+    //   }
 
-      await request();
-      router.refresh();
-      toast.success('Success');
-    } catch (error) {
-      toast.error('Something went wrong.');
-    }
+    //   await request();
+    //   router.refresh();
+    //   toast.success('Success');
+    // } catch (error) {
+    //   toast.error('Something went wrong.');
+    // }
   }, 
   [
     currentUser, 
