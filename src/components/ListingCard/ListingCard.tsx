@@ -48,10 +48,10 @@ export default function ListingCard({
             top-5
             right-4
           ">
-            <HeartButton 
+            {/* <HeartButton 
               listingId={id.toString()} 
               currentUser={currentUser}
-            />
+            /> */}
           </div>
         </div>
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent">
