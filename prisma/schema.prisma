@@ -47,11 +47,12 @@ model Movie {
 }
 
 model Seat {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  movie    Movie   @relation(fields: [movieId], references: [id])
-  movieId  String
-  label    String // E.g., "A1", "A2", ...
-  occupied Boolean
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  movie       Movie         @relation(fields: [movieId], references: [id])
+  movieId     String
+  label       String // E.g., "A1", "A2", ...
+  occupied    Boolean
+  Transaction Transaction[]
 }
 
 enum TransactionType {
@@ -66,12 +67,13 @@ model Transaction {
   userId    String          @db.ObjectId
   movie     Movie?          @relation(fields: [movieId], references: [id])
   movieId   String?         @db.ObjectId
-  seats     Int[] // Now optional: Array of seat indices or null
+  seats     Seat            @relation(fields: [seatId], references: [id])
   quantity  Int? // Quantity of items or actions (e.g., number of tickets)
-  type      TransactionType // Use the enum to specify the transaction type
-  totalCost Float // Total cost involved in the transaction
+  type      TransactionType
+  totalCost Float
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
+  seatId    String          @db.ObjectId
 }
 
 model Conversation {

@@ -4,6 +4,7 @@ import SeatSelectionComponent from "@/components/Seat/SeatSelectionComponent";
 import { fetcher } from "@/libs";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import useSWR from "swr";
 
 type SeatStatus = "available" | "selected" | "unavailable";
@@ -17,6 +18,7 @@ export default function ChooseSeat() {
   const router = useRouter();
   const [id, setId] = useState<string | null>(null);
   const [seats, setSeats] = useState<Seat[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]); // State to store selected seats
 
   useEffect(() => {
     if (router.isReady) {
@@ -49,9 +51,47 @@ export default function ChooseSeat() {
           : seat
       )
     );
+    setSelectedSeats((prevSelectedSeats) => {
+      if (clickedSeat.status === "available") {
+        // Add the seat to selectedSeats
+        return [...prevSelectedSeats, clickedSeat];
+      } else {
+        // Remove the seat from selectedSeats
+        return prevSelectedSeats.filter((seat) => seat.id !== clickedSeat.id);
+      }
+    });
+  
   };
 
-  const selectedSeats = seats.filter((seat) => seat.status === "selected");
+
+  const handleCheckout = (movieName: string, selectedSeats: string[], totalPrice: number, movieUrl: string) => {
+    const existingCheckouts = localStorage.getItem("checkouts");
+    console.log("mov",movieUrl)
+    let checkouts = existingCheckouts ? JSON.parse(existingCheckouts) : [];
+  
+    const existingMovie = checkouts.find((checkout: any) => checkout.movieName === movieName);
+  
+    if (existingMovie) {
+      // Movie already exists, update the seats and total price
+      existingMovie.totalPrice += totalPrice;
+      existingMovie.seats = [...new Set([...existingMovie.seats, ...selectedSeats])]; // Combine seats and remove duplicates
+    } else {
+      const newCheckout = {
+        movieName,
+        seats: selectedSeats,
+        totalPrice,
+        movieUrl,
+      };
+      checkouts.push(newCheckout);
+    }
+  
+    localStorage.setItem("checkouts", JSON.stringify(checkouts));
+  
+    toast.success("Checkout successful!");
+  };
+
+
+  // const selectedSeats = seats.filter((seat) => seat.status === "selected");
 
   if (!id || !movie) {
     return <div>Loading...</div>; // or some loading spinner
@@ -68,7 +108,14 @@ export default function ChooseSeat() {
               handleSeatClick={handleSeatClick}
             />
           </div>
-          <SeatBookingSummary price={movie.price} selectedSeats={selectedSeats} />
+          <SeatBookingSummary
+          
+          selectedSeats={selectedSeats} 
+  price={movie.price} 
+  movieName={movie.title} 
+  movieUrl={movie.poster_url}
+  handleCheckout={handleCheckout}
+          />
         </div>
       </div>
     </div>
