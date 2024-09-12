@@ -48,6 +48,9 @@ export const authOptions: AuthOptions = {
   callbacks: {
     jwt: async ({ token, trigger, session, user }) => {
       const tokenUser = token.user as CurrentUser;
+      console.log("tu",tokenUser)
+      console.log("whattttt")
+
       if (trigger === "update" && session?.user) {
         const { avatarUrl, balance } = session.user;
 
@@ -75,43 +78,38 @@ export const authOptions: AuthOptions = {
 
         return token;
       } else {
-        const tokenUser = token.user as CurrentUser;
-
+        if(user){
+        const currUser = user as CurrentUser
+console.log("uid",currUser.id)
       // Now you can safely add custom fields like id, balance, etc. to session.user
-      session.user = {
-        id: tokenUser.id,
-        username: tokenUser.username,
-        name: tokenUser.name,
-        age: tokenUser.age,
-        balance: tokenUser.balance,
-        favoriteIds: tokenUser.wishlistIds,
-        avatarUrl: tokenUser.avatarUrl,
-        createdAt: tokenUser.createdAt,
+      session = {
+        id: currUser.id,
+        username: currUser.username,
+        name: currUser.name,
+        age: currUser.age,
+        balance: currUser.balance,
+        favoriteIds: currUser.wishlistIds,
+        avatarUrl: currUser.avatarUrl,
+        createdAt: currUser.createdAt,
       };
 
       return session;
-        // user && (token.user = user);
-
-        // if (user) {
-        //   token.user = {
-        //     ...user,
-        //     hashedPassword: undefined,
-        //   };
-        // }
-
-        // return token;
+        
       }
+    }
     },
+    
     session: async ({ session, token }) => {
       // session.user = token.user as DefaultSession["user"];
       // return session;
+      console.log("token",token)
       const tokenUser = token.user as CurrentUser;
 
-      // Update session user to include custom fields from token
       session.user = tokenUser
 
-      return session; // Return updated session object
+      return session; 
     },
+    
   },
   pages: {
     signIn: "/",

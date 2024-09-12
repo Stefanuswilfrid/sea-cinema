@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import UserBox from "./UserBox";
 import { useUser } from "@/hooks/useUser";
 import useSWR from "swr";
