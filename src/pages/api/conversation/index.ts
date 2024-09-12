@@ -39,7 +39,6 @@ export default async function handler(
           },
         });
 
-        console.log("excov",existingConversations)
         const singleConversation = existingConversations[0];
         if (singleConversation) {
           return res.status(200).json(singleConversation);

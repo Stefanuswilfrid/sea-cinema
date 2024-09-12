@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import SEO from "@/components/SEO";
-import { CurrentUser } from "@/types";
+import { CurrentUser, TransactionInterface } from "@/types";
 import { useUser } from "@/hooks/useUser";
 
 import PlusIcon from "@/components/Icons/PlusIcon";
@@ -27,14 +27,9 @@ export default function Balance() {
     </>
   );
 }
-export interface Transaction {
-  id: string;
-  type: string;
-  totalCost: number;
-  createdAt: string;
-}
+
 function BalancePage() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<TransactionInterface[]>([]);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -42,7 +37,7 @@ function BalancePage() {
         const response = await fetch("/api/transaction/get");
         if (response.ok) {
           const transactionsData = await response.json();
-          setTransactions(transactionsData as Transaction[]);
+          setTransactions(transactionsData as TransactionInterface[]);
         } else {
         }
       } catch (error) {

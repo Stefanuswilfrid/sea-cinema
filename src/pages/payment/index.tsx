@@ -73,7 +73,6 @@ function PaymentPage() {
       toast.error("Insufficient balance. Please top up.");
       return;
     }
-    console.log(products[0].movieName,"name")
 
     const payload = {
       userId: currentUser.id,

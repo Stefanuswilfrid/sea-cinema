@@ -66,15 +66,13 @@ export default function ChooseSeat() {
 
   const handleCheckout = (movieName: string, selectedSeats: string[], totalPrice: number, movieUrl: string) => {
     const existingCheckouts = localStorage.getItem("checkouts");
-    console.log("mov",movieUrl)
     let checkouts = existingCheckouts ? JSON.parse(existingCheckouts) : [];
   
     const existingMovie = checkouts.find((checkout: any) => checkout.movieName === movieName);
   
     if (existingMovie) {
-      // Movie already exists, update the seats and total price
       existingMovie.totalPrice += totalPrice;
-      existingMovie.seats = [...new Set([...existingMovie.seats, ...selectedSeats])]; // Combine seats and remove duplicates
+      existingMovie.seats = [...new Set([...existingMovie.seats, ...selectedSeats])]; 
     } else {
       const newCheckout = {
         movieName,
@@ -91,10 +89,9 @@ export default function ChooseSeat() {
   };
 
 
-  // const selectedSeats = seats.filter((seat) => seat.status === "selected");
 
   if (!id || !movie) {
-    return <div>Loading...</div>; // or some loading spinner
+    return <div>Loading...</div>; 
   }
 
   return (

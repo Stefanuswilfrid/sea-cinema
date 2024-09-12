@@ -16,73 +16,103 @@ export default async function handler(
         return res.status(401).json({ message: "Not authenticated" });
       }
 
-      // Parse data from the request body
       const { transactions, totalCost } = req.body;
 
       if (!transactions || transactions.length === 0 || !totalCost) {
         return res.status(400).json({ message: "Invalid request data" });
       }
 
-      // Create the transaction for each movie in the transactions array
+      const failedSeats: { seatLabel: string; reason: string }[] = [];
+
       const createdTransactions = await Promise.all(
         transactions.map(async (transaction: any) => {
           const { movieName, seats, totalPrice } = transaction;
 
-          // 1. Fetch the movie using the movieName
           const movie = await prisma.movie.findUnique({
-            where: { title: movieName }, // Assuming movieName is unique
+            where: { title: movieName },
           });
 
           if (!movie) {
             throw new Error(`Movie with name "${movieName}" not found.`);
           }
 
-          // 2. Fetch seat details from the database based on seat labels and movieId
-          const seatDetails = await Promise.all(
+          const seatIds = await Promise.all(
             seats.map(async (seatLabel: string) => {
+              console.log(`Attempting to fetch seat: ${seatLabel} for movie ${movieName}`);
+
               const seat = await prisma.seat.findFirst({
                 where: {
                   label: seatLabel,
-                  movieId: movie.id, // Ensure the seat belongs to the correct movie
+                  movieId: movie.id,
                 },
-                include:{
-
-                }
               });
 
               if (!seat) {
-                throw new Error(`Seat "${seatLabel}" not found for movie "${movieName}".`);
+                failedSeats.push({
+                  seatLabel,
+                  reason: `Seat "${seatLabel}" not found or already occupied for movie "${movieName}".`,
+                });
+                console.log(`Seat ${seatLabel} for movie ${movieName} not found or already occupied.`);
+                return null;
               }
 
-              return seat;
+              // Log the seat information
+              console.log(`Found seat: ${seatLabel} (ID: ${seat.id}) for movie ${movieName}`);
+
+              // Mark the seat as occupied
+              await prisma.seat.update({
+                where: { id: seat.id },
+                data: { occupied: true },
+              });
+
+              return seat.id; // Return the seat ID to link it with the transaction
             })
           );
 
-          // 3. Create the transaction using the movieId and seat details
+          // Filter out any null seatIds (those that failed)
+          const validSeatIds = seatIds.filter((seatId) => seatId !== null);
+
+          console.log(`Valid seats for movie ${movieName}: ${validSeatIds.length}`);
+
+          // If there are no valid seats, skip transaction creation
+          if (validSeatIds.length === 0) {
+            console.log(`No valid seats found for movie ${movieName}, skipping transaction.`);
+            return null;
+          }
+
           return prisma.transaction.create({
             data: {
               userId: session.user.id,
-              movieId: movie.id, // Use the fetched movieId
-              seats: seatDetails, // Store seat IDs
-              quantity: seatDetails.length, // Quantity is the number of seats booked
+              movieId: movie.id,
+              seats: {
+                connect: validSeatIds.map((seatId) => ({ id: seatId })),
+              }, // Link all the valid seats to the transaction
+              quantity: validSeatIds.length, // The number of seats booked
               type: "MOVIE_TICKET_BOOKING", // Transaction type enum
-              totalCost: totalPrice, // Total cost for this transaction
+              totalCost: (totalPrice / seats.length) * validSeatIds.length, // Adjust totalCost for the valid seats booked
             },
           });
         })
       );
 
-      // Respond with success and the created transactions
+      // Filter out null transactions
+      const validTransactions = createdTransactions.filter((transaction) => transaction !== null);
+
+      if (failedSeats.length > 0) {
+        return res.status(400).json({
+          message: "Some seats could not be booked.",
+          failedSeats,
+          transactions: validTransactions,
+        });
+      }
+
       return res.status(201).json({
         message: "Transactions created successfully",
-        transactions: createdTransactions,
+        transactions: validTransactions,
       });
-    } catch (error : any) {
+    } catch (error: any) {
       console.error("Error creating transaction:", error);
-      if (error.message.includes("not found")) {
-        return res.status(404).json({ message: error.message });
-      }
-      return res.status(500).json({ message: "Internal Server Error" });
+      return res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
   } else {
     // Handle non-POST methods

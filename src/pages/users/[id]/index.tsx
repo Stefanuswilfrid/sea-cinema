@@ -32,7 +32,6 @@ export default function EditProfile() {
   const [isFixed, setIsFixed] = useState(true);
   const router = useRouter(); // Get the router instance
   const { id } = router.query; // Fetch the `id` from the params
-  console.log("id",id)
 
   useEffect(() => {
     const handleScroll = () => {

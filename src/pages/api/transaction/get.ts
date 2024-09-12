@@ -9,6 +9,8 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
       },
       include: {
         movie: true,
+        seats: true,  
+
       },
     });
 

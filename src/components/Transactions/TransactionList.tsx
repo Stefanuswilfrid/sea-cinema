@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowBigUp, WalletIcon, CreditCard, ChevronDown } from 'lucide-react';
-import { Transaction } from '@/pages/balance';
 import { formatDate } from '@/libs/utils/time';
 import ShoppingBagIcon from '../Icons/ShoppingBagIcon';
 import { useRouter } from 'next/navigation';
+import { Transaction } from '@prisma/client';
+import { TransactionInterface } from '@/types';
 
 interface TransactionProps {
-  transactions: Transaction[] | null;
+  transactions: TransactionInterface[] | null;
 }
 
 interface TransactionDetail {
@@ -20,22 +21,22 @@ function getTransactionDetails(type: string): TransactionDetail {
     case 'TOP_UP':
       return {
         icon: <ArrowBigUp className="w-6 h-6" />,
-        description: 'Account Top Up'
+        description: 'Account Top Up',
       };
     case 'WITHDRAWAL':
       return {
         icon: <WalletIcon className="w-6 h-6" />,
-        description: 'Account Withdrawal'
+        description: 'Account Withdrawal',
       };
     case 'MOVIE_TICKET_BOOKING':
       return {
         icon: <ShoppingBagIcon className="w-6 h-6" />,
-        description: 'Movie Ticket Purchase'
+        description: 'Movie Ticket Purchase',
       };
     default:
       return {
         icon: <ShoppingBagIcon className="w-6 h-6" />,
-        description: 'Miscellaneous Purchase'
+        description: 'Miscellaneous Purchase',
       };
   }
 }
@@ -43,9 +44,10 @@ function getTransactionDetails(type: string): TransactionDetail {
 const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
   const router = useRouter();
   const [visibleTransactions, setVisibleTransactions] = useState(5);
+  console.log("test",transactions)
 
   const loadMore = () => {
-    setVisibleTransactions(prevVisible => Math.min(prevVisible + 5, transactions?.length || 0));
+    setVisibleTransactions((prevVisible) => Math.min(prevVisible + 5, transactions?.length || 0));
   };
 
   const containerVariants = {
@@ -53,9 +55,9 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -64,11 +66,11 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 300,
-        damping: 24
-      }
-    }
+        damping: 24,
+      },
+    },
   };
 
   const emptyStateVariants = {
@@ -78,9 +80,9 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   };
 
   if (transactions === null) {
@@ -97,7 +99,7 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
         <p className="mt-1 text-sm text-muted-foreground">Please try again later.</p>
         <div className="mt-6">
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push('/')}
             type="button"
             className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
@@ -118,8 +120,9 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
           exit="hidden"
           className="space-y-4"
         >
-          {transactions.slice(0, visibleTransactions).map(transaction => {
+          {transactions.slice(0, visibleTransactions).map((transaction) => {
             const { icon, description } = getTransactionDetails(transaction.type);
+
             return (
               <motion.div
                 key={transaction.id}
@@ -133,10 +136,26 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
                   <div>
                     <p className="font-medium">{description}</p>
                     <p className="text-sm text-muted-foreground">{formatDate(transaction.createdAt)}</p>
+
+                    {transaction.type === 'MOVIE_TICKET_BOOKING' && transaction.movieId && (
+                      <p className="text-sm text-muted-foreground">
+                        Movie : {transaction.movie?.title} 
+                        <div className='flex gap-2 text-primary font-bold'>  {transaction.seats?.map((seat:any)=>{
+                          return(
+                            <p>{seat.label} </p>
+                          )
+                        })}
+                        </div>
+                      </p>
+                    )}
                   </div>
                 </div>
-                <p className={`font-medium ${description === "Account Top Up" ? "text-green-500" : "text-red-500"}`}>
-                  {description === "Account Top Up" ? "+" : "-"}${transaction.totalCost.toFixed(2)}
+                <p
+                  className={`font-medium ${
+                    description === 'Account Top Up' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {description === 'Account Top Up' ? '+' : '-'}${transaction.totalCost.toFixed(2)}
                 </p>
               </motion.div>
             );
@@ -148,10 +167,7 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
               exit={{ opacity: 0 }}
               className="flex justify-center mt-4"
             >
-              <button
-                onClick={loadMore}
-                className="flex items-center gap-2"
-              >
+              <button onClick={loadMore} className="flex items-center gap-2">
                 Load More <ChevronDown className="w-4 h-4" />
               </button>
             </motion.div>
@@ -170,7 +186,7 @@ const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
           <p className="mt-1 text-sm text-muted-foreground">You haven't made any transactions in the past.</p>
           <div className="mt-6">
             <button
-              onClick={() => router.push("/")}
+              onClick={() => router.push('/')}
               type="button"
               className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >

@@ -31,7 +31,6 @@ export default async function handler(
                     wishlistIds
                 }
               });
-              console.log("user",user)
             
               return res.status(200).json(user)  
         },

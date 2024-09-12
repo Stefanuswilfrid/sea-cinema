@@ -40,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             data: {
                 userId: userId,
                 type: 'WITHDRAWAL',
+              
                 totalCost: totalCost
             }
         });

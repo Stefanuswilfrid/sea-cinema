@@ -1,4 +1,4 @@
-import { Conversation, Message, User } from "@prisma/client";
+import { Conversation, Message, Movie, Seat, Transaction, User } from "@prisma/client";
 export type CurrentUser = Omit<User,"createdAt"> & {
     // id: string;
     // username: string;
@@ -31,5 +31,9 @@ export interface NotificationInterface {
   type: NotificationType;
 
   createdAt: string;
+}
 
+export interface TransactionInterface extends Transaction {
+  movie?: Movie | null;   // Movie is optional
+  seats?: Seat[];         // Seats is an array of Seat objects
 }
