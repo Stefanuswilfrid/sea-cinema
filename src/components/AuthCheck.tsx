@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useSession } from "next-auth/react";
 import { ReactNode } from 'react';
 import LoadingModal from './Modal/LoadingModal';
+import { CurrentUser } from '@/types';
 
 
 type AuthCheckProps = {
@@ -13,7 +14,7 @@ type AuthCheckProps = {
 // Component's children only shown to logged-in users
 export default function AuthCheck({ children }: AuthCheckProps) {
     const { data: session, status } = useSession();
-    const currentUser = session?.user;
+    const currentUser = session?.user ;
 
     if (status === 'loading') {
         // Optional: Render a loading state while checking the session status

@@ -24,5 +24,4 @@ export interface NotificationInterface {
   read: boolean;
   createdAt: string;
 
-
 }

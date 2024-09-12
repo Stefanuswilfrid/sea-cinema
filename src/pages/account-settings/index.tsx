@@ -48,7 +48,7 @@ export default function AccountSettings() {
     },
   ];
   const { data } = useSession();
-  const currentUser = data?.user as CurrentUser;
+  const currentUser = data?.user ;
 
   return (
     <AuthCheck>
@@ -57,7 +57,7 @@ export default function AccountSettings() {
           <AccountHeading
             name={currentUser?.name!}
             username={currentUser?.username!}
-            id={currentUser?.id}
+            id={currentUser?.id!}
           />
 
           <InfoCard />

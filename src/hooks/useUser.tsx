@@ -36,7 +36,7 @@ export function useDelayedIsAuthenticated() {
 export function useUser() {
     const { data: session, status, update } = useSession()
   
-    const user = session?.user as CurrentUser
+    const user = session?.user 
   
     const isAuthenticated = React.useMemo(
       () => status === 'authenticated',

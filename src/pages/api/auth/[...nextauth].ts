@@ -16,6 +16,8 @@ export const authOptions: AuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
+        
+        
         if (!credentials?.username || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
@@ -73,21 +75,42 @@ export const authOptions: AuthOptions = {
 
         return token;
       } else {
-        user && (token.user = user);
+        const tokenUser = token.user as CurrentUser;
 
-        if (user) {
-          token.user = {
-            ...user,
-            hashedPassword: undefined,
-          };
-        }
+      // Now you can safely add custom fields like id, balance, etc. to session.user
+      session.user = {
+        id: tokenUser.id,
+        username: tokenUser.username,
+        name: tokenUser.name,
+        age: tokenUser.age,
+        balance: tokenUser.balance,
+        favoriteIds: tokenUser.wishlistIds,
+        avatarUrl: tokenUser.avatarUrl,
+        createdAt: tokenUser.createdAt,
+      };
 
-        return token;
+      return session;
+        // user && (token.user = user);
+
+        // if (user) {
+        //   token.user = {
+        //     ...user,
+        //     hashedPassword: undefined,
+        //   };
+        // }
+
+        // return token;
       }
     },
     session: async ({ session, token }) => {
-      session.user = token.user as DefaultSession["user"];
-      return session;
+      // session.user = token.user as DefaultSession["user"];
+      // return session;
+      const tokenUser = token.user as CurrentUser;
+
+      // Update session user to include custom fields from token
+      session.user = tokenUser
+
+      return session; // Return updated session object
     },
   },
   pages: {

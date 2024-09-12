@@ -10,7 +10,7 @@ import { CurrentUser } from '@/types';
 
 const Navbar =() => {
   const { data: session } = useSession();
-  const currentUser = session?.user as CurrentUser;
+  const currentUser = session?.user ;
 
   
   return (
@@ -29,7 +29,7 @@ const Navbar =() => {
                       />
                     </span>
                     </Link>
-                    <UserMenu currentUser={currentUser} />
+                    <UserMenu currentUser={currentUser!} />
 
 
                 </div>
