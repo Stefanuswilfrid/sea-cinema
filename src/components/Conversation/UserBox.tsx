@@ -22,7 +22,6 @@ const UserBox: React.FC<UserBoxProps> = ({ data, selected, currentUserId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { trigger, isMutating } = useMutation('/conversation/', async (url, payload) => {
-    console.log("payload", payload); 
     return await apiClient.post(url, payload);
   });
   

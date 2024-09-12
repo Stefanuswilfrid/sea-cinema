@@ -23,7 +23,6 @@ export default function TopUpModal() {
   });
 
   const { trigger, isMutating } = useMutation('/transaction/topup', async (url, payload) => {
-    console.log("payload", payload); 
     return await apiClient.post(url, payload);
   });
 

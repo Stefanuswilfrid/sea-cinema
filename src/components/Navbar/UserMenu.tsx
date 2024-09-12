@@ -107,11 +107,7 @@ const UserMenu : React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => {router.push("/notification"),setIsOpen(false)}}
                 />
                <hr/>
-               <MenuItem
-                  label="Watchlists"
-                  onClick={() => {router.push("/watchlist"),setIsOpen(false)}}
-                  bold={false}
-                />
+               
                <MenuItem
                   label="Account"
                   onClick={() => {router.push(`/users/${currentUser?.id}`),setIsOpen(false)}}

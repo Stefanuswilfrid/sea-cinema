@@ -17,7 +17,6 @@ import { apiClient } from "./utils/api-client";
 // };
 
 export const fetcher = (url: any) => {
-  console.log("test",url)
   if (url.includes("undefined")) return undefined;
   return apiClient.get(url).then((res) => res.data);
 };

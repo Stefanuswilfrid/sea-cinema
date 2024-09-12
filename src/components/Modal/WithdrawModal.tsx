@@ -31,7 +31,6 @@ export default function WithdrawModal() {
     });
 
     const { trigger, isMutating } = useMutation('/transaction/withdraw', async (url, payload) => {
-      console.log("payload", payload); 
       return await apiClient.post(url, payload);
     });
 

@@ -28,8 +28,7 @@ export default function MessageID() {
     );
   }
 
-  console.log("msg", messages);
-  console.log("p", conversation);
+
 
   if (!conversation || !messages) {
     return (

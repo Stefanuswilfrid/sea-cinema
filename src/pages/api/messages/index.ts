@@ -15,10 +15,8 @@ export default async function handler(
       },
       POST: async (session) => {
         try {
-          console.log("kepanggil gak")
           const { message, conversationId, image } = req.body;
-          console.log("reqquery", req.body);
-          console.log("img",image)
+
 
           const newMessage = await prisma.message.create({
             include: {

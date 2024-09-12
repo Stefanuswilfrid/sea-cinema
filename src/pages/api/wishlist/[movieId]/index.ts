@@ -13,7 +13,6 @@ export default async function handler(
         },
         POST: async (session) => {
             const {movieId} = req.query;
-            console.log("test",movieId)
 
             if (!movieId || typeof movieId !== 'string'){
                 throw new Error("Invalid ID");

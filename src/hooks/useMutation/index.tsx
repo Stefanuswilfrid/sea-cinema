@@ -37,7 +37,6 @@ export function useMutation<T>(
           mutatedBy: options?.mutatedBy,
         })
 
-        console.log('url',url)
 
         const response = await mutatorFn(url, data.arg)
         swrObserver.setMutationState(key, {

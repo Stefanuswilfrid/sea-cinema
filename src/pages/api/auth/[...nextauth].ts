@@ -16,8 +16,6 @@ export const authOptions: AuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        
-        
         if (!credentials?.username || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
@@ -47,11 +45,26 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     jwt: async ({ token, trigger, session, user }) => {
-      const tokenUser = token.user as CurrentUser;
-      console.log("tu",tokenUser)
-      console.log("whattttt")
+   
+
+      if (user) {
+        const currUser = user as CurrentUser;
+        token.user = {
+          id: currUser.id,
+          username: currUser.username,
+          name: currUser.name,
+          age: currUser.age,
+          balance: currUser.balance,
+          wishlistIds: currUser.wishlistIds,
+          avatarUrl: currUser.avatarUrl,
+          createdAt: currUser.createdAt,
+        };
+        return token; // Return the token with updated user information
+      }
+  
 
       if (trigger === "update" && session?.user) {
+        const tokenUser = token.user as CurrentUser;
         const { avatarUrl, balance } = session.user;
 
         const updateData: Partial<{ avatarUrl: string; balance: number }> = {};
@@ -73,43 +86,21 @@ export const authOptions: AuthOptions = {
 
         token.user = {
           ...tokenUser,
-          ...updateData, 
+          ...updateData,
         };
 
         return token;
-      } else {
-        if(user){
-        const currUser = user as CurrentUser
-console.log("uid",currUser.id)
-      // Now you can safely add custom fields like id, balance, etc. to session.user
-      session = {
-        id: currUser.id,
-        username: currUser.username,
-        name: currUser.name,
-        age: currUser.age,
-        balance: currUser.balance,
-        favoriteIds: currUser.wishlistIds,
-        avatarUrl: currUser.avatarUrl,
-        createdAt: currUser.createdAt,
-      };
-
-      return session;
-        
       }
-    }
+      return token; 
     },
-    
+
     session: async ({ session, token }) => {
-      // session.user = token.user as DefaultSession["user"];
-      // return session;
-      console.log("token",token)
       const tokenUser = token.user as CurrentUser;
 
-      session.user = tokenUser
+      session.user = tokenUser;
 
-      return session; 
+      return session;
     },
-    
   },
   pages: {
     signIn: "/",

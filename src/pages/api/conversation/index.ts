@@ -44,7 +44,6 @@ export default async function handler(
         if (singleConversation) {
           return res.status(200).json(singleConversation);
         }
-        console.log("reach?",userId)
 
         const newConversation = await prisma.conversation.create({
           data: {
@@ -79,7 +78,6 @@ export default async function handler(
       },
     });
   } catch (error) {
-    console.log("error", error);
     return res.status(500).json(error);
   }
 }
