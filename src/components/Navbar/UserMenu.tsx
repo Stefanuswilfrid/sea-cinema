@@ -101,6 +101,11 @@ const UserMenu : React.FC<UserMenuProps> = ({ currentUser }) => {
                   label="My Bookings "
                   onClick={() => {router.push("/payment"),setIsOpen(false)}}
                 />
+
+<MenuItem
+                  label="Notifications "
+                  onClick={() => {router.push("/notification"),setIsOpen(false)}}
+                />
                <hr/>
                <MenuItem
                   label="Watchlists"

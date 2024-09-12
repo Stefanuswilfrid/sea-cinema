@@ -14,6 +14,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import React from "react";
 import toast from "react-hot-toast";
+import SEO from "@/components/SEO";
 
 // if (typeof window !== "undefined") {
 //   // checks that we are client-side
@@ -25,6 +26,8 @@ import toast from "react-hot-toast";
 //     },
 //   });
 // }
+
+
 
 
 export default  function App({ Component, pageProps: {session,...pageProps} }: AppProps) {
@@ -49,6 +52,11 @@ export default  function App({ Component, pageProps: {session,...pageProps} }: A
  }, [router.pathname])
   return (
     <>
+    <SEO
+        title="SEA Cinema | Movie ticket booking app"
+        desc="SEA Cinema is a rising star in the movie theater industry known for
+        its affordable ticket prices and wide range of movie genres."
+      />
     <CartProvider>
     <SessionProvider>
     {/* <PostHogProvider client={posthog}> */}

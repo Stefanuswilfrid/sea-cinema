@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import { AlarmClock, ArrowRight, Lightbulb, PlusIcon } from "lucide-react";
 import { ChevronRight } from "react-feather";
 import { button } from "@material-tailwind/react";
+import AuthCheck from "@/components/AuthCheck";
 
 const interests = [
   { icon: '🍝', label: 'Food' },
@@ -57,6 +58,8 @@ export default function EditProfile() {
         desc="SEA Cinema is a rising star in the movie theater industry known for
         its affordable ticket prices and wide range of movie genres."
       />
+          <AuthCheck>
+
       <div className="w-full xl:px-20 md:px-10 sm:px-6 px-4 mt-12 mx-6 sm:max-w-5xl sm:mx-auto flex flex-col sm:flex-row gap-20">
         <div className="relative">
           <AddPhoto id={currentUser?.id} />
@@ -127,7 +130,7 @@ export default function EditProfile() {
           </div>
         </div>
       </div>
-      
+      </AuthCheck>
     </>
   );
 }
