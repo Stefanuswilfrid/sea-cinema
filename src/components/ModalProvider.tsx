@@ -1,11 +1,11 @@
 
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
-import SeatModal from "./Modal/SeatModal";
 import LoginModal from "./Modal/LoginModal";
 import RegisterModal from "./Modal/RegisterModal";
 import TopUpModal from "./Modal/TopUpModal";
 import WithdrawModal from "./Modal/WithdrawModal";
+import SelectInterestModal from "./Modal/SelectInterestModal";
 
 const ModalProvider = () => {
  
@@ -13,10 +13,9 @@ const ModalProvider = () => {
         <>
         <TopUpModal/>
         <WithdrawModal/>
-        <SeatModal />
       <LoginModal />
       <RegisterModal />
-      {/* <CreateWatchlistModal/> */}
+      <SelectInterestModal/>
       </>
     )
 }
