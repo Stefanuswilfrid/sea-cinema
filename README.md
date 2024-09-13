@@ -81,3 +81,7 @@ The app is a movie browsing platform that includes the following features:
 ### Profile Screen
 
 ![Profile Screen](./public/screenshots/ss6.png)
+
+### Choose Interest Screen
+
+![Choose Interest Screen](./public/screenshots/ss7.png)

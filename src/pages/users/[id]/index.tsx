@@ -7,21 +7,28 @@ import { PlusIcon } from "lucide-react";
 import AuthCheck from "@/components/AuthCheck";
 import Button from "@/components/Button/Button";
 import useSelectInterestModal from "@/hooks/useSelectInterestModal";
-import { useMutation } from "@/hooks/useMutation";
-import { apiClient } from "@/libs/utils/api-client";
 import { useUser } from "@/hooks/useUser";
-import update from "@/pages/api/profile/update";
 
 export default function EditProfile() {
   const interestModal = useSelectInterestModal();
   const { updateUser, user } = useUser();
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const currentUser = user!;
   const [isFixed, setIsFixed] = useState(true);
   const router = useRouter();
   const { id } = router.query;
-  const [intro, setIntro] = useState(currentUser.bio || "");
+  const [intro, setIntro] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (currentUser?.bio) {
+      setIntro(currentUser.bio);
+    }
+    if (currentUser?.interests) {
+      setSelectedInterests(currentUser.interests);
+    }
+  }, [currentUser?.bio, currentUser?.interests]);
 
   const handleIntroChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIntro(e.target.value);
@@ -29,19 +36,21 @@ export default function EditProfile() {
 
   const handleSaveIntro = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       await updateUser({
         bio: intro,
-      });      
+      });
 
       setIsEditing(false);
-      setIsLoading(false)
-
+      setIsLoading(false);
     } catch (error) {
       console.error("Error updating bio:", error);
-      setIsLoading(false)
-
+      setIsLoading(false);
     }
+  };
+
+  const handleEditInterests = () => {
+    interestModal.onOpen();
   };
 
   return (
@@ -59,7 +68,6 @@ export default function EditProfile() {
           <div className="md:ml-12 w-full mt-6 px-7 sm:px-0">
             <section>
               <h1 className="text-2xl font-bold">About you</h1>
-              {intro && <h1>bio{intro}</h1>}
 
               <div className="my-6 px-4 py-5 border-dashed border-2 border-grey rounded-xl overflow-hidden">
                 {!isEditing ? (
@@ -67,7 +75,7 @@ export default function EditProfile() {
                     {intro ? (
                       <>
                         <p>{intro}</p>
-                        <button 
+                        <button
                           onClick={() => setIsEditing(true)}
                           className="mt-2 text-black underline focus:outline-none"
                         >
@@ -77,7 +85,7 @@ export default function EditProfile() {
                     ) : (
                       <>
                         <p>Write something fun.</p>
-                        <button 
+                        <button
                           onClick={() => setIsEditing(true)}
                           className="mt-2 text-black underline focus:outline-none"
                         >
@@ -95,7 +103,7 @@ export default function EditProfile() {
                       className="w-full min-h-[100px] p-2 border-2 border-dashed border-gray-300 rounded-md resize-none focus:outline-none focus:border-black-500 transition-colors duration-200"
                     />
                     <Button
-                    disabled={isLoading}
+                      disabled={isLoading}
                       label="Save Intro"
                       onClick={handleSaveIntro}
                       className="mt-2 px-4 py-2 bg-black w-auto border-none text-white rounded-md focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 transition-colors duration-200"
@@ -110,20 +118,29 @@ export default function EditProfile() {
                 Find common ground with other users by adding interests to your profile.
               </p>
 
-              <div className="space-y-2">
-                <div className="flex space-x-4">
-                  {[1, 2, 3].map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={()=>{interestModal.onOpen()}}
-                      className="w-24 h-12 mb-8 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center"
-                    >
-                      <PlusIcon className="h-6 w-6 text-gray-400" />
-                      <span className="sr-only">Add interest</span>
-                    </button>
-                  ))}
-                </div>
-              
+              <div className="space-y-4">
+                {selectedInterests.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {selectedInterests.map((interest, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                      >
+                        {interest}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-600">
+                    Add interests to find common ground with other users.
+                  </p>
+                )}
+                <button
+                  onClick={handleEditInterests}
+                  className="text-black underline focus:outline-none"
+                >
+                  Edit interests
+                </button>
               </div>
             </section>
 
@@ -133,8 +150,11 @@ export default function EditProfile() {
               }`}
             >
               <div className="max-w-6xl text-right m-auto">
-                <Button label="Done" onClick={()=>{}} className="px-6 py-3 border-black w-auto bg-black text-white rounded-lg ml-auto"/>
-                  
+                <Button
+                  label="Done"
+                  onClick={() => {}}
+                  className="px-6 py-3 border-black w-auto bg-black text-white rounded-lg ml-auto"
+                />
               </div>
             </div>
           </div>

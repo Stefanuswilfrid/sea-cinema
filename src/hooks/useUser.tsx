@@ -8,6 +8,7 @@ type UpdateUserArgs = {
     username?: string
     balance? : number
     bio?: string
+    interests?: string[]
 }
   
 
@@ -53,6 +54,7 @@ export function useUser() {
         createdAt: user?.createdAt,
         balance : user?.balance,
         bio: user?.bio,
+        interests: user?.interests
       } as CurrentUser,
       status,
       updateUser: async (args: UpdateUserArgs) => {
