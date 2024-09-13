@@ -56,6 +56,7 @@ export function useUser() {
       } as CurrentUser,
       status,
       updateUser: async (args: UpdateUserArgs) => {
+        console.log("ar",args)
         const sessionObj = {
           ...session,
           user: {

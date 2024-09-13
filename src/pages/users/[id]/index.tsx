@@ -10,56 +10,38 @@ import useSelectInterestModal from "@/hooks/useSelectInterestModal";
 import { useMutation } from "@/hooks/useMutation";
 import { apiClient } from "@/libs/utils/api-client";
 import { useUser } from "@/hooks/useUser";
+import update from "@/pages/api/profile/update";
 
 export default function EditProfile() {
   const interestModal = useSelectInterestModal();
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const { data } = useSession();
-  const currentUser = data?.user!;
+  const { updateUser, user } = useUser();
+  const [isLoading,setIsLoading] = useState(false);
+  const currentUser = user!;
   const [isFixed, setIsFixed] = useState(true);
   const router = useRouter();
   const { id } = router.query;
-  const [intro, setIntro] = useState(currentUser?.bio || "");
+  const [intro, setIntro] = useState(currentUser.bio || "");
   const [isEditing, setIsEditing] = useState(false);
-
-  const { updateUser, user } = useUser();
-
-
-  const { trigger, isMutating } = useMutation('/profile/update', async (url, payload) => {
-    return await apiClient.post(url, payload);
-  });
-  
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const lastH1 = document.querySelector(".last-h1") as HTMLElement;
-      const bottomOfLastH1 = lastH1?.getBoundingClientRect().bottom;
-
-      if (bottomOfLastH1 && bottomOfLastH1 < window.innerHeight + -80) {
-        setIsFixed(false);
-      } else {
-        setIsFixed(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const handleIntroChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIntro(e.target.value);
   };
 
-  const handleSaveIntro = () => {
-    // Here you would typically save the intro to your backend
-    // For now, we'll just update the local state
-    updateUser({
-      bio: intro,
-    });
-    trigger({intro:intro})
-    setIsEditing(false);
+  const handleSaveIntro = async () => {
+    try {
+      setIsLoading(true)
+      await updateUser({
+        bio: intro,
+      });      
+
+      setIsEditing(false);
+      setIsLoading(false)
+
+    } catch (error) {
+      console.error("Error updating bio:", error);
+      setIsLoading(false)
+
+    }
   };
 
   return (
@@ -77,6 +59,7 @@ export default function EditProfile() {
           <div className="md:ml-12 w-full mt-6 px-7 sm:px-0">
             <section>
               <h1 className="text-2xl font-bold">About you</h1>
+              {intro && <h1>bio{intro}</h1>}
 
               <div className="my-6 px-4 py-5 border-dashed border-2 border-grey rounded-xl overflow-hidden">
                 {!isEditing ? (
@@ -112,7 +95,7 @@ export default function EditProfile() {
                       className="w-full min-h-[100px] p-2 border-2 border-dashed border-gray-300 rounded-md resize-none focus:outline-none focus:border-black-500 transition-colors duration-200"
                     />
                     <Button
-                    disabled={isMutating}
+                    disabled={isLoading}
                       label="Save Intro"
                       onClick={handleSaveIntro}
                       className="mt-2 px-4 py-2 bg-black w-auto border-none text-white rounded-md focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 transition-colors duration-200"
@@ -140,9 +123,7 @@ export default function EditProfile() {
                     </button>
                   ))}
                 </div>
-                <button className="p-0 mb-8 h-auto font-semibold text-gray-900 underline">
-                  Add interests
-                </button>
+              
               </div>
             </section>
 

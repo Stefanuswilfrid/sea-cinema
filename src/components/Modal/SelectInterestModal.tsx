@@ -4,6 +4,8 @@ import { useMutation } from "@/hooks/useMutation";
 import { apiClient } from "@/libs/utils/api-client";
 import useSelectInterestModal from "@/hooks/useSelectInterestModal";
 import { useState, useCallback, useMemo } from "react";
+import Button from "../Button/Button";
+import { useUser } from "@/hooks/useUser";
 
 const interests = [
   { icon: '🍝', label: 'Food' },
@@ -27,6 +29,8 @@ const interests = [
 export default function SelectInterestModal() {
   const SelectInterestModal = useSelectInterestModal();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const { updateUser, user } = useUser();
+
   const { trigger, isMutating } = useMutation('/profile/', async (url, payload) => {
     return await apiClient.post(url, payload);
   });
@@ -81,13 +85,13 @@ export default function SelectInterestModal() {
         <p className="text-gray-600">
           {`${selectedInterests.length}/${interests.length} selected`}
         </p>
-        <button
+        <Button
+        label="Continue"
           onClick={handleSubmit(onSubmit)}
-          className="transition rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-700 hover:bg-gradient-to-r hover:from-indigo-700 hover:to-indigo-800 text-md font-semibold text-white py-2 px-4"
+          className="w-auto px-4"
           disabled={isMutating}
-        >
-          Continue
-        </button>
+        />
+        
       </div>
     </div>
   ), [selectedInterests, handleSubmit, onSubmit, isMutating]);
