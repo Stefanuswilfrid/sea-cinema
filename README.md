@@ -56,4 +56,28 @@ The app is a movie browsing platform that includes the following features:
 - Cloudinary
 - Next Auth
 
-![ezgif com-video-to-gif-2](https://github.com/Stefanuswilfrid/sea-cinema/assets/77448713/7e58a243-aa05-414c-ad74-29c763ce8592)
+## Screenshots
+
+### Home Screen
+
+![Home Screen](./public/screenshots/ss1.png)
+
+### Movie Detail Screen
+
+![Movie Detail Screen](./public/screenshots/ss2.png)
+
+### Choose Seat Screen
+
+![Choose Seat Screen](./public/screenshots/ss3.png)
+
+### Payment Screen
+
+![Payment Screen](./public/screenshots/ss4.png)
+
+### Balance Screen
+
+![Balance Screen](./public/screenshots/ss5.png)
+
+### Profile Screen
+
+![Profile Screen](./public/screenshots/ss6.png)

@@ -44,7 +44,6 @@ function getTransactionDetails(type: string): TransactionDetail {
 const TransactionList: React.FC<TransactionProps> = ({ transactions }) => {
   const router = useRouter();
   const [visibleTransactions, setVisibleTransactions] = useState(5);
-  console.log("test",transactions)
 
   const loadMore = () => {
     setVisibleTransactions((prevVisible) => Math.min(prevVisible + 5, transactions?.length || 0));

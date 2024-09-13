@@ -90,7 +90,6 @@ export default async function handler(
       GET: async (session) => {
         
         const { messageId } = req.query;
-        console.log("iddd",req.query)
 
         const messages = await prisma.message.findMany({
           where: {

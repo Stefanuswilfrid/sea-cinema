@@ -64,7 +64,6 @@ type HandlerType = {
         username: '',
         wishlistIds: [],
       }
-      // console.log("receba",session?.user)
       const sessionUser = session?.user! ;
   
       if (session?.user ) {

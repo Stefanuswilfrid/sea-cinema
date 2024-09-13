@@ -12,7 +12,6 @@ export function useMutation<T>(
     url,
     payload
   ) => {
-    console.log("payload",payload)
     return await apiClient.post(url, payload)
   },
   options?: {
@@ -45,7 +44,6 @@ export function useMutation<T>(
         })
         return response
       } catch (error) {
-        console.log("wt",error)
         swrObserver.setMutationState(key, {
           state: 'error',
           mutatedBy: options?.mutatedBy,

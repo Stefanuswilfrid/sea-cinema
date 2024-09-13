@@ -27,7 +27,6 @@ const SeatBookingSummary: React.FC<BookingSummaryProps> = ({ selectedSeats, pric
       toast.error("No Seats Selected")
       return
     }
-    console.log("url?",movieUrl)
     handleCheckout(movieName, selectedSeatIds, totalPrice, movieUrl);
     router.push("/payment")
   };
