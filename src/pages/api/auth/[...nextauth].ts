@@ -65,9 +65,9 @@ export const authOptions: AuthOptions = {
 
       if (trigger === "update" && session?.user) {
         const tokenUser = token.user as CurrentUser;
-        const { avatarUrl, balance } = session.user;
+        const { avatarUrl, balance,intro } = session.user;
 
-        const updateData: Partial<{ avatarUrl: string; balance: number }> = {};
+        const updateData: Partial<{ avatarUrl: string; balance: number,bio:string }> = {};
 
         if (avatarUrl) {
           updateData.avatarUrl = avatarUrl;
@@ -75,6 +75,10 @@ export const authOptions: AuthOptions = {
 
         if (balance !== undefined) {
           updateData.balance = (tokenUser.balance || 0) + balance;
+        }
+
+        if(intro){
+          updateData.bio = intro
         }
 
         await prisma.user.update({

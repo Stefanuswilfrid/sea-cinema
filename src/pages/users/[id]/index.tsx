@@ -7,6 +7,9 @@ import { PlusIcon } from "lucide-react";
 import AuthCheck from "@/components/AuthCheck";
 import Button from "@/components/Button/Button";
 import useSelectInterestModal from "@/hooks/useSelectInterestModal";
+import { useMutation } from "@/hooks/useMutation";
+import { apiClient } from "@/libs/utils/api-client";
+import { useUser } from "@/hooks/useUser";
 
 export default function EditProfile() {
   const interestModal = useSelectInterestModal();
@@ -18,6 +21,14 @@ export default function EditProfile() {
   const { id } = router.query;
   const [intro, setIntro] = useState(currentUser?.bio || "");
   const [isEditing, setIsEditing] = useState(false);
+
+  const { updateUser, user } = useUser();
+
+
+  const { trigger, isMutating } = useMutation('/profile/update', async (url, payload) => {
+    return await apiClient.post(url, payload);
+  });
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +55,10 @@ export default function EditProfile() {
   const handleSaveIntro = () => {
     // Here you would typically save the intro to your backend
     // For now, we'll just update the local state
+    updateUser({
+      bio: intro,
+    });
+    trigger({intro:intro})
     setIsEditing(false);
   };
 
@@ -96,12 +111,12 @@ export default function EditProfile() {
                       placeholder="Write something fun and punchy."
                       className="w-full min-h-[100px] p-2 border-2 border-dashed border-gray-300 rounded-md resize-none focus:outline-none focus:border-black-500 transition-colors duration-200"
                     />
-                    <button
+                    <Button
+                    disabled={isMutating}
+                      label="Save Intro"
                       onClick={handleSaveIntro}
-                      className="mt-2 px-4 py-2 bg-black text-white rounded-md focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 transition-colors duration-200"
-                    >
-                      Save Intro
-                    </button>
+                      className="mt-2 px-4 py-2 bg-black w-auto border-none text-white rounded-md focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 transition-colors duration-200"
+                    />
                   </>
                 )}
               </div>

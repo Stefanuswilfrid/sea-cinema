@@ -9,7 +9,6 @@ import AuthCheck from "@/components/AuthCheck";
 import { useMutation } from "@/hooks/useMutation";
 import { apiClient } from "@/libs/utils/api-client";
 
-// Helper function to fetch products from localStorage
 const getProductsFromLocalStorage = () => {
   if (typeof window !== 'undefined') {
     const storedProducts = localStorage.getItem('checkouts');
@@ -18,7 +17,6 @@ const getProductsFromLocalStorage = () => {
   return [];
 };
 
-// Helper function to save products back to localStorage
 const saveProductsToLocalStorage = (products: any[]) => {
   localStorage.setItem('checkouts', JSON.stringify(products));
 };
@@ -40,9 +38,8 @@ function PaymentPage() {
   const router = useRouter();
   // const { resetCart } = useContext(CartContext);
   
-  // State to store fetched products from localStorage
   const [products, setProducts] = useState<any[]>([]);
-  const [termsAccepted, setTermsAccepted] = useState(false); // For handling terms and conditions
+  const [termsAccepted, setTermsAccepted] = useState(false); 
 
   // Calculate subtotal and total
   const subtotal = products.reduce((sum, product) => sum + product.totalPrice, 0);
@@ -50,7 +47,6 @@ function PaymentPage() {
   const total = subtotal > 0 ? subtotal + additionalFees : 0;
 
   useEffect(() => {
-    // Fetch products from localStorage
     const storedProducts = getProductsFromLocalStorage();
     setProducts(storedProducts);
   }, []);
@@ -62,11 +58,7 @@ function PaymentPage() {
     toast.success(`${movieName} removed from the cart.`);
   };
 
-  const mapSeatLabelToNumber = (seat: string): number => {
-    const row = seat.charCodeAt(0) - 65; // Convert "A" to 0, "B" to 1, etc.
-    const seatNumber = parseInt(seat.slice(1), 10); // Convert "5" to 5, etc.
-    return row * 10 + seatNumber; // Example calculation, can be customized
-  };
+
 
   const handlePayNow = () => {
     if (currentUser.balance < total) {

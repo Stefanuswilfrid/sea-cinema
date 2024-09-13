@@ -6,7 +6,8 @@ type UpdateUserArgs = {
     avatarUrl?: string | null
     displayName?: string
     username?: string
-    balance : number
+    balance? : number
+    bio?: string
 }
   
 
@@ -51,6 +52,7 @@ export function useUser() {
         id: user?.id ?? '',
         createdAt: user?.createdAt,
         balance : user?.balance,
+        bio: user?.bio,
       } as CurrentUser,
       status,
       updateUser: async (args: UpdateUserArgs) => {
