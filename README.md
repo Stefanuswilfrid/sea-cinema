@@ -44,6 +44,8 @@ The app is a movie browsing platform that includes the following features:
 - **Logout**: Users can securely log out of their accounts to protect their privacy.
   Additionally, the app provides transaction history functionality, allowing users to view their past transactions and track their ticket bookings and balance usage.
 
+- **Text-to-Speech (TTS) Playback** : The app features a text-to-speech playback button that allows users to hear movie descriptions read aloud.
+
 ## Tech 🛠
 
 - Next.js
