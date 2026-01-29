@@ -60,30 +60,12 @@ The app is a movie browsing platform that includes the following features:
 
 ## Screenshots
 
-### Home Screen
-
-![Home Screen](./public/screenshots/ss1.png)
-
-### Movie Detail Screen
-
-![Movie Detail Screen](./public/screenshots/ss2.png)
-
-### Choose Seat Screen
-
-![Choose Seat Screen](./public/screenshots/ss3.png)
-
-### Payment Screen
-
-![Payment Screen](./public/screenshots/ss4.png)
-
-### Balance Screen
-
-![Balance Screen](./public/screenshots/ss5.png)
-
-### Profile Screen
-
-![Profile Screen](./public/screenshots/ss6.png)
-
-### Choose Interest Screen
-
-![Choose Interest Screen](./public/screenshots/ss7.png)
+| Home Screen | Movie Detail Screen |
+| --- | --- |
+| ![Home Screen](./public/screenshots/ss1.png) | ![Movie Detail Screen](./public/screenshots/ss2.png) |
+| Choose Seat Screen | Payment Screen |
+| ![Choose Seat Screen](./public/screenshots/ss3.png) | ![Payment Screen](./public/screenshots/ss4.png) |
+| Balance Screen | Profile Screen |
+| ![Balance Screen](./public/screenshots/ss5.png) | ![Profile Screen](./public/screenshots/ss6.png) |
+| Choose Interest Screen |  |
+| ![Choose Interest Screen](./public/screenshots/ss7.png) |  |
